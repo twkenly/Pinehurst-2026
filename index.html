@@ -129,7 +129,8 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .daybadge{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
 .datetag{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold2);font-weight:600;padding-top:4px;text-shadow:0 1px 4px rgba(0,0,0,0.75),0 1px 2px rgba(0,0,0,0.9)}
 .todaypill{background:var(--gold);color:var(--green);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:12px;margin-left:10px}
-.wxbadge{display:flex;align-items:center;gap:12px;background:rgba(10,28,18,0.45);border:1px solid rgba(233,225,205,0.3);padding:8px 14px;font-size:0}
+.wxbadge{display:flex;align-items:center;gap:12px;background:rgba(6,18,12,0.72);border:1px solid rgba(233,225,205,0.3);padding:8px 14px;font-size:0}
+.wxbadge .icon{width:26px;height:26px;flex:0 0 auto}
 .wxbadge .lab{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(233,225,205,0.72);line-height:1.35}
 .wxbadge .bar{width:1px;height:28px;background:rgba(233,225,205,0.3)}
 .wxbadge .slots{display:flex;gap:14px}
@@ -674,13 +675,31 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 (function(){
   var GENERATED_AT = '2026-09-15T00:54:41Z';
   var WX = {
-    thu: {cond:'Clear',   t8:60, t12:73, t20:66},
-    fri: {cond:'Sunny',   t8:59, t12:74, t20:63},
-    sat: {cond:'Warm',    t8:50, t12:69, t20:58},
-    sun: {cond:'Cool',    t8:48, t12:66, t20:56}
+    thu: {cond:'Clear',         t8:60, t12:73, t20:66},
+    fri: {cond:'Sunny',         t8:59, t12:74, t20:63},
+    sat: {cond:'Partly Cloudy', t8:50, t12:69, t20:58},
+    sun: {cond:'Partly Cloudy', t8:48, t12:66, t20:56}
   };
+  var ICONS = {
+    sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
+    partly: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7.3" r="2.8"/><path d="M9 2.7v1.2M13.2 7.3h-1.2M4.8 7.3H3.6M5.9 4.2l.85.85M12.1 4.2l-.85.85"/><path d="M8 18h9a3.6 3.6 0 0 0 .5-7.16A5 5 0 0 0 8.3 9.4 3.6 3.6 0 0 0 8 18Z"/></svg>',
+    cloud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18h10a4 4 0 0 0 .6-7.96A5.5 5.5 0 0 0 7.1 9.1 4 4 0 0 0 7 18Z"/></svg>',
+    rain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15h10a4 4 0 0 0 .6-7.96A5.5 5.5 0 0 0 7.1 6.1 4 4 0 0 0 7 15Z"/><path d="M8 18.5l-1 2M12 18.5l-1 2M16 18.5l-1 2"/></svg>',
+    storm: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14h9a3.6 3.6 0 0 0 .5-7.16A5 5 0 0 0 7.3 5.9 3.6 3.6 0 0 0 7 14Z"/><path d="M13 13l-3 5h3l-2 4"/></svg>',
+    fog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 10h9a3.2 3.2 0 0 0 .4-6.38A4.6 4.6 0 0 0 6.6 4.9 3.2 3.2 0 0 0 6 10Z"/><path d="M4 14h16M4 17.5h16M4 21h11"/></svg>'
+  };
+  function weatherIcon(cond){
+    var c = (cond||'').toLowerCase();
+    if(/storm/.test(c)) return ICONS.storm;
+    if(/rain|drizzle|shower/.test(c)) return ICONS.rain;
+    if(/fog/.test(c)) return ICONS.fog;
+    if(/snow/.test(c)) return ICONS.cloud;
+    if(/partly|mostly cloudy|cool/.test(c)) return ICONS.partly;
+    if(/cloud/.test(c)) return ICONS.cloud;
+    return ICONS.sun;
+  }
   function slotHtml(w){
-    return '<div class="lab">Est.<br>'+w.cond+'</div><div class="bar"></div><div class="slots">'+
+    return '<div class="icon" style="color:#E9E1CD">'+weatherIcon(w.cond)+'</div><div class="bar"></div><div class="slots">'+
       '<div class="slot"><div class="t">8 am</div><div class="n">'+w.t8+'&deg;</div></div>'+
       '<div class="slot"><div class="t">12 pm</div><div class="n">'+w.t12+'&deg;</div></div>'+
       '<div class="slot"><div class="t">8 pm</div><div class="n">'+w.t20+'&deg;</div></div>'+
