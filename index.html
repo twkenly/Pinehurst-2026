@@ -15,8 +15,8 @@ body{margin:0;background:var(--cream);color:var(--green2);font-family:'Jost',san
 a{color:inherit;text-decoration:none}
 h1,h2,h3,.serif{font-family:'Libre Caslon Display',serif}
 img{display:block;max-width:100%}
-.wrap{max-width:880px;margin:0 auto;padding:0 22px}
-@media(max-width:480px){.wrap{padding:0 26px}}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+@media(max-width:480px){.wrap{padding:0 28px}}
 .eyebrow{font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
 .section{padding:56px 0}
 .section-title{font-size:34px;color:var(--green);margin:6px 0 0}
@@ -25,7 +25,8 @@ img{display:block;max-width:100%}
 
 /* nav */
 #nav{position:sticky;top:0;z-index:50;background:rgba(246,242,233,0.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
-#nav .inner{max-width:880px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:10px 22px;scrollbar-width:none}
+#nav .inner{max-width:880px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:10px 24px;scrollbar-width:none}
+@media(max-width:480px){#nav .inner{padding:10px 28px}}
 #nav .inner::-webkit-scrollbar{display:none}
 #nav a{flex:0 0 auto;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--green3);padding:8px 12px;border-radius:20px;white-space:nowrap;font-weight:500}
 #nav a.active{background:var(--green);color:#F6F2E9}
@@ -61,12 +62,17 @@ img{display:block;max-width:100%}
 .cell .d{font-size:13px;line-height:1.5;color:var(--green3);margin-top:5px}
 
 .courses{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
-@media(max-width:640px){.courses{grid-template-columns:repeat(3,1fr)}}
-.course{text-align:center}
+.course{text-align:center;min-width:0}
 .course .icon{height:74px;background:var(--card);border:1px solid var(--border);padding:9px;display:flex;align-items:center;justify-content:center}
 .course .icon img{max-height:100%;max-width:100%;object-fit:contain}
 .course .name{font-family:'Libre Caslon Display',serif;font-size:13.5px;color:var(--green);margin-top:7px}
 .course .time{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-top:2px}
+@media(max-width:520px){
+  .courses{gap:6px}
+  .course .icon{height:50px;padding:5px}
+  .course .name{font-size:10.5px;margin-top:5px;line-height:1.2}
+  .course .time{font-size:8px;letter-spacing:0.04em;margin-top:2px}
+}
 
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:640px){.two{grid-template-columns:1fr}}
@@ -97,11 +103,15 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .badge.air{background:#DDE9DE;color:#1F5D34}
 .badge.done{background:#E4DECD;color:var(--muted)}
 .badge.alert{background:#F5D7D7;color:#8A1F1F}
-.leg{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);flex-wrap:wrap}
+.leg{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
 .leg .route{font-size:14.5px;color:var(--green2)}
 .leg .flightno{font-size:11.5px;color:var(--muted);letter-spacing:0.06em}
 .leg .status{font-size:13px;color:var(--green3);text-align:right}
 .leg .track{display:inline-block;margin-top:6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold)}
+@media(max-width:640px){
+  .leg{flex-direction:column;align-items:flex-start;gap:8px}
+  .leg .status{text-align:left}
+}
 .asof{font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-top:18px;display:flex;align-items:center;gap:6px}
 .livedot{width:6px;height:6px;border-radius:50%;background:#3E8E56;display:inline-block;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
