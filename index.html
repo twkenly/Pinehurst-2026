@@ -36,7 +36,8 @@ img{display:block;max-width:100%}
 #cover .bg{position:absolute;inset:0}
 #cover .bg img{width:100%;height:100%;object-fit:cover}
 #cover .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,28,18,0.80) 0%,rgba(10,28,18,0.30) 40%,rgba(10,28,18,0.88) 82%,rgba(10,28,18,0.96) 100%)}
-#cover .content{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:36px 22px 40px;color:#E9E1CD}
+#cover .content{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:36px 24px 40px;color:#E9E1CD}
+@media(max-width:480px){#cover .content{padding:36px 28px 40px}}
 .brandrow{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .brandrow .lockup{height:66px;display:flex;align-items:center;gap:16px}
 .brandrow .lockup img{height:52px;width:auto;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.55)) drop-shadow(0 1px 2px rgba(0,0,0,0.5))}
@@ -103,14 +104,16 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .badge.air{background:#DDE9DE;color:#1F5D34}
 .badge.done{background:#E4DECD;color:var(--muted)}
 .badge.alert{background:#F5D7D7;color:#8A1F1F}
-.leg{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.leg{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.leg > div:first-child{flex:1;min-width:0}
 .leg .route{font-size:14.5px;color:var(--green2)}
 .leg .flightno{font-size:11.5px;color:var(--muted);letter-spacing:0.06em}
-.leg .status{font-size:13px;color:var(--green3);text-align:right}
-.leg .track{display:inline-block;margin-top:6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold)}
-@media(max-width:640px){
-  .leg{flex-direction:column;align-items:flex-start;gap:8px}
-  .leg .status{text-align:left}
+.leg .status{font-size:13px;color:var(--green3);text-align:right;flex:0 0 auto;white-space:nowrap}
+.leg .track{display:inline-block;margin-top:6px;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);white-space:normal}
+@media(max-width:400px){
+  .leg .status{font-size:11.5px}
+  .leg .route{font-size:13px}
+  .leg .flightno{font-size:10.5px}
 }
 .asof{font-size:11px;color:var(--muted);letter-spacing:0.06em;margin-top:18px;display:flex;align-items:center;gap:6px}
 .livedot{width:6px;height:6px;border-radius:50%;background:#3E8E56;display:inline-block;animation:pulse 2s infinite}
@@ -121,9 +124,10 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .day .hero{position:relative;background:var(--green);overflow:hidden}
 .day .hero > img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .day .hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,28,18,0.66) 0%,rgba(10,28,18,0.08) 42%,rgba(10,28,18,0.8) 100%)}
-.day .hero .inner{position:relative;padding:30px 20px;display:flex;flex-direction:column;justify-content:space-between;min-height:100%}
+.day .hero .inner{position:relative;padding:30px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:100%}
+@media(max-width:480px){.day .hero .inner{padding:30px 28px}}
 .daybadge{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
-.datetag{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold2);font-weight:600;padding-top:4px}
+.datetag{font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold2);font-weight:600;padding-top:4px;text-shadow:0 1px 4px rgba(0,0,0,0.75),0 1px 2px rgba(0,0,0,0.9)}
 .todaypill{background:var(--gold);color:var(--green);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:12px;margin-left:10px}
 .wxbadge{display:flex;align-items:center;gap:12px;background:rgba(10,28,18,0.45);border:1px solid rgba(233,225,205,0.3);padding:8px 14px;font-size:0}
 .wxbadge .lab{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(233,225,205,0.72);line-height:1.35}
@@ -133,8 +137,8 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .wxbadge .slot .t{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold2);font-weight:600}
 .wxbadge .slot .n{font-family:'Libre Caslon Display',serif;font-size:16px;color:#fff;margin-top:2px}
 .day .titleblock{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.day h2.dayh{font-size:38px;color:#fff;line-height:1.02;margin:0}
-.day .sub{font-family:'Libre Caslon Display',serif;font-size:16px;color:#E9E1CD;margin-top:8px;max-width:440px}
+.day h2.dayh{font-size:38px;color:#fff;line-height:1.02;margin:0;text-shadow:0 2px 10px rgba(0,0,0,0.6),0 1px 3px rgba(0,0,0,0.8)}
+.day .sub{font-family:'Libre Caslon Display',serif;font-size:16px;color:#E9E1CD;margin-top:8px;max-width:440px;text-shadow:0 1px 6px rgba(0,0,0,0.65),0 1px 2px rgba(0,0,0,0.8)}
 .day .courseicon{width:78px;height:78px;background:var(--card);border:2px solid var(--gold);padding:9px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .day .courseicon img{max-height:100%;max-width:100%;object-fit:contain}
 
@@ -166,10 +170,18 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 /* costs */
 .costbox{background:var(--green);color:#E9E1CD;padding:24px 22px}
 table.costtable{width:100%;border-collapse:collapse;margin-top:14px;font-size:13.5px}
-table.costtable th{text-align:right;padding:0 0 9px;font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold2);font-weight:600;border-bottom:1px solid rgba(233,225,205,0.3)}
-table.costtable th:first-child,table.costtable td:first-child{text-align:left}
-table.costtable td{padding:10px 0;text-align:right;color:rgba(233,225,205,0.9)}
+table.costtable th{text-align:right;padding:0 0 9px 8px;font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold2);font-weight:600;border-bottom:1px solid rgba(233,225,205,0.3)}
+table.costtable th:first-child,table.costtable td:first-child{text-align:left;padding-left:0}
+table.costtable td{padding:10px 0 10px 8px;text-align:right;color:rgba(233,225,205,0.9)}
 table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,205,0.3);font-family:'Libre Caslon Display',serif;font-size:20px;color:#fff}
+table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:12.5px;color:rgba(233,225,205,0.9);vertical-align:bottom;padding-bottom:15px}
+@media(max-width:480px){
+  table.costtable{font-size:11px}
+  table.costtable th{font-size:8.5px;letter-spacing:0.06em;padding-left:5px}
+  table.costtable td{padding-left:5px}
+  table.costtable tr.total td{font-size:15px}
+  table.costtable tr.total td:first-child{font-size:10.5px}
+}
 
 .footer-row{margin-top:30px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--footer)}
 .linklist a{border-bottom:1px solid var(--gold);color:var(--green)}
@@ -369,7 +381,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
 <!-- ============ FRIDAY ============ -->
 <section id="fri" class="day">
   <div class="hero" style="height:290px">
-    <img src="assets/fb1efa77-0704-4d70-9c7f-9f9750bbd5b0.jpg" alt="The Cradle">
+    <img src="assets/0409b2f4-9476-483f-bf6b-2d66dfe741c6.webp" alt="The Cradle short course">
     <div class="scrim"></div>
     <div class="inner wrap" style="padding-left:0;padding-right:0">
       <div class="daybadge">
@@ -402,7 +414,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <img src="assets/0409b2f4-9476-483f-bf6b-2d66dfe741c6.webp" alt="The Cradle" style="height:110px;object-fit:cover">
+        <img src="assets/fb1efa77-0704-4d70-9c7f-9f9750bbd5b0.jpg" alt="The Cradle sign" style="height:110px;object-fit:cover;object-position:center 65%">
         <img src="assets/0b16b3b5-4b2e-489f-9332-dc3886e922f5.png" alt="Pinehurst No. 8" style="height:110px;object-fit:cover">
         <img src="assets/ashtens-exterior.jpg" alt="Ashten's" style="height:110px;object-fit:cover">
         <div class="heads-up"><div class="k">Heads Up</div><div class="v">Technically 27 holes, but the Cradle is a pitch-and-putt with music on &mdash; a chill hour, not a workout. Just bring the good shirt for dinner.</div></div>
@@ -529,7 +541,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
       </tbody>
     </table>
     <div class="two" style="margin-top:20px;font-size:13.5px;line-height:1.55;color:rgba(233,225,205,0.85)">
-      <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">Why it moved</span><br>Dropping from six to four lost us the double-occupancy rate on the 3-bedroom &mdash; <span style="color:#fff">+$480 per person</span>. Switching to a 2-bedroom gives that $480 back.</div>
+      <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">Why it moved</span><br>Dropping from six to four lost us the double-occupancy rate on the 3-bedroom &mdash; <span style="color:#fff">+$480 per person</span>. Switching to a 2-bedroom gives that $480 back. Also for transparency: the $250 No. 2 premium wasn't in the previous itinerary &mdash; it's included here now.</div>
       <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">What's not in it</span><br>Resort fee and tax, caddie fees and gratuity, dinners, drinks, rental car, Tobacco Road greens fee (~$280).</div>
     </div>
   </div>
@@ -538,9 +550,9 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
 <!-- ============ SCRAPBOOK ============ -->
 <section id="scrapbook" class="section wrap">
   <div class="eyebrow">The Latest</div>
-  <h2 class="section-title">From the Trip</h2>
+  <h2 class="section-title">Boots on the Ground</h2>
   <hr class="hr">
-  <p style="font-size:14.5px;line-height:1.6;color:var(--green3);max-width:640px;margin-top:0">Fills in automatically from the group's shared photo album, sorted onto the day each shot was taken. This is the spot for the two of you not out here to follow along.</p>
+  <p style="font-size:14.5px;line-height:1.6;color:var(--green3);max-width:640px;margin-top:0">A scrapbook that updates at the end of each day, automatically pulling in whatever's posted to our shared photo album &mdash; <a href="https://www.icloud.com/sharedalbum/#D2Pv3v2wJvwY8Q0meNs7-c5dMDwCAEQARog6Cnf0qSS-tsFo8QByXmHC0MFwHl-KhgmKVYEpKkrwbo" target="_blank" rel="noopener" style="color:var(--green);font-weight:600;border-bottom:1px solid var(--gold)">JOIN HERE</a> to add your own. This is a spot for James/Kevin to follow along from home.</p>
   <div class="asof" id="scrapbook-asof"><span class="livedot"></span><span>Checked for new photos as of 9:43 PM ET &middot; 0 photos so far</span></div>
   <!-- SCRAPBOOK_SEEN: 2C8094B1-9001-4E8D-8F92-B488DE67341E -->
 
@@ -598,12 +610,38 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
   onScroll();
 })();
 
-/* ---------- countdown to first tee ---------- */
+/* ---------- countdown / live "at a glance" trip-day status ---------- */
 (function(){
+  var DAYS = [
+    {date:'2026-10-01', anchor:'#thu', label:'Arrival &amp; No. 10', num:1},
+    {date:'2026-10-02', anchor:'#fri', label:'The Cradle &amp; No. 8', num:2},
+    {date:'2026-10-03', anchor:'#sat', label:'No. 2', num:3},
+    {date:'2026-10-04', anchor:'#sun', label:'Tobacco Road', num:4}
+  ];
   var target = new Date('2026-10-01T13:36:00-04:00').getTime();
+  var tripEnd = new Date('2026-10-04T23:59:59-04:00').getTime();
   var el = document.getElementById('countdown');
+
   function render(){
     var now = Date.now();
+    var todayStr = new Date().toLocaleDateString('en-CA', {timeZone:'America/New_York'});
+    var todayInfo = null;
+    for(var i=0;i<DAYS.length;i++){ if(DAYS[i].date === todayStr) todayInfo = DAYS[i]; }
+
+    if(todayInfo){
+      el.innerHTML =
+        '<a href="'+todayInfo.anchor+'" style="display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit">'+
+        '<span class="livedot" style="background:#ff5252"></span>'+
+        '<span style="font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:#ff8a80;font-weight:700">Live</span>'+
+        '<span style="width:1px;height:26px;background:rgba(233,225,205,0.3)"></span>'+
+        '<span><div class="num" style="font-size:19px">Day '+todayInfo.num+' of 4</div><div class="lab">'+todayInfo.label+'</div></span>'+
+        '</a>';
+      return;
+    }
+    if(now > tripEnd){
+      el.innerHTML = '<span class="num" style="font-size:17px">See you in the Sandhills next time.</span>';
+      return;
+    }
     var diff = target - now;
     if(diff <= 0){ el.innerHTML = '<span class="num">On the ground.</span>'; return; }
     var d = Math.floor(diff/86400000);
