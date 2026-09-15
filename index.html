@@ -35,12 +35,12 @@ img{display:block;max-width:100%}
 #cover .bg img{width:100%;height:100%;object-fit:cover}
 #cover .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,28,18,0.80) 0%,rgba(10,28,18,0.30) 40%,rgba(10,28,18,0.88) 82%,rgba(10,28,18,0.96) 100%)}
 #cover .content{position:relative;flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:36px 22px 40px;color:#E9E1CD}
-.brandrow{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.brandrow .lockup{height:66px;background:#FFFDF7;border:1px solid rgba(185,149,81,0.6);padding:6px 10px;display:flex;align-items:center;gap:12px}
-.brandrow .lockup img{height:50px;width:auto}
-.brandrow .lockup .div{width:1px;height:40px;background:#DCD5C4}
-.brandrow .label div:first-child{font-size:9.5px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500}
-.brandrow .label div:last-child{font-size:9.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold2);margin-top:4px}
+.brandrow{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.brandrow .lockup{height:66px;display:flex;align-items:center;gap:16px}
+.brandrow .lockup img{height:52px;width:auto;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.55)) drop-shadow(0 1px 2px rgba(0,0,0,0.5))}
+.brandrow .lockup .div{width:1px;height:38px;background:rgba(255,255,255,0.45);box-shadow:0 1px 3px rgba(0,0,0,0.5)}
+.brandrow .label div:first-child{font-size:9.5px;letter-spacing:0.28em;text-transform:uppercase;font-weight:500;text-shadow:0 1px 4px rgba(0,0,0,0.75),0 1px 2px rgba(0,0,0,0.9)}
+.brandrow .label div:last-child{font-size:9.5px;letter-spacing:0.28em;text-transform:uppercase;color:var(--gold2);margin-top:4px;text-shadow:0 1px 4px rgba(0,0,0,0.75),0 1px 2px rgba(0,0,0,0.9)}
 #cover h1{font-size:15vw;line-height:0.95;color:#fff;margin:22px 0 0;letter-spacing:-0.01em;font-weight:900}
 @media(min-width:640px){#cover h1{font-size:78px}}
 .goldbar{width:90px;height:2px;background:var(--gold);margin:20px 0 16px}
@@ -191,9 +191,8 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
   <a href="#fri" data-sec="fri">Fri</a>
   <a href="#sat" data-sec="sat">Sat</a>
   <a href="#sun" data-sec="sun">Sun</a>
-  <a href="#scrapbook" data-sec="scrapbook">Scrapbook</a>
   <a href="#info" data-sec="info">Know Before You Go</a>
-  <a href="#pack" data-sec="pack">Packing</a>
+  <a href="#scrapbook" data-sec="scrapbook">Scrapbook</a>
 </div></nav>
 
 <!-- ============ COVER ============ -->
@@ -205,7 +204,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
       <div class="lockup">
         <img src="assets/ae600950-e588-4c98-b6f7-2cf85b40e500.png" alt="Kenly Golf Club">
         <div class="div"></div>
-        <img src="assets/fdc4f2e3-3486-48ac-afed-5d6a63715441.png" alt="Pinehurst 1895">
+        <img src="assets/pinehurst-logo-white.png" alt="Pinehurst 1895">
       </div>
       <div class="label">
         <div>Kenly Golf Club</div>
@@ -296,7 +295,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
 <!-- ============ TRAVEL ============ -->
 <section id="travel" class="section wrap">
   <div class="eyebrow">Logistics</div>
-  <h2 class="section-title">Getting There &amp; Back</h2>
+  <h2 class="section-title">Getting There</h2>
   <hr class="hr">
   <div class="asof" id="travel-asof"><span class="livedot"></span><span></span></div>
   <div id="flightcards"></div>
@@ -317,7 +316,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
 <!-- ============ THURSDAY ============ -->
 <section id="thu" class="day">
   <div class="hero" style="height:300px">
-    <img src="assets/e3c01142-cd49-4cff-a62b-8ccdecc1819c.jpg" alt="Carolina Hotel entrance">
+    <img src="assets/e3c01142-cd49-4cff-a62b-8ccdecc1819c.jpg" alt="Carolina Hotel entrance" style="object-position:center 78%">
     <div class="scrim"></div>
     <div class="inner wrap" style="padding-left:0;padding-right:0">
       <div class="daybadge">
@@ -394,7 +393,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
       <div style="display:flex;flex-direction:column;gap:12px">
         <img src="assets/0409b2f4-9476-483f-bf6b-2d66dfe741c6.webp" alt="The Cradle" style="height:110px;object-fit:cover">
         <img src="assets/0b16b3b5-4b2e-489f-9332-dc3886e922f5.png" alt="Pinehurst No. 8" style="height:110px;object-fit:cover">
-        <img src="assets/d2d2723d-cb3b-4cee-b442-cbeb34ce9ca9.webp" alt="Ashten's" style="height:110px;object-fit:cover">
+        <img src="assets/d2d2723d-cb3b-4cee-b442-cbeb34ce9ca9.webp" alt="Ashten's" style="height:110px;width:100%;object-fit:contain;background:var(--card)">
         <div class="heads-up"><div class="k">Heads Up</div><div class="v">Technically 27 holes, but the Cradle is a pitch-and-putt with music on &mdash; a chill hour, not a workout. Just bring the good shirt for dinner.</div></div>
       </div>
     </div>
@@ -404,7 +403,7 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
 <!-- ============ SATURDAY ============ -->
 <section id="sat" class="day">
   <div class="hero" style="height:320px">
-    <img src="assets/9098b0e9-0d5d-4782-b98c-c948c97b9767.jpg" alt="Pinehurst No. 2">
+    <img src="assets/9098b0e9-0d5d-4782-b98c-c948c97b9767.jpg" alt="Pinehurst No. 2" style="object-position:center 78%">
     <div class="scrim"></div>
     <div class="inner wrap" style="padding-left:0;padding-right:0">
       <div class="daybadge">
@@ -435,8 +434,8 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
         <img src="assets/480f8e64-38c7-451d-9a07-daccb1a93f03.jpg" alt="Payne Stewart statue" style="height:118px;object-fit:cover">
-        <img src="assets/e6c5fca5-440f-4ce5-a206-4623b4f9ef76.jpg" alt="The Deuce" style="height:118px;object-fit:cover">
-        <img src="assets/80d17265-a1cc-4fcd-aa1c-933cb5140a45.jpg" alt="Wiregrass" style="height:118px;object-fit:cover">
+        <img src="assets/e6c5fca5-440f-4ce5-a206-4623b4f9ef76.jpg" alt="The Deuce" style="height:118px;object-fit:cover;object-position:center 82%">
+        <img src="assets/80d17265-a1cc-4fcd-aa1c-933cb5140a45.jpg" alt="Wiregrass" style="height:118px;object-fit:cover;object-position:center 75%">
         <div class="heads-up dark"><div class="k">Caddie Cash</div><div class="v">We're going to want all the help we can get. Double-bag fee $85 per bag, charged day of play. Recommended gratuity minimum $65 cash per player. Bring it with you.</div></div>
       </div>
     </div>
@@ -478,16 +477,49 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
       <div style="display:flex;flex-direction:column;gap:12px">
         <img src="assets/1c220cbc-aff0-444c-96b4-b1a8dc965876.webp" alt="Tobacco Road" style="height:135px;object-fit:cover">
         <img src="assets/e31a2d28-47e4-4bb7-ae18-f660cdeb3f3e.webp" alt="Tobacco Road at sunset" style="height:135px;object-fit:cover">
-        <div class="heads-up">
-          <div class="k">Departures</div>
-          <div style="font-size:14px;line-height:1.9;color:var(--green2);margin-top:9px">
-            <div class="rowline" style="padding:2px 0"><span>Kyle</span><span class="sub">5:01 pm &middot; UA 481</span></div>
-            <div class="rowline" style="padding:2px 0"><span>Tyler</span><span class="sub">5:30 pm &middot; DL 5109</span></div>
-            <div class="rowline" style="padding:2px 0"><span>Colin</span><span class="sub">6:01 pm &middot; AS 572</span></div>
-            <div class="rowline" style="padding:2px 0"><span>Granger</span><span class="sub">7:35 pm &middot; DL 2393</span></div>
-          </div>
-        </div>
       </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="label">Return Flights</div>
+      <div class="asof" id="travel-asof-return" style="margin-top:10px"><span class="livedot"></span><span></span></div>
+      <div id="flightcards-return"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KNOW BEFORE YOU GO ============ -->
+<section id="info" class="section wrap">
+  <div class="eyebrow">Before You Pack</div>
+  <h2 class="section-title">Know Before You Go</h2>
+  <hr class="hr">
+  <div class="grid3">
+    <div class="cell"><div class="k">Weather</div><div class="v">Upper 40s &rarr; upper 70s</div><div class="d">Mid-to-upper 70s Thu and Fri, easing into the upper 60s by Sunday. Early mornings are colder.</div></div>
+    <div class="cell"><div class="k">Walking</div><div class="v">Three of four on foot</div><div class="d">No. 10 and the Cradle walking, No. 2 with caddies. Only No. 8 has carts.</div></div>
+    <div class="cell"><div class="k">Dress Code</div><div class="v">Collared, no denim</div><div class="d">Layers. For Fri/Sat dinner: no gym shorts, no ballcaps.</div></div>
+  </div>
+
+  <div class="costbox" style="margin-top:24px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid rgba(233,225,205,0.28);padding-bottom:12px;flex-wrap:wrap;gap:10px">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:600">The Numbers</div>
+        <div class="serif" style="font-size:26px;color:#fff;margin-top:5px">Costs &middot; Current 3-Bedroom Condo</div>
+      </div>
+      <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(233,225,205,0.6);text-align:right;line-height:1.6">Per person<br>Before resort fee &amp; tax</div>
+    </div>
+    <div style="font-size:13.5px;line-height:1.55;color:rgba(233,225,205,0.75);margin-top:14px">Colin is on the standard B&amp;B package &mdash; three nights, three rounds, breakfast daily. The rest of us are on that same package, custom-built to add Thursday's round on No. 10 before he lands.</div>
+    <table class="costtable">
+      <thead><tr><th></th><th>Colin</th><th>Tyler</th><th>Kyle</th><th>Granger</th></tr></thead>
+      <tbody>
+        <tr><td>Package rate</td><td>$2,330</td><td>$2,670</td><td>$2,670</td><td>$2,670</td></tr>
+        <tr><td>No. 10 premium</td><td>&mdash;</td><td>$125</td><td>$125</td><td>$125</td></tr>
+        <tr><td>No. 2 premium</td><td>$250</td><td>$250</td><td>$250</td><td>$250</td></tr>
+        <tr class="total"><td>Total before fee &amp; tax</td><td>$2,580</td><td>$3,045</td><td>$3,045</td><td>$3,045</td></tr>
+      </tbody>
+    </table>
+    <div class="two" style="margin-top:20px;font-size:13.5px;line-height:1.55;color:rgba(233,225,205,0.85)">
+      <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">Why it moved</span><br>Dropping from six to four lost us the double-occupancy rate on the 3-bedroom &mdash; <span style="color:#fff">+$480 per person</span>. Switching to a 2-bedroom gives that $480 back.</div>
+      <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">What's not in it</span><br>Resort fee and tax, caddie fees and gratuity, dinners, drinks, rental car, Tobacco Road greens fee (~$280).</div>
     </div>
   </div>
 </section>
@@ -528,52 +560,6 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
     <div class="scrap-grid" id="scrap-sun"><div class="scrap-empty">No photos yet.</div></div>
   </div>
   <!-- SCRAPBOOK:sun:END -->
-</section>
-
-<!-- ============ KNOW BEFORE YOU GO ============ -->
-<section id="info" class="section wrap">
-  <div class="eyebrow">Before You Pack</div>
-  <h2 class="section-title">Know Before You Go</h2>
-  <hr class="hr">
-  <div class="grid3">
-    <div class="cell"><div class="k">Weather</div><div class="v">Upper 40s &rarr; upper 70s</div><div class="d">Mid-to-upper 70s Thu and Fri, easing into the upper 60s by Sunday. Early mornings are colder.</div></div>
-    <div class="cell"><div class="k">Walking</div><div class="v">Three of four on foot</div><div class="d">No. 10 and the Cradle walking, No. 2 with caddies. Only No. 8 has carts.</div></div>
-    <div class="cell"><div class="k">Dress Code</div><div class="v">Collared, no denim</div><div class="d">Layers. For Fri/Sat dinner: no gym shorts, no ballcaps.</div></div>
-  </div>
-
-  <div class="costbox" style="margin-top:24px">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid rgba(233,225,205,0.28);padding-bottom:12px;flex-wrap:wrap;gap:10px">
-      <div>
-        <div style="font-size:10px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:600">The Numbers</div>
-        <div class="serif" style="font-size:26px;color:#fff;margin-top:5px">Costs &middot; Current 3-Bedroom Condo</div>
-      </div>
-      <div style="font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(233,225,205,0.6);text-align:right;line-height:1.6">Per person<br>Before resort fee &amp; tax</div>
-    </div>
-    <div style="font-size:13.5px;line-height:1.55;color:rgba(233,225,205,0.75);margin-top:14px">Colin is on the standard B&amp;B package &mdash; three nights, three rounds, breakfast daily. The rest of us are on that same package, custom-built to add Thursday's round on No. 10 before he lands.</div>
-    <table class="costtable">
-      <thead><tr><th></th><th>Colin</th><th>Tyler</th><th>Kyle</th><th>Granger</th></tr></thead>
-      <tbody>
-        <tr><td>Package rate</td><td>$2,330</td><td>$2,670</td><td>$2,670</td><td>$2,670</td></tr>
-        <tr><td>No. 10 premium</td><td>&mdash;</td><td>$125</td><td>$125</td><td>$125</td></tr>
-        <tr><td>No. 2 premium</td><td>$250</td><td>$250</td><td>$250</td><td>$250</td></tr>
-        <tr class="total"><td>Total before fee &amp; tax</td><td>$2,580</td><td>$3,045</td><td>$3,045</td><td>$3,045</td></tr>
-      </tbody>
-    </table>
-    <div class="two" style="margin-top:20px;font-size:13.5px;line-height:1.55;color:rgba(233,225,205,0.85)">
-      <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">Why it moved</span><br>Dropping from six to four lost us the double-occupancy rate on the 3-bedroom &mdash; <span style="color:#fff">+$480 per person</span>. Switching to a 2-bedroom gives that $480 back.</div>
-      <div style="border-top:1px solid rgba(233,225,205,0.3);padding-top:12px"><span style="color:var(--gold2);letter-spacing:0.14em;text-transform:uppercase;font-size:10px;font-weight:600">What's not in it</span><br>Resort fee and tax, caddie fees and gratuity, dinners, drinks, rental car, Tobacco Road greens fee (~$280).</div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PACKING CHECKLIST ============ -->
-<section id="pack" class="section wrap">
-  <div class="eyebrow">One Tap</div>
-  <h2 class="section-title">Packing Checklist</h2>
-  <hr class="hr">
-  <div class="progresswrap"><div class="progressbar"><div id="pack-progress-bar" style="width:0%"></div></div><div class="progresstext" id="pack-progress-text">0 / 0 packed</div></div>
-  <div class="checklist" id="checklist" style="margin-top:14px"></div>
-  <div style="font-size:12px;color:var(--muted);margin-top:10px">Checks are saved on this device only &mdash; each of you gets your own list.</div>
 </section>
 
 <div id="toclose">
@@ -672,28 +658,28 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
      AviationStack: {status, depDelayMin, arrDelayMin, checkedAt}. Absent or
      stale (>12h old) `real` data falls back to the computed countdown. */
   var FLIGHTS = [
-    {traveler:'Tyler', legLabel:'Outbound', route:'LGA &rarr; RDU', flightno:'Delta 4956', ident:'DAL4956', iata:'DL4956',
+    {traveler:'Tyler', dir:'out', legLabel:'Outbound', route:'LGA &rarr; RDU', flightno:'Delta 4956', ident:'DAL4956', iata:'DL4956',
      dep:'2026-09-30T10:35:00Z', arr:'2026-09-30T12:19:00Z'},
-    {traveler:'Tyler', legLabel:'Return', route:'RDU &rarr; LGA', flightno:'Delta 5109', ident:'DAL5109', iata:'DL5109',
+    {traveler:'Tyler', dir:'back', legLabel:'Return', route:'RDU &rarr; LGA', flightno:'Delta 5109', ident:'DAL5109', iata:'DL5109',
      dep:'2026-10-04T21:30:00Z', arr:'2026-10-04T23:23:00Z'},
 
-    {traveler:'Kyle', legLabel:'Outbound &middot; leg 1', route:'CLE &rarr; IAD', flightno:'United 780', ident:'UAL780', iata:'UA780',
+    {traveler:'Kyle', dir:'out', legLabel:'Outbound &middot; leg 1', route:'CLE &rarr; IAD', flightno:'United 780', ident:'UAL780', iata:'UA780',
      dep:'2026-09-30T18:57:00Z', arr:'2026-09-30T20:16:00Z'},
-    {traveler:'Kyle', legLabel:'Outbound &middot; leg 2', route:'IAD &rarr; RDU', flightno:'United 1322', ident:'UAL1322', iata:'UA1322',
+    {traveler:'Kyle', dir:'out', legLabel:'Outbound &middot; leg 2', route:'IAD &rarr; RDU', flightno:'United 1322', ident:'UAL1322', iata:'UA1322',
      dep:'2026-09-30T22:45:00Z', arr:'2026-09-30T23:58:00Z'},
-    {traveler:'Kyle', legLabel:'Return &middot; leg 1', route:'RDU &rarr; ORD', flightno:'United 481', ident:'UAL481', iata:'UA481',
+    {traveler:'Kyle', dir:'back', legLabel:'Return &middot; leg 1', route:'RDU &rarr; ORD', flightno:'United 481', ident:'UAL481', iata:'UA481',
      dep:'2026-10-04T21:01:00Z', arr:'2026-10-04T23:30:00Z'},
-    {traveler:'Kyle', legLabel:'Return &middot; leg 2', route:'ORD &rarr; CLE', flightno:'United 1156', ident:'UAL1156', iata:'UA1156',
+    {traveler:'Kyle', dir:'back', legLabel:'Return &middot; leg 2', route:'ORD &rarr; CLE', flightno:'United 1156', ident:'UAL1156', iata:'UA1156',
      dep:'2026-10-05T01:05:00Z', arr:'2026-10-05T02:36:00Z'},
 
-    {traveler:'Granger', legLabel:'Outbound', route:'ATL &rarr; RDU', flightno:'Delta 2066', ident:'DAL2066', iata:'DL2066',
+    {traveler:'Granger', dir:'out', legLabel:'Outbound', route:'ATL &rarr; RDU', flightno:'Delta 2066', ident:'DAL2066', iata:'DL2066',
      arr:'2026-10-01T12:28:00Z'},
-    {traveler:'Granger', legLabel:'Return', route:'RDU &rarr; ATL', flightno:'Delta 2393', ident:'DAL2393', iata:'DL2393',
+    {traveler:'Granger', dir:'back', legLabel:'Return', route:'RDU &rarr; ATL', flightno:'Delta 2393', ident:'DAL2393', iata:'DL2393',
      dep:'2026-10-04T23:35:00Z'},
 
-    {traveler:'Colin', legLabel:'Outbound', route:'SEA &rarr; RDU', flightno:'Alaska 572', ident:'ASA572', iata:'AS572',
+    {traveler:'Colin', dir:'out', legLabel:'Outbound', route:'SEA &rarr; RDU', flightno:'Alaska 572', ident:'ASA572', iata:'AS572',
      arr:'2026-10-01T20:35:00Z'},
-    {traveler:'Colin', legLabel:'Return', route:'RDU &rarr; SEA', flightno:'Alaska 572', ident:'ASA572', iata:'AS572',
+    {traveler:'Colin', dir:'back', legLabel:'Return', route:'RDU &rarr; SEA', flightno:'Alaska 572', ident:'ASA572', iata:'AS572',
      dep:'2026-10-04T22:01:00Z'}
   ];
 
@@ -754,11 +740,15 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
     return new Date(iso).toLocaleTimeString('en-US', {timeZone:'America/New_York', hour:'numeric', minute:'2-digit'}) + ' ET';
   }
 
-  var byTraveler = {};
-  FLIGHTS.forEach(function(f){ (byTraveler[f.traveler] = byTraveler[f.traveler]||[]).push(f); });
+  function groupByTraveler(legs){
+    var g = {};
+    legs.forEach(function(f){ (g[f.traveler] = g[f.traveler]||[]).push(f); });
+    return g;
+  }
+  var byTravelerOut = groupByTraveler(FLIGHTS.filter(function(f){ return f.dir === 'out'; }));
+  var byTravelerBack = groupByTraveler(FLIGHTS.filter(function(f){ return f.dir === 'back'; }));
 
-  function render(){
-    var now = Date.now();
+  function cardsHtml(byTraveler, now){
     var html = '';
     Object.keys(byTraveler).forEach(function(name){
       html += '<div class="flightcard"><div class="who"><div class="nm">'+name+'</div></div>';
@@ -774,9 +764,25 @@ table.costtable tr.total td{padding-top:13px;border-top:1px solid rgba(233,225,2
       });
       html += '</div>';
     });
-    document.getElementById('flightcards').innerHTML = html;
-    var stampEl = document.getElementById('travel-asof').querySelector('span:last-child');
+    return html;
+  }
+
+  function stamp(elId){
+    var el = document.getElementById(elId);
+    if(!el) return;
+    var stampEl = el.querySelector('span:last-child');
     stampEl.textContent = 'Scheduled times shown; live status computed as of ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',second:'2-digit'}) + ' (updates automatically)';
+  }
+
+  function render(){
+    var now = Date.now();
+    document.getElementById('flightcards').innerHTML = cardsHtml(byTravelerOut, now);
+    stamp('travel-asof');
+    var backEl = document.getElementById('flightcards-return');
+    if(backEl){
+      backEl.innerHTML = cardsHtml(byTravelerBack, now);
+      stamp('travel-asof-return');
+    }
   }
   render();
   setInterval(render, 15000);
@@ -796,45 +802,6 @@ document.querySelectorAll('.addcal').forEach(function(a){
   a.setAttribute('rel', 'noopener');
 });
 
-/* ---------- packing checklist (localStorage, per device) ---------- */
-(function(){
-  var ITEMS = [
-    'Golf shoes (spikes, broken in)',
-    'Rain gear / layers for cool mornings',
-    'Collared shirts (dinner + course dress code)',
-    'Belt, non-denim pants/shorts',
-    'Glove(s) + extra grips tape',
-    'Extra golf balls (Tobacco Road is unforgiving)',
-    'Sunscreen + hat',
-    'Cash for caddies ($65+ per player) + double-bag fee',
-    'Comfortable shoes for the Hall of Fame walk',
-    'Phone charger / battery pack',
-    'ID for the Westin key pickup (Kyle)',
-    'Reservation confirmations (Ashten’s, Wiregrass)'
-  ];
-  var KEY = 'pinehurst2026-checklist';
-  var state = {};
-  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){}
-  var list = document.getElementById('checklist');
-  list.innerHTML = ITEMS.map(function(item, i){
-    var checked = state[i] ? 'checked' : '';
-    return '<label><input type="checkbox" data-i="'+i+'" '+checked+'><span>'+item+'</span></label>';
-  }).join('');
-  function updateProgress(){
-    var total = ITEMS.length, done = Object.keys(state).filter(function(k){return state[k];}).length;
-    document.getElementById('pack-progress-bar').style.width = (total? (done/total*100):0) + '%';
-    document.getElementById('pack-progress-text').textContent = done + ' / ' + total + ' packed';
-  }
-  list.addEventListener('change', function(e){
-    if(e.target.matches('input[type=checkbox]')){
-      var i = e.target.getAttribute('data-i');
-      state[i] = e.target.checked;
-      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(err){}
-      updateProgress();
-    }
-  });
-  updateProgress();
-})();
 </script>
 </body>
 </html>
