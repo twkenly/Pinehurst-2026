@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Pinehurst 2026 Was Built</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Jost:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#0F2B1D; --paper:#F6F2E9; --card:#FFFDF7; --cardline:#DCD5C4;
+  --gold:#B99551; --gold2:#C9AE72; --slate:#5A6459; --muted:#8A8574;
+  --shadow: 0 1px 2px rgba(15,43,29,0.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#EFE7D2; --paper:#0E2116; --card:#152A1E; --cardline:#2C4535;
+    --gold:#D9BB7C; --gold2:#C9AE72; --slate:#C7CBBF; --muted:#93A092;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EFE7D2; --paper:#0E2116; --card:#152A1E; --cardline:#2C4535;
+  --gold:#D9BB7C; --gold2:#C9AE72; --slate:#C7CBBF; --muted:#93A092;
+  --shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--slate);
+  font-family:'Jost',sans-serif; -webkit-font-smoothing:antialiased;
+  padding-block:64px 80px;
+}
+h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wrap:balance}
+
+.wrap{max-width:700px; margin:0 auto; padding:0 24px}
+
+.eyebrow{
+  font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--gold); font-weight:600;
+}
+
+/* ---- masthead ---- */
+.masthead{margin-bottom:52px}
+.masthead .eyebrow{margin-bottom:14px}
+.masthead h1{font-size:42px; line-height:1.12; margin:0 0 16px}
+.masthead .dek{font-size:17px; line-height:1.6; color:var(--slate); max-width:520px}
+.masthead .rule{height:1px; background:var(--cardline); margin-top:36px}
+
+/* ---- intro ---- */
+.intro{font-size:17px; line-height:1.75; margin:36px 0 56px}
+.intro p{margin:0 0 18px}
+.intro p:last-child{margin-bottom:0}
+.intro .lede{font-family:'Libre Caslon Display',serif; font-size:22px; color:var(--ink); line-height:1.5; margin-bottom:22px}
+
+/* ---- routing strip (build phases, styled like a course routing) ---- */
+.routing{margin:56px 0}
+.routing .label{font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin-bottom:22px}
+.routing svg{width:100%; height:auto; display:block}
+.routing-caps{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:14px}
+.routing-caps div{font-size:12.5px; line-height:1.5; color:var(--slate); text-align:center}
+.routing-caps b{display:block; font-family:'Libre Caslon Display',serif; font-size:14.5px; color:var(--ink); margin-bottom:4px; font-weight:400}
+
+@media (max-width:560px){
+  .routing-caps{grid-template-columns:repeat(2,1fr); row-gap:20px}
+}
+
+/* ---- feature grid ---- */
+.section-head{margin:64px 0 24px}
+.section-head h2{font-size:26px; margin:0 0 10px}
+.section-head p{font-size:15.5px; line-height:1.6; color:var(--muted); max-width:480px; margin:0}
+
+.grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media (max-width:560px){ .grid{grid-template-columns:1fr} }
+
+.card{
+  background:var(--card); border:1px solid var(--cardline); border-radius:3px;
+  padding:22px 22px 24px; box-shadow:var(--shadow);
+}
+.card .k{
+  font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);
+  font-weight:600; margin-bottom:10px;
+}
+.card h3{font-family:'Libre Caslon Display',serif; font-weight:400; font-size:19px; color:var(--ink); margin:0 0 8px}
+.card p{font-size:14.5px; line-height:1.55; color:var(--slate); margin:0}
+
+/* ---- under the hood ---- */
+.hood{margin-top:64px; border-top:1px solid var(--cardline); padding-top:40px}
+.hood h2{font-size:22px; margin:0 0 16px}
+.hood p{font-size:16px; line-height:1.75; margin:0 0 16px}
+.hood p:last-child{margin-bottom:0}
+.hood a{color:var(--ink); border-bottom:1px solid var(--gold); text-decoration:none}
+
+/* ---- close / cta ---- */
+.close{
+  margin-top:64px; padding:32px 28px; text-align:center;
+  border:1px solid var(--cardline); background:var(--card); border-radius:3px;
+}
+.close .serif{font-size:20px; margin-bottom:16px; line-height:1.5}
+.close a.cta{
+  display:inline-block; font-family:'Jost',sans-serif; font-weight:600; font-size:13px;
+  letter-spacing:0.08em; text-transform:uppercase; color:var(--ink);
+  border:1px solid var(--ink); border-radius:2px; padding:12px 22px;
+  text-decoration:none;
+}
+.close a.cta:hover{background:var(--ink); color:var(--paper)}
+
+.sign{margin-top:44px; font-size:13px; color:var(--muted); text-align:center; letter-spacing:0.04em}
+</style>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">Behind the Scorecard</div>
+    <h1>How Pinehurst 2026<br>Was Built</h1>
+    <div class="dek">A short note on how the trip site came together &mdash; for anyone curious what's actually running behind the page, without the hundred small edits it took to get there.</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="intro">
+    <p class="lede">It started as a PDF &mdash; the kind you'd print and fold into a golf bag pocket.</p>
+    <p>I dropped in everything that mattered: the reservation details, notes from a call with Pinehurst directly, the flight info the guys sent over. Claude turned that into a polished itinerary &mdash; finding course logos, real photos of the courses and restaurants, the expected weather for those dates, and a link to each place so nobody had to guess where they were headed.</p>
+    <p>A few rounds of feedback later, the PDF looked right. But golf trips don't hold still &mdash; a tee time moves, a flight gets delayed, the forecast changes the morning of. Once it's been sent out, a PDF has no way to know any of that happened. So I rebuilt it as a website instead: one that checks in on itself. It also meant James and Kevin, watching from home, could actually follow along &mdash; a live link to the round in 18Birdies, and new photos landing on the right day as soon as someone in the group took them. I did the building inside <span class="serif" style="font-size:16.5px">Claude Code</span>, Anthropic's AI coding tool &mdash; describing what I wanted, reviewing what came back, and going another round wherever it didn't feel right yet.</p>
+  </div>
+
+  <div class="routing">
+    <div class="label">The Routing</div>
+    <svg viewBox="0 0 640 46" preserveAspectRatio="none">
+      <line x1="40" y1="14" x2="600" y2="14" stroke="var(--cardline)" stroke-width="1.5"/>
+      <circle cx="40" cy="14" r="6" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <circle cx="213" cy="14" r="6" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <circle cx="387" cy="14" r="6" fill="none" stroke="var(--gold)" stroke-width="2"/>
+      <circle cx="600" cy="14" r="6" fill="none" stroke="var(--gold)" stroke-width="2"/>
+    </svg>
+    <div class="routing-caps">
+      <div><b>The dossier</b>Reservations, call notes, and flight info went in; a polished PDF itinerary with photos, logos, weather, and reference links came out.</div>
+      <div><b>The pivot</b>A few rounds of feedback in, realized a PDF goes stale the moment a tee time or a forecast changes.</div>
+      <div><b>The build</b>Rebuilt it as a real website inside Claude Code, carrying over the same look &mdash; cream paper, deep green, gold rule lines.</div>
+      <div><b>The pulse</b>Set up routines that check the weather, flights, and shared photo album on a schedule, so the page updates on its own.</div>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2>What makes it feel alive</h2>
+    <p>Three routines run in the background on their own schedule, and one more links straight out to something that's already live.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="k">Weather</div>
+      <h3>A forecast for each day</h3>
+      <p>A routine checks a weather service for each day of the trip, so the numbers on the page are today's, not the day I built it.</p>
+    </div>
+    <div class="card">
+      <div class="k">Flights</div>
+      <h3>Real status, not guesses</h3>
+      <p>On travel days, another routine checks each flight against live tracking data &mdash; on time, delayed, landed &mdash; through the day.</p>
+    </div>
+    <div class="card">
+      <div class="k">Scores</div>
+      <h3>Linked to the round itself</h3>
+      <p>The scoring section just links straight through to our live 18Birdies round &mdash; that one's live on its own; ours is just the link.</p>
+    </div>
+    <div class="card">
+      <div class="k">Photos</div>
+      <h3>A scrapbook that fills itself in</h3>
+      <p>A third routine scans our shared Apple photo album for anything new, works out which day it belongs to, and drops it in &mdash; no uploading through the site.</p>
+    </div>
+  </div>
+
+  <div class="hood">
+    <h2 class="serif">Under the hood</h2>
+    <p>The whole thing started about three weeks ago. The PDF itinerary took an hour or two inside Claude. Turning it into a live website took a few hours across a couple of sessions, plus tweaks since &mdash; not a long build, just a very iterated one.</p>
+    <p>It's one page, built and maintained through Claude Code. Claude itself only shares pages within my own company account by default, which doesn't work for a group of friends and family &mdash; so I set it up on GitHub Pages instead, a free way to host a page at a normal public web address: <a href="https://twkenly.github.io/Pinehurst-2026/" target="_blank" rel="noopener">twkenly.github.io/Pinehurst-2026</a>. Anyone with the link can open it, no account or app required.</p>
+    <p>What you won't find here is the working file: every small design revision along the way. This is the short version.</p>
+    <p style="margin-top:28px;padding-top:20px;border-top:1px solid var(--cardline)">Want the fuller technical rundown &mdash; detailed enough to hand to your own Claude and start asking it questions? <a href="build-notes.md" download style="color:var(--ink);border-bottom:1px solid var(--gold);text-decoration:none">Download the build notes (.md)</a>.</p>
+  </div>
+
+  <div class="close">
+    <div class="serif">Curious what it actually looks like?</div>
+    <a class="cta" href="https://twkenly.github.io/Pinehurst-2026/" target="_blank" rel="noopener">Open Pinehurst 2026 &rarr;</a>
+  </div>
+
+  <div class="sign">Kenly Golf Club &middot; Oct 1&ndash;4, 2026</div>
+
+</div>
+
+</body>
+</html>
