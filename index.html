@@ -377,6 +377,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="heads-up" data-wxnote="thu" style="display:none"></div>
         <img src="assets/321424c2-c7c5-4f44-9335-7947de1eba0e.jpg" alt="Pinehurst No. 10" style="height:110px;object-fit:cover">
         <img src="assets/f877b246-d09f-471b-8f03-f2f0341d470a.jpg" alt="Station 21" style="height:110px;object-fit:cover">
         <img src="assets/b441438f-03b7-4d3c-8b7e-3e5cc5485e02.jpg" alt="Pinehurst Brewing Co." style="height:110px;object-fit:cover">
@@ -422,6 +423,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="heads-up" data-wxnote="fri" style="display:none"></div>
         <img src="assets/fb1efa77-0704-4d70-9c7f-9f9750bbd5b0.jpg" alt="The Cradle sign" style="height:110px;object-fit:cover;object-position:center 65%">
         <img src="assets/0b16b3b5-4b2e-489f-9332-dc3886e922f5.png" alt="Pinehurst No. 8" style="height:110px;object-fit:cover">
         <img src="assets/ashtens-exterior.jpg" alt="Ashten's" style="height:110px;object-fit:cover">
@@ -463,6 +465,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="heads-up" data-wxnote="sat" style="display:none"></div>
         <img src="assets/480f8e64-38c7-451d-9a07-daccb1a93f03.jpg" alt="Payne Stewart statue" style="height:118px;object-fit:cover">
         <img src="assets/e6c5fca5-440f-4ce5-a206-4623b4f9ef76.jpg" alt="The Deuce" style="height:118px;object-fit:cover;object-position:center 82%">
         <img src="assets/80d17265-a1cc-4fcd-aa1c-933cb5140a45.jpg" alt="Wiregrass" style="height:118px;object-fit:cover;object-position:center 75%">
@@ -505,6 +508,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="heads-up" data-wxnote="sun" style="display:none"></div>
         <img src="assets/1c220cbc-aff0-444c-96b4-b1a8dc965876.webp" alt="Tobacco Road" style="height:135px;object-fit:cover">
         <img src="assets/e31a2d28-47e4-4bb7-ae18-f660cdeb3f3e.webp" alt="Tobacco Road at sunset" style="height:135px;object-fit:cover">
       </div>
@@ -686,10 +690,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 (function(){
   var GENERATED_AT = '2026-09-16T11:26:16Z';
   var WX = {
-    thu: {cond:'Cloudy',        t8:70, t12:73, t20:72},
-    fri: {cond:'Sunny',         t8:59, t12:74, t20:63},
-    sat: {cond:'Partly Cloudy', t8:50, t12:69, t20:58},
-    sun: {cond:'Partly Cloudy', t8:48, t12:66, t20:56}
+    thu: {cond:'Cloudy',        t8:70, t12:73, t20:72, note:''},
+    fri: {cond:'Sunny',         t8:59, t12:74, t20:63, note:''},
+    sat: {cond:'Partly Cloudy', t8:50, t12:69, t20:58, note:''},
+    sun: {cond:'Partly Cloudy', t8:48, t12:66, t20:56, note:''}
   };
   var ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
@@ -719,6 +723,14 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   document.querySelectorAll('[data-wx]').forEach(function(el){
     var key = el.getAttribute('data-wx');
     el.innerHTML = slotHtml(WX[key]);
+  });
+  document.querySelectorAll('[data-wxnote]').forEach(function(el){
+    var key = el.getAttribute('data-wxnote');
+    var note = WX[key] && WX[key].note;
+    if(note){
+      el.innerHTML = '<div class="k">Weather Heads-Up</div><div class="v">'+note+'</div>';
+      el.style.display = '';
+    }
   });
   var g = document.getElementById('glance-weather');
   var stamp = new Date(GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
