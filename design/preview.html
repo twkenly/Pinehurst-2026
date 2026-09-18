@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo Redesign — Preview</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0F2B1D; --ink:#0B3B18; --cream:#F6F2E9; --card:#FFFDF7; --border:#DCD5C4;
+  --gold:#B99551; --gold2:#C9AE72; --muted:#8A8574;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:#3A473C;font-family:'Jost',sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Libre Caslon Display',serif;color:var(--green)}
+img{display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+@media(max-width:480px){.wrap{padding:0 20px}}
+
+header.top{padding:48px 0 36px;border-bottom:1px solid var(--border)}
+.eyebrow{font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
+header.top h1{font-size:36px;margin:10px 0 12px}
+header.top p{font-size:15.5px;line-height:1.6;color:#5A6459;max-width:640px;margin:0}
+.notice{margin-top:20px;background:var(--card);border:1px solid var(--border);padding:14px 18px;font-size:13.5px;line-height:1.6;color:#5A6459;max-width:640px}
+.notice b{color:var(--green)}
+
+.variant{padding:56px 0;border-bottom:1px solid var(--border)}
+.variant:last-of-type{border-bottom:none}
+.variant-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.variant-head .num{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.variant-head h2{font-size:26px;margin:6px 0 4px}
+.variant-head p{font-size:14px;color:var(--muted);margin:0;max-width:520px}
+
+.hero-row{display:grid;grid-template-columns:200px 1fr;gap:28px;margin-bottom:26px}
+@media(max-width:640px){.hero-row{grid-template-columns:1fr}}
+.hero-card{background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:20px}
+.hero-card img{width:150px;height:auto}
+
+.sizes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:640px){.sizes{grid-template-columns:repeat(2,1fr)}}
+.size-card{background:var(--card);border:1px solid var(--border);padding:14px;text-align:center}
+.size-card.dark{background:var(--green);border-color:var(--green)}
+.size-card .lab{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+.size-card.dark .lab{color:rgba(233,225,205,0.65)}
+.size-card .stage{display:flex;align-items:center;justify-content:center;height:76px;margin-top:8px}
+.size-card img{margin:0 auto}
+
+.row-label{font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin:26px 0 10px}
+
+.swatchgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:760px){.swatchgrid{grid-template-columns:repeat(2,1fr)}}
+.swatch{background:var(--card);border:1px solid var(--border);padding:16px;text-align:center}
+.swatch.dark{background:var(--green);border-color:var(--green)}
+.swatch img{width:80px;height:auto;margin:0 auto}
+.swatch .lab{font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.swatch.dark .lab{color:rgba(233,225,205,0.7)}
+
+.lockups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:760px){.lockups{grid-template-columns:1fr}}
+.lockup-card{background:var(--card);border:1px solid var(--border);padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:140px}
+.lockup-card img{max-width:100%;max-height:110px}
+.lockup-card .lab{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+
+footer.close{padding:44px 0 70px;text-align:center}
+footer.close p{font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Kenly Golf Club &middot; Design Exploration</div>
+    <h1>Logo Redesign — Three Directions</h1>
+    <p>Same brief across all three: shield, crossed clubs, ball on top, a custom geometric K in place of the serif monogram — pulled a step further from Knollwood's crest than the current mark, while keeping the same silhouette family. Ink sampled directly from the current logo file: <code>#0B3B18</code>.</p>
+    <div class="notice"><b>Note on the 1-color builds:</b> the "hole" areas (the K, the ball's center) are set to match the swatch they're shown on here, using a true SVG mask so they render correctly on any single background &mdash; but they're not yet independent of background color. Fine for digital use as-is; a screen-printer or embroiderer should get true vector holes cut before production.</div>
+  </header>
+
+  <!-- VARIANT 1 -->
+  <section class="variant">
+    <div class="variant-head">
+      <div>
+        <div class="num">Variant 01</div>
+        <h2>Iron + Driver</h2>
+        <p>An asymmetric pair &mdash; a rounded driver head on one side, an angular iron blade on the other &mdash; crossed behind the shield, geometric K center.</p>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-card"><img src="logo/variant-1-iron-driver/master.svg" alt="Variant 1 emblem, full size"></div>
+      <div class="sizes">
+        <div class="size-card"><div class="lab">64px &middot; light</div><div class="stage"><img src="logo/variant-1-iron-driver/master.svg" style="width:64px"></div></div>
+        <div class="size-card dark"><div class="lab">64px &middot; dark</div><div class="stage"><img src="logo/variant-1-iron-driver/color-cream.svg" style="width:64px"></div></div>
+        <div class="size-card"><div class="lab">24px &middot; light</div><div class="stage"><img src="logo/variant-1-iron-driver/master.svg" style="width:24px"></div></div>
+        <div class="size-card dark"><div class="lab">24px &middot; dark</div><div class="stage"><img src="logo/variant-1-iron-driver/color-cream.svg" style="width:24px"></div></div>
+      </div>
+    </div>
+
+    <div class="row-label">Color builds</div>
+    <div class="swatchgrid">
+      <div class="swatch"><img src="logo/variant-1-iron-driver/master.svg"><div class="lab">Master (2-color)</div></div>
+      <div class="swatch"><img src="logo/variant-1-iron-driver/color-green.svg"><div class="lab">1-color green</div></div>
+      <div class="swatch dark"><img src="logo/variant-1-iron-driver/color-cream.svg"><div class="lab">1-color reversed</div></div>
+      <div class="swatch"><img src="logo/variant-1-iron-driver/embroidery.svg"><div class="lab">Embroidery-simplified</div></div>
+    </div>
+
+    <div class="row-label">Lockups</div>
+    <div class="lockups">
+      <div class="lockup-card"><img src="logo/variant-1-iron-driver/master.svg" style="max-height:90px"><div class="lab">Emblem only</div></div>
+      <div class="lockup-card"><img src="logo/variant-1-iron-driver/lockup-stacked.svg"><div class="lab">Stacked with wordmark</div></div>
+      <div class="lockup-card"><img src="logo/variant-1-iron-driver/lockup-horizontal.svg"><div class="lab">Horizontal</div></div>
+    </div>
+  </section>
+
+  <!-- VARIANT 2 -->
+  <section class="variant">
+    <div class="variant-head">
+      <div>
+        <div class="num">Variant 02</div>
+        <h2>Matched Clubs, Solid Silhouette</h2>
+        <p>Two identical clubs, restyled as bold solid paddle-head silhouettes rather than literal club illustrations &mdash; the most graphic, poster-like version of the mark.</p>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-card"><img src="logo/variant-2-matched-silhouette/master.svg" alt="Variant 2 emblem, full size"></div>
+      <div class="sizes">
+        <div class="size-card"><div class="lab">64px &middot; light</div><div class="stage"><img src="logo/variant-2-matched-silhouette/master.svg" style="width:64px"></div></div>
+        <div class="size-card dark"><div class="lab">64px &middot; dark</div><div class="stage"><img src="logo/variant-2-matched-silhouette/color-cream.svg" style="width:64px"></div></div>
+        <div class="size-card"><div class="lab">24px &middot; light</div><div class="stage"><img src="logo/variant-2-matched-silhouette/master.svg" style="width:24px"></div></div>
+        <div class="size-card dark"><div class="lab">24px &middot; dark</div><div class="stage"><img src="logo/variant-2-matched-silhouette/color-cream.svg" style="width:24px"></div></div>
+      </div>
+    </div>
+
+    <div class="row-label">Color builds</div>
+    <div class="swatchgrid">
+      <div class="swatch"><img src="logo/variant-2-matched-silhouette/master.svg"><div class="lab">Master (2-color)</div></div>
+      <div class="swatch"><img src="logo/variant-2-matched-silhouette/color-green.svg"><div class="lab">1-color green</div></div>
+      <div class="swatch dark"><img src="logo/variant-2-matched-silhouette/color-cream.svg"><div class="lab">1-color reversed</div></div>
+      <div class="swatch"><img src="logo/variant-2-matched-silhouette/embroidery.svg"><div class="lab">Embroidery-simplified</div></div>
+    </div>
+
+    <div class="row-label">Lockups</div>
+    <div class="lockups">
+      <div class="lockup-card"><img src="logo/variant-2-matched-silhouette/master.svg" style="max-height:90px"><div class="lab">Emblem only</div></div>
+      <div class="lockup-card"><img src="logo/variant-2-matched-silhouette/lockup-stacked.svg"><div class="lab">Stacked with wordmark</div></div>
+      <div class="lockup-card"><img src="logo/variant-2-matched-silhouette/lockup-horizontal.svg"><div class="lab">Horizontal</div></div>
+    </div>
+  </section>
+
+  <!-- VARIANT 3 -->
+  <section class="variant">
+    <div class="variant-head">
+      <div>
+        <div class="num">Variant 03</div>
+        <h2>Flagstick-Stem K</h2>
+        <p>The K's vertical stroke becomes a flagstick with a small pennant &mdash; the most "golf" of the three, with simpler supporting clubs so the flag reads as the hero detail.</p>
+      </div>
+    </div>
+
+    <div class="hero-row">
+      <div class="hero-card"><img src="logo/variant-3-flagstick-k/master.svg" alt="Variant 3 emblem, full size"></div>
+      <div class="sizes">
+        <div class="size-card"><div class="lab">64px &middot; light</div><div class="stage"><img src="logo/variant-3-flagstick-k/master.svg" style="width:64px"></div></div>
+        <div class="size-card dark"><div class="lab">64px &middot; dark</div><div class="stage"><img src="logo/variant-3-flagstick-k/color-cream.svg" style="width:64px"></div></div>
+        <div class="size-card"><div class="lab">24px &middot; light</div><div class="stage"><img src="logo/variant-3-flagstick-k/master.svg" style="width:24px"></div></div>
+        <div class="size-card dark"><div class="lab">24px &middot; dark</div><div class="stage"><img src="logo/variant-3-flagstick-k/color-cream.svg" style="width:24px"></div></div>
+      </div>
+    </div>
+
+    <div class="row-label">Color builds</div>
+    <div class="swatchgrid">
+      <div class="swatch"><img src="logo/variant-3-flagstick-k/master.svg"><div class="lab">Master (2-color)</div></div>
+      <div class="swatch"><img src="logo/variant-3-flagstick-k/color-green.svg"><div class="lab">1-color green</div></div>
+      <div class="swatch dark"><img src="logo/variant-3-flagstick-k/color-cream.svg"><div class="lab">1-color reversed</div></div>
+      <div class="swatch"><img src="logo/variant-3-flagstick-k/embroidery.svg"><div class="lab">Embroidery-simplified</div></div>
+    </div>
+
+    <div class="row-label">Lockups</div>
+    <div class="lockups">
+      <div class="lockup-card"><img src="logo/variant-3-flagstick-k/master.svg" style="max-height:90px"><div class="lab">Emblem only</div></div>
+      <div class="lockup-card"><img src="logo/variant-3-flagstick-k/lockup-stacked.svg"><div class="lab">Stacked with wordmark</div></div>
+      <div class="lockup-card"><img src="logo/variant-3-flagstick-k/lockup-horizontal.svg"><div class="lab">Horizontal</div></div>
+    </div>
+  </section>
+
+  <footer class="close">
+    <p>Pick a variant (and tell me if you want to mix elements &mdash; e.g. Variant 2's bold clubs with Variant 3's flagstick K) and I'll swap it into the header, favicon, OG image, and the story page.</p>
+  </footer>
+</div>
+
+</body>
+</html>
