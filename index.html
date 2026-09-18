@@ -688,12 +688,12 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-09-16T11:26:16Z';
+  var GENERATED_AT = '2026-09-18T16:55:00Z';
   var WX = {
-    thu: {cond:'Cloudy',        t8:70, t12:73, t20:72, note:''},
-    fri: {cond:'Sunny',         t8:59, t12:74, t20:63, note:''},
-    sat: {cond:'Partly Cloudy', t8:50, t12:69, t20:58, note:''},
-    sun: {cond:'Partly Cloudy', t8:48, t12:66, t20:56, note:''}
+    thu: {cond:'Sunny',   t8:61, t12:75, t20:67, note:''},
+    fri: {cond:'Showers', t8:59, t12:73, t20:65, note:"Showers possible during dinner at Ashten's — bring a jacket or umbrella."},
+    sat: {cond:'Showers', t8:63, t12:71, t20:65, note:'Rain likely by evening, possibly during dinner at Wiregrass — bring a jacket or umbrella.'},
+    sun: {cond:'Showers', t8:64, t12:75, t20:67, note:'Afternoon showers possible during the Tobacco Road round — pack a rain layer.'}
   };
   var ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
@@ -735,11 +735,11 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   var g = document.getElementById('glance-weather');
   var stamp = new Date(GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
   g.innerHTML =
-    '<div class="rowline"><span class="d">Thu</span><span>Clear &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 73&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Fri</span><span>Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 59&deg; <span style="color:var(--muted);font-size:11px">H</span> 74&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sat</span><span>Warm &middot; <span style="color:var(--muted);font-size:11px">L</span> 50&deg; <span style="color:var(--muted);font-size:11px">H</span> 69&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sun</span><span>Cool &middot; <span style="color:var(--muted);font-size:11px">L</span> 48&deg; <span style="color:var(--muted);font-size:11px">H</span> 66&deg;</span></div>'+
-    '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Planning estimates as of '+stamp+' ET. Live per-day forecasts open automatically about 16 days out &mdash; ask for a refresh as the trip gets close.</div>';
+    '<div class="rowline"><span class="d">Thu</span><span>Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 54&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Fri</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 77&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sun</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
+    '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows. Rechecked regularly as the trip approaches.</div>';
 })();
 
 /* ---------- flights: computed live status from booked schedule (all times fixed UTC instants) ---------- */
