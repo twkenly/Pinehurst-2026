@@ -226,6 +226,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   <a href="#sun" data-sec="sun">Sun</a>
   <a href="#info" data-sec="info">Know Before You Go</a>
   <a href="#scrapbook" data-sec="scrapbook">Scrapbook</a>
+  <a href="story.html" data-sec="story">Our Story</a>
 </div></nav>
 
 <!-- ============ COVER ============ -->
@@ -615,7 +616,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 /* ---------- nav active state ---------- */
 (function(){
   var links = document.querySelectorAll('#nav a');
-  var secs = Array.from(links).map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+  var secs = Array.from(links).map(function(a){
+    var href = a.getAttribute('href');
+    return href.charAt(0) === '#' ? document.getElementById(href.slice(1)) : null;
+  });
   function onScroll(){
     var pos = window.scrollY + 120;
     var idx = 0;
