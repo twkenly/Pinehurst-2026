@@ -530,7 +530,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   <h2 class="section-title">Know Before You Go</h2>
   <hr class="hr">
   <div class="grid3">
-    <div class="cell"><div class="k">Weather</div><div class="v">Mid-50s &rarr; low 80s</div><div class="d">Sunny Thursday, then showers are likely each afternoon or evening Friday through Sunday &mdash; pack a light rain layer.</div></div>
+    <div class="cell"><div class="k">Weather</div><div class="v">Mid-50s &rarr; upper 70s</div><div class="d">Rain chances every day of the trip, heaviest Thursday &mdash; pack a light rain layer and expect a mix of sun and showers throughout.</div></div>
     <div class="cell"><div class="k">Walking</div><div class="v">Three of four on foot</div><div class="d">No. 10 and the Cradle walking, No. 2 with caddies. Only No. 8 has carts.</div></div>
     <div class="cell"><div class="k">Dress Code</div><div class="v">Collared, no denim</div><div class="d">Layers. For Fri/Sat dinner: no gym shorts, no ballcaps.</div></div>
   </div>
@@ -690,10 +690,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-09-18T16:55:00Z';
+  var GENERATED_AT = '2026-09-19T11:30:00Z';
   var WX = {
-    thu: {cond:'Sunny',   t8:61, t12:75, t20:67, note:''},
-    fri: {cond:'Showers', t8:59, t12:73, t20:65, note:"Showers possible during dinner at Ashten's — bring a jacket or umbrella."},
+    thu: {cond:'Rain',     t8:60, t12:72, t20:62, note:'Rain likely on and off through the day — pack rain gear for the round at No. 10 and dinner at Pinehurst Brewing.'},
+    fri: {cond:'Showers',  t8:59, t12:70, t20:60, note:"Morning showers possible during the Cradle/No. 8, with more rain possible again by evening at Ashten's — bring a rain layer."},
     sat: {cond:'Showers', t8:63, t12:71, t20:65, note:'Rain likely by evening, possibly during dinner at Wiregrass — bring a jacket or umbrella.'},
     sun: {cond:'Showers', t8:64, t12:75, t20:67, note:'Afternoon showers possible during the Tobacco Road round — pack a rain layer.'}
   };
@@ -743,8 +743,8 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   var g = document.getElementById('glance-weather');
   var stamp = new Date(GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
   g.innerHTML =
-    '<div class="rowline"><span class="d">Thu</span><span>Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 54&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Fri</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Thu</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 58&deg; <span style="color:var(--muted);font-size:11px">H</span> 78&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Fri</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 54&deg; <span style="color:var(--muted);font-size:11px">H</span> 75&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 77&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sun</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
     '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows. Rechecked regularly as the trip approaches.</div>';
