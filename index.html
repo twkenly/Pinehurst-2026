@@ -209,6 +209,28 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 .scrap-grid img{width:100%;height:150px;object-fit:cover;background:var(--card)}
 .scrap-empty{grid-column:1/-1;font-size:13.5px;color:var(--muted);font-style:italic;padding:10px 0}
 .scrap-cap{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.3}
+
+/* ask-the-itinerary widget */
+#ask-btn{position:fixed;right:18px;bottom:18px;width:52px;height:52px;border-radius:50%;background:var(--green);border:1px solid var(--gold);color:var(--gold2);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,0.28);z-index:80}
+#ask-btn svg{width:24px;height:24px}
+#ask-btn:hover{background:#12291e}
+#ask-panel{position:fixed;right:18px;bottom:82px;width:340px;max-width:calc(100vw - 36px);height:min(480px,calc(100vh - 120px));background:var(--cream);border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.28);display:none;flex-direction:column;overflow:hidden;z-index:81}
+#ask-panel.open{display:flex}
+#ask-head{background:var(--green);padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;flex:0 0 auto}
+#ask-close{color:rgba(233,225,205,0.75);font-size:20px;line-height:1;cursor:pointer;padding:2px 4px}
+#ask-msgs{flex:1 1 auto;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.ask-msg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:13.5px;line-height:1.5}
+.ask-msg.user{align-self:flex-end;background:var(--green);color:var(--cream);border-bottom-right-radius:3px}
+.ask-msg.bot{align-self:flex-start;background:var(--card);border:1px solid var(--border);color:var(--green2);border-bottom-left-radius:3px}
+.ask-msg.bot b{color:var(--green)}
+#ask-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;flex:0 0 auto}
+.ask-chip{font-size:11px;padding:5px 10px;border-radius:14px;border:1px solid var(--border);color:var(--green2);cursor:pointer;background:var(--card)}
+.ask-chip:hover{border-color:var(--gold)}
+#ask-form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);flex:0 0 auto}
+#ask-input{flex:1;min-width:0;border:1px solid var(--border);border-radius:20px;padding:9px 14px;font-size:13.5px;font-family:inherit;background:var(--card);color:var(--green)}
+#ask-input:focus{outline:none;border-color:var(--gold)}
+#ask-form button{width:36px;height:36px;border-radius:50%;background:var(--green);color:var(--cream);border:none;cursor:pointer;font-size:15px;flex:0 0 auto}
+@media(max-width:480px){#ask-panel{right:10px;left:10px;width:auto;bottom:78px}#ask-btn{right:14px;bottom:14px}}
 </style>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -611,6 +633,25 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   </div>
 </div>
 
+<div id="ask-btn" role="button" tabindex="0" aria-label="Ask about the trip">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.63-.31-3.77-.86L4 20l1.02-4.55A8.47 8.47 0 0 1 3.5 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z"/></svg>
+</div>
+<div id="ask-panel">
+  <div id="ask-head">
+    <div>
+      <div style="font-family:'Libre Caslon Display',serif;font-size:16px;color:#fff">Ask about the trip</div>
+      <div style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(233,225,205,0.65);margin-top:2px">Answers pulled from this page</div>
+    </div>
+    <div id="ask-close" role="button" aria-label="Close">&times;</div>
+  </div>
+  <div id="ask-msgs"></div>
+  <div id="ask-chips"></div>
+  <form id="ask-form">
+    <input id="ask-input" type="text" placeholder="Where's dinner Saturday?" autocomplete="off">
+    <button type="submit" aria-label="Send">&rarr;</button>
+  </form>
+</div>
+
 <script>
 /* ---------- nav active state ---------- */
 (function(){
@@ -781,6 +822,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     {traveler:'Colin', dir:'back', legLabel:'Return', route:'RDU &rarr; SEA', flightno:'Alaska 572', ident:'ASA572', iata:'AS572',
      dep:'2026-10-04T22:01:00Z'}
   ];
+  window.FLIGHTS = FLIGHTS;
 
   function fmtLocal(iso){
     return new Date(iso).toLocaleString('en-US', {timeZone:'America/New_York', weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}) + ' ET';
@@ -903,6 +945,283 @@ document.querySelectorAll('.addcal').forEach(function(a){
   a.setAttribute('target', '_blank');
   a.setAttribute('rel', 'noopener');
 });
+
+/* ---------- ask-the-itinerary: no-backend keyword FAQ widget ---------- */
+(function(){
+  var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
+  var DAY_SYNS = {
+    thu: ['thu','thur','thurs','thursday','day1','dayone','oct1'],
+    fri: ['fri','friday','day2','daytwo','oct2'],
+    sat: ['sat','saturday','day3','daythree','oct3'],
+    sun: ['sun','sunday','day4','dayfour','oct4']
+  };
+  var TOPICS = {
+    dinner:   ['dinner','dinners','restaurant','eat','eating','reservation'],
+    lunch:    ['lunch','bite'],
+    breakfast:['breakfast'],
+    golf:     ['golf','tee','round','course','play','playing','caddie','caddies','walking','cart'],
+    flight:   ['flight','flights','fly','flying','land','landing','depart','departure','arrive','arrival','airport','plane'],
+    weather:  ['weather','rain','forecast','temp','temperature','hot','cold','jacket','umbrella'],
+    home:     ['condo','hotel','stay','staying','sleep','sleeping','address','bedroom','home','base','westin'],
+    pack:     ['pack','packing','dress','wear','clothes','clothing','layer','layers'],
+    caddie:   ['caddie','caddies','tip','tipping','gratuity','cash'],
+    cost:     ['cost','costs','price','pricing','money','pay','paying','total','owe'],
+    transpo:  ['shuttle','car','rental','uber','transpo','transportation','ride'],
+    score:    ['score','scorecard','scores','18birdies','birdies']
+  };
+
+  function norm(s){ return (s||'').toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim(); }
+  function tokens(s){ return norm(s).split(' ').filter(Boolean); }
+  function detectDay(qNorm){
+    for(var d in DAY_SYNS){
+      for(var i=0;i<DAY_SYNS[d].length;i++){ if(qNorm.indexOf(DAY_SYNS[d][i])!==-1) return d; }
+    }
+    return null;
+  }
+  function detectTopics(qTokens){
+    var found = [];
+    for(var t in TOPICS){
+      for(var i=0;i<TOPICS[t].length;i++){ if(qTokens.indexOf(TOPICS[t][i])!==-1){ found.push(t); break; } }
+    }
+    return found;
+  }
+
+  function dayFromCalDate(iso){
+    var m = {'20261001':'thu','20261002':'fri','20261003':'sat','20261004':'sun'};
+    return m[iso.slice(0,8)] || null;
+  }
+  function fmtCalTime(s,e){
+    function one(iso){
+      var d = new Date(iso.slice(0,4)+'-'+iso.slice(4,6)+'-'+iso.slice(6,8)+'T'+iso.slice(9,11)+':'+iso.slice(11,13)+':00-04:00');
+      return d.toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
+    }
+    return e ? (one(s)+'–'+one(e)) : one(s);
+  }
+
+  // ---- build the knowledge base straight from the rendered page ----
+  var KB = [];
+  var EVENT_VENUES = []; // {day, venue} pairs already covered by a calendar event, so we can skip redundant timeline duplicates
+
+  document.querySelectorAll('.addcal[data-cal]').forEach(function(a){
+    var d;
+    try{ d = JSON.parse(a.getAttribute('data-cal')); }catch(err){ return; }
+    var day = dayFromCalDate(d.s);
+    if(!day) return;
+    var isDinner = /^dinner/i.test(d.t);
+    var venue = d.t.replace(/^Dinner - /,'').replace(/ - Tee Time$/,'');
+    var label = isDinner ? 'Dinner at '+venue : venue + ' tee time';
+    EVENT_VENUES.push({day: day, venue: venue.toLowerCase()});
+    KB.push({
+      day: day, kind: 'event',
+      topics: isDinner ? ['dinner'] : ['golf'],
+      text: d.t+' '+d.d+' '+d.l,
+      answer: '<b>'+DAY_LABEL[day]+'</b> — '+label+', '+fmtCalTime(d.s,d.e)+'. '+d.d
+    });
+  });
+
+  document.querySelectorAll('.day').forEach(function(sec){
+    var day = sec.id;
+    if(!DAY_LABEL[day]) return;
+    sec.querySelectorAll('.tl-row').forEach(function(row){
+      var timeEl = row.querySelector('.time');
+      var titleEl = row.querySelector('.ev-title');
+      var bodyEls = row.querySelectorAll('.ev-body');
+      var title = titleEl ? titleEl.textContent.replace(/\s*\+\s*Add to calendar\s*/,'').trim() : '';
+      var body = Array.prototype.map.call(bodyEls, function(b){ return b.textContent.trim(); }).join(' ');
+      if(!title && !body) return;
+      var titleLower = title.toLowerCase();
+      var isEventDup = EVENT_VENUES.some(function(ev){ return ev.day===day && titleLower.indexOf(ev.venue)!==-1; });
+      if(isEventDup) return; // already covered by a cleaner calendar-event answer
+      KB.push({
+        day: day, kind: 'timeline', topics: [],
+        text: (timeEl?timeEl.textContent:'')+' '+title+' '+body,
+        answer: '<b>'+DAY_LABEL[day]+(timeEl?', '+timeEl.textContent:'')+'</b> — '+(title?title+': ':'')+body
+      });
+    });
+  });
+
+  var coverTag = document.querySelector('#cover .tag');
+  var coverChips = document.querySelector('#cover .chips');
+  var coverCourses = document.querySelector('#cover .chips2');
+  if(coverTag){
+    var tagText = coverTag.innerHTML.replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+    KB.push({
+      day: null, kind: 'info', topics: [],
+      text: 'trip dates when start end begin '+tagText+' '+(coverChips?coverChips.textContent:'')+' '+(coverCourses?coverCourses.textContent:''),
+      answer: '<b>The Trip:</b> '+tagText+(coverChips?' Traveling: '+coverChips.textContent.trim().split(/(?=[A-Z])/).join(', ').replace(/^,\s*/,''):'')
+    });
+  }
+
+  ['glance','info'].forEach(function(secId){
+    var sec = document.getElementById(secId);
+    if(!sec) return;
+    sec.querySelectorAll('.grid3 .cell').forEach(function(cell){
+      var k = cell.querySelector('.k'), v = cell.querySelector('.v'), d = cell.querySelector('.d');
+      if(!k) return;
+      KB.push({
+        day: null, topics: [],
+        text: k.textContent+' '+(v?v.textContent:'')+' '+(d?d.textContent:''),
+        answer: '<b>'+k.textContent+':</b> '+(v?v.textContent:'')+(d?' — '+d.textContent:'')
+      });
+    });
+  });
+
+  var homeSec = document.getElementById('home');
+  if(homeSec){
+    var homeTitle = homeSec.querySelector('.section-title');
+    var homeText = Array.prototype.map.call(
+      homeSec.querySelectorAll('.two .label + div'),
+      function(e){ return e.textContent.trim(); }
+    ).join(' ');
+    KB.push({
+      day: null, topics: ['home'],
+      text: 'home base condo staying hotel address '+(homeTitle?homeTitle.textContent:'')+' '+homeText,
+      answer: '<b>Home Base:</b> '+(homeTitle?homeTitle.textContent.trim():'')+'. '+homeText
+    });
+  }
+
+  document.querySelectorAll('#travel .heads-up').forEach(function(hu){
+    var k = hu.querySelector('.k');
+    var vs = hu.querySelectorAll('.v');
+    var text = Array.prototype.map.call(vs, function(v){ return v.textContent.trim(); }).join(' ');
+    KB.push({ day: null, topics: ['transpo'], text: (k?k.textContent:'')+' '+text, answer: '<b>'+(k?k.textContent:'Travel')+':</b> '+text });
+  });
+
+  var glanceWx = document.getElementById('glance-weather');
+  if(glanceWx){
+    KB.push({ day: null, topics: ['weather'], text: 'weather forecast rain temperature '+glanceWx.textContent, answer: glanceWx.innerHTML });
+  }
+
+  if(window.FLIGHTS){
+    var byTrav = {};
+    window.FLIGHTS.forEach(function(f){ (byTrav[f.traveler]=byTrav[f.traveler]||[]).push(f); });
+    Object.keys(byTrav).forEach(function(name){
+      var text = byTrav[name].map(function(f){
+        var when = f.dep || f.arr;
+        var t = when ? new Date(when).toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',hour:'numeric',minute:'2-digit'}) : '';
+        return f.legLabel+' '+f.route.replace(/&rarr;/,'to')+' ('+f.flightno+') '+t;
+      }).join('; ');
+      KB.push({
+        day: null, topics: ['flight'],
+        text: 'flight flights '+name+' '+text,
+        answer: '<b>'+name+'’s flights:</b> '+text
+      });
+    });
+  }
+
+  var costBox = document.querySelector('.costbox');
+  if(costBox){
+    KB.push({
+      day: null, topics: ['cost'],
+      text: 'cost costs price money pay total '+costBox.textContent.replace(/\s+/g,' '),
+      answer: '<b>Costs:</b> package rates run roughly $2,330–$3,045 per person before resort fee, tax, caddie fees, dinners, and the rental car — see the full breakdown under Know Before You Go.'
+    });
+  }
+
+  document.querySelectorAll('.heads-up').forEach(function(hu){
+    var k = hu.querySelector('.k');
+    if(k && /caddie/i.test(k.textContent)){
+      var v = hu.querySelector('.v');
+      var day = hu.closest ? (hu.closest('.day') ? hu.closest('.day').id : null) : null;
+      KB.push({ day: day, topics: ['caddie'], text: 'caddie cash tip gratuity '+k.textContent+' '+(v?v.textContent:''), answer: '<b>Caddie Cash:</b> '+(v?v.textContent:'') });
+    }
+  });
+
+  var scoreEl = document.querySelector('a[href*="18birdies"]');
+  if(scoreEl){
+    KB.push({ day: null, topics: ['score'], text: 'scorecard live scores 18birdies follow', answer: '<b>Follow the Scores:</b> hole-by-hole updates via <a href="'+scoreEl.href+'" target="_blank" rel="noopener">18Birdies</a>.' });
+  }
+
+  // fill in any topics an entry's own text implies but wasn't explicitly tagged with
+  // (e.g. a Know Before You Go cell titled "Dress Code" should still match a "packing" question)
+  KB.forEach(function(e){
+    detectTopics(tokens(e.text)).forEach(function(t){ if(e.topics.indexOf(t)===-1) e.topics.push(t); });
+  });
+
+  // ---- matching ----
+  function scoreEntry(entry, qTokens, qDay, qTopics){
+    var eTokens = tokens(entry.text);
+    var overlap = 0;
+    qTokens.forEach(function(t){ if(t.length>2 && eTokens.indexOf(t)!==-1) overlap++; });
+    var s = overlap;
+    if(qDay && entry.day===qDay) s += 4;
+    if(qDay && entry.day && entry.day!==qDay) s -= 3;
+    if(qTopics.length){ qTopics.forEach(function(t){ if(entry.topics.indexOf(t)!==-1) s += 5; }); }
+    return s;
+  }
+
+  function answer(q){
+    var qNorm = norm(q);
+    var qTokens = tokens(q);
+    var qDay = detectDay(qNorm);
+    var qTopics = detectTopics(qTokens);
+    var scored = KB.map(function(e){ return {e:e, s:scoreEntry(e, qTokens, qDay, qTopics)}; })
+                   .filter(function(x){ return x.s > 0; })
+                   .sort(function(a,b){ return b.s - a.s; });
+    if(!scored.length){
+      return "I couldn’t find anything on that in the itinerary — try asking about a specific day’s dinner, tee time, flights, weather, or packing.";
+    }
+    var top = scored[0].s;
+    var picked = scored.filter(function(x){ return x.s >= top - 1; }).slice(0,3);
+    var seen = {}, out = [];
+    picked.forEach(function(x){ if(!seen[x.e.answer]){ seen[x.e.answer]=1; out.push(x.e.answer); } });
+    return out.join('<br><br>');
+  }
+
+  // ---- UI ----
+  var btn = document.getElementById('ask-btn');
+  var panel = document.getElementById('ask-panel');
+  var msgs = document.getElementById('ask-msgs');
+  var form = document.getElementById('ask-form');
+  var input = document.getElementById('ask-input');
+  var closeBtn = document.getElementById('ask-close');
+  var chips = document.getElementById('ask-chips');
+
+  function addMsg(html, who){
+    var d = document.createElement('div');
+    d.className = 'ask-msg '+who;
+    d.innerHTML = html;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  var greeted = false;
+  function openPanel(){
+    panel.classList.add('open');
+    if(!greeted){
+      addMsg('Ask me anything about the trip — dinners, tee times, flights, weather, packing. I only know what’s on this page, so I might not catch everything.', 'bot');
+      greeted = true;
+    }
+    input.focus();
+  }
+  btn.addEventListener('click', function(){
+    if(panel.classList.contains('open')) panel.classList.remove('open'); else openPanel();
+  });
+  closeBtn.addEventListener('click', function(){ panel.classList.remove('open'); });
+
+  var SUGGESTIONS = ["Where's dinner Saturday?", "Friday tee times?", "What's the weather?", "When do we get to Pinehurst?"];
+  SUGGESTIONS.forEach(function(s){
+    var c = document.createElement('div');
+    c.className = 'ask-chip';
+    c.textContent = s;
+    c.addEventListener('click', function(){ ask(s); });
+    chips.appendChild(c);
+  });
+
+  function ask(q){
+    addMsg(q.replace(/</g,'&lt;'), 'user');
+    chips.style.display = 'none';
+    setTimeout(function(){ addMsg(answer(q), 'bot'); }, 250);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var q = input.value.trim();
+    if(!q) return;
+    input.value = '';
+    ask(q);
+  });
+})();
 
 </script>
 
