@@ -25,7 +25,6 @@ img{display:block;max-width:100%}
 
 /* nav */
 #nav{position:sticky;top:0;z-index:50;background:rgba(246,242,233,0.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--border)}
-section[id]{scroll-margin-top:60px}
 #nav .inner{max-width:880px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:10px 24px;scrollbar-width:none}
 @media(max-width:480px){#nav .inner{padding:10px 28px}}
 #nav .inner::-webkit-scrollbar{display:none}
@@ -145,7 +144,6 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .wxbadge .slot{text-align:center}
 .wxbadge .slot .t{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold2);font-weight:600}
 .wxbadge .slot .n{font-family:'Libre Caslon Display',serif;font-size:16px;color:#fff;margin-top:2px}
-.wxbadge .slot .si{width:14px;height:14px;margin:4px auto 0}
 .day .titleblock{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .day h2.dayh{font-size:38px;color:#fff;line-height:1.02;margin:0;text-shadow:0 2px 10px rgba(0,0,0,0.6),0 1px 3px rgba(0,0,0,0.8)}
 .day .sub{font-family:'Libre Caslon Display',serif;font-size:16px;color:#E9E1CD;margin-top:8px;max-width:440px;text-shadow:0 1px 6px rgba(0,0,0,0.65),0 1px 2px rgba(0,0,0,0.8)}
@@ -379,7 +377,6 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="heads-up" data-wxnote="thu" style="display:none"></div>
         <img src="assets/321424c2-c7c5-4f44-9335-7947de1eba0e.jpg" alt="Pinehurst No. 10" style="height:110px;object-fit:cover">
         <img src="assets/f877b246-d09f-471b-8f03-f2f0341d470a.jpg" alt="Station 21" style="height:110px;object-fit:cover">
         <img src="assets/b441438f-03b7-4d3c-8b7e-3e5cc5485e02.jpg" alt="Pinehurst Brewing Co." style="height:110px;object-fit:cover">
@@ -425,7 +422,6 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="heads-up" data-wxnote="fri" style="display:none"></div>
         <img src="assets/fb1efa77-0704-4d70-9c7f-9f9750bbd5b0.jpg" alt="The Cradle sign" style="height:110px;object-fit:cover;object-position:center 65%">
         <img src="assets/0b16b3b5-4b2e-489f-9332-dc3886e922f5.png" alt="Pinehurst No. 8" style="height:110px;object-fit:cover">
         <img src="assets/ashtens-exterior.jpg" alt="Ashten's" style="height:110px;object-fit:cover">
@@ -467,7 +463,6 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        <div class="heads-up" data-wxnote="sat" style="display:none"></div>
         <img src="assets/480f8e64-38c7-451d-9a07-daccb1a93f03.jpg" alt="Payne Stewart statue" style="height:118px;object-fit:cover">
         <img src="assets/e6c5fca5-440f-4ce5-a206-4623b4f9ef76.jpg" alt="The Deuce" style="height:118px;object-fit:cover;object-position:center 82%">
         <img src="assets/80d17265-a1cc-4fcd-aa1c-933cb5140a45.jpg" alt="Wiregrass" style="height:118px;object-fit:cover;object-position:center 75%">
@@ -510,7 +505,6 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="heads-up" data-wxnote="sun" style="display:none"></div>
         <img src="assets/1c220cbc-aff0-444c-96b4-b1a8dc965876.webp" alt="Tobacco Road" style="height:135px;object-fit:cover">
         <img src="assets/e31a2d28-47e4-4bb7-ae18-f660cdeb3f3e.webp" alt="Tobacco Road at sunset" style="height:135px;object-fit:cover">
       </div>
@@ -530,7 +524,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   <h2 class="section-title">Know Before You Go</h2>
   <hr class="hr">
   <div class="grid3">
-    <div class="cell"><div class="k">Weather</div><div class="v">Mid-50s &rarr; upper 70s</div><div class="d">Rain chances every day of the trip, heaviest Thursday &mdash; pack a light rain layer and expect a mix of sun and showers throughout.</div></div>
+    <div class="cell"><div class="k">Weather</div><div class="v">Upper 40s &rarr; upper 70s</div><div class="d">Mid-to-upper 70s Thu and Fri, easing into the upper 60s by Sunday. Early mornings are colder.</div></div>
     <div class="cell"><div class="k">Walking</div><div class="v">Three of four on foot</div><div class="d">No. 10 and the Cradle walking, No. 2 with caddies. Only No. 8 has carts.</div></div>
     <div class="cell"><div class="k">Dress Code</div><div class="v">Collared, no denim</div><div class="d">Layers. For Fri/Sat dinner: no gym shorts, no ballcaps.</div></div>
   </div>
@@ -690,12 +684,12 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-09-19T11:30:00Z';
+  var GENERATED_AT = '2026-09-19T11:23:20Z';
   var WX = {
-    thu: {cond:'Rain',     t8:60, t12:72, t20:62, note:'Rain likely on and off through the day — pack rain gear for the round at No. 10 and dinner at Pinehurst Brewing.'},
-    fri: {cond:'Showers',  t8:59, t12:70, t20:60, note:"Morning showers possible during the Cradle/No. 8, with more rain possible again by evening at Ashten's — bring a rain layer."},
-    sat: {cond:'Showers', t8:63, t12:71, t20:65, note:'Rain likely by evening, possibly during dinner at Wiregrass — bring a jacket or umbrella.'},
-    sun: {cond:'Showers', t8:64, t12:75, t20:67, note:'Afternoon showers possible during the Tobacco Road round — pack a rain layer.'}
+    thu: {cond:'Cloudy', t8:68, t12:77, t20:76},
+    fri: {cond:'Cloudy', t8:68, t12:82, t20:76},
+    sat: {cond:'Cloudy', t8:66, t12:69, t20:66},
+    sun: {cond:'Cloudy', t8:59, t12:72, t20:66}
   };
   var ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
@@ -715,39 +709,25 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     if(/cloud/.test(c)) return ICONS.cloud;
     return ICONS.sun;
   }
-  function slot(label, temp, cond){
-    var icon = cond ? '<div class="si" style="color:#E9E1CD">'+weatherIcon(cond)+'</div>' : '';
-    return '<div class="slot"><div class="t">'+label+'</div>'+icon+'<div class="n">'+temp+'&deg;</div></div>';
-  }
   function slotHtml(w){
-    var hourly = w.t8icon || w.t12icon || w.t20icon;
-    var lead = hourly ? '' : '<div class="icon" style="color:#E9E1CD">'+weatherIcon(w.cond)+'</div><div class="bar"></div>';
-    return lead+'<div class="slots">'+
-      slot('8 am', w.t8, w.t8icon)+
-      slot('12 pm', w.t12, w.t12icon)+
-      slot('8 pm', w.t20, w.t20icon)+
+    return '<div class="icon" style="color:#E9E1CD">'+weatherIcon(w.cond)+'</div><div class="bar"></div><div class="slots">'+
+      '<div class="slot"><div class="t">8 am</div><div class="n">'+w.t8+'&deg;</div></div>'+
+      '<div class="slot"><div class="t">12 pm</div><div class="n">'+w.t12+'&deg;</div></div>'+
+      '<div class="slot"><div class="t">8 pm</div><div class="n">'+w.t20+'&deg;</div></div>'+
       '</div>';
   }
   document.querySelectorAll('[data-wx]').forEach(function(el){
     var key = el.getAttribute('data-wx');
     el.innerHTML = slotHtml(WX[key]);
   });
-  document.querySelectorAll('[data-wxnote]').forEach(function(el){
-    var key = el.getAttribute('data-wxnote');
-    var note = WX[key] && WX[key].note;
-    if(note){
-      el.innerHTML = '<div class="k">Weather Heads-Up</div><div class="v">'+note+'</div>';
-      el.style.display = '';
-    }
-  });
   var g = document.getElementById('glance-weather');
   var stamp = new Date(GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
   g.innerHTML =
-    '<div class="rowline"><span class="d">Thu</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 58&deg; <span style="color:var(--muted);font-size:11px">H</span> 78&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Fri</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 54&deg; <span style="color:var(--muted);font-size:11px">H</span> 75&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 77&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sun</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
-    '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows. Rechecked regularly as the trip approaches.</div>';
+    '<div class="rowline"><span class="d">Thu</span><span>Clear &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 73&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Fri</span><span>Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 59&deg; <span style="color:var(--muted);font-size:11px">H</span> 74&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sat</span><span>Warm &middot; <span style="color:var(--muted);font-size:11px">L</span> 50&deg; <span style="color:var(--muted);font-size:11px">H</span> 69&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sun</span><span>Cool &middot; <span style="color:var(--muted);font-size:11px">L</span> 48&deg; <span style="color:var(--muted);font-size:11px">H</span> 66&deg;</span></div>'+
+    '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Live forecast as of '+stamp+' ET, refreshed automatically.</div>';
 })();
 
 /* ---------- flights: computed live status from booked schedule (all times fixed UTC instants) ---------- */
@@ -905,6 +885,5 @@ document.querySelectorAll('.addcal').forEach(function(a){
 });
 
 </script>
-
 </body>
 </html>
