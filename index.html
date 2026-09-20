@@ -731,9 +731,9 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-09-19T11:30:00Z';
+  var GENERATED_AT = '2026-09-20T11:20:00Z';
   var WX = {
-    thu: {cond:'Rain',     t8:60, t12:72, t20:62, note:'Rain likely on and off through the day — pack rain gear for the round at No. 10 and dinner at Pinehurst Brewing.'},
+    thu: {cond:'Rain',     t8:60, t12:68, t20:61, note:'Rain likely on and off through the day — pack rain gear for the round at No. 10 and dinner at Pinehurst Brewing.'},
     fri: {cond:'Showers',  t8:59, t12:70, t20:60, note:"Morning showers possible during the Cradle/No. 8, with more rain possible again by evening at Ashten's — bring a rain layer."},
     sat: {cond:'Showers', t8:63, t12:71, t20:65, note:'Rain likely by evening, possibly during dinner at Wiregrass — bring a jacket or umbrella.'},
     sun: {cond:'Showers', t8:64, t12:75, t20:67, note:'Afternoon showers possible during the Tobacco Road round — pack a rain layer.'}
@@ -784,7 +784,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   var g = document.getElementById('glance-weather');
   var stamp = new Date(GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
   g.innerHTML =
-    '<div class="rowline"><span class="d">Thu</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 58&deg; <span style="color:var(--muted);font-size:11px">H</span> 78&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Thu</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 58&deg; <span style="color:var(--muted);font-size:11px">H</span> 74&deg;</span></div>'+
     '<div class="rowline"><span class="d">Fri</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 54&deg; <span style="color:var(--muted);font-size:11px">H</span> 75&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 77&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sun</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
