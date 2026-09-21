@@ -146,6 +146,33 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 .wxbadge .slot .t{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold2);font-weight:600}
 .wxbadge .slot .n{font-family:'Libre Caslon Display',serif;font-size:16px;color:#fff;margin-top:2px}
 .wxbadge .slot .si{width:14px;height:14px;margin:4px auto 0}
+
+/* weather detail page */
+.wx-legend{background:var(--card);border:1px solid var(--border);padding:14px 16px;margin-top:22px;font-size:12.5px;line-height:1.65;color:var(--green3)}
+.wx-legend b{color:var(--green)}
+.wx-legend-row{display:flex;gap:10px;align-items:flex-start;margin-top:6px}
+.wx-legend-row:first-child{margin-top:0}
+.wx-legend-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;margin-top:5px}
+.wx-daycard{border:1px solid var(--border);margin-top:20px}
+.wx-dayhead{display:flex;justify-content:space-between;align-items:center;background:var(--green);padding:14px 18px;flex-wrap:wrap;gap:8px}
+.wx-dayname{font-family:'Libre Caslon Display',serif;font-size:19px;color:#fff}
+.wx-dayname span{color:rgba(233,225,205,0.65);font-size:13px;font-family:'Jost',sans-serif;margin-left:6px}
+.wx-verdict{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding:5px 12px;border-radius:12px;white-space:nowrap}
+.wx-verdict.great{background:var(--gold2);color:var(--green)}
+.wx-verdict.good{background:rgba(201,174,114,0.3);color:#F6F2E9}
+.wx-verdict.fair{background:rgba(233,225,205,0.14);color:#F6F2E9;border:1px solid rgba(201,174,114,0.55)}
+.wx-verdict.rough{background:rgba(233,225,205,0.1);color:#F6F2E9;border:1px solid rgba(233,225,205,0.4)}
+.wx-periods{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+@media(max-width:640px){.wx-periods{grid-template-columns:1fr}}
+.wx-period{background:var(--card);padding:16px 18px}
+.wx-ptitle{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.wx-picon{width:22px;height:22px;color:var(--green3);margin-top:10px}
+.wx-ptemp{font-family:'Libre Caslon Display',serif;font-size:22px;color:var(--green);margin-top:8px}
+.wx-pprecip{font-size:12px;color:var(--green3);margin-top:3px}
+.wx-ptag{display:inline-block;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600;color:var(--gold);margin-top:8px}
+.wx-pdesc{font-size:13px;line-height:1.5;color:var(--green2);margin-top:4px}
+.wx-bottomline{padding:14px 18px;font-size:13.5px;line-height:1.55;color:var(--green2);border-top:1px solid var(--border);background:var(--cardAlt)}
+.wx-bottomline b{color:var(--green)}
 .day .titleblock{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .day h2.dayh{font-size:38px;color:#fff;line-height:1.02;margin:0;text-shadow:0 2px 10px rgba(0,0,0,0.6),0 1px 3px rgba(0,0,0,0.8)}
 .day .sub{font-family:'Libre Caslon Display',serif;font-size:16px;color:#E9E1CD;margin-top:8px;max-width:440px;text-shadow:0 1px 6px rgba(0,0,0,0.65),0 1px 2px rgba(0,0,0,0.8)}
@@ -240,6 +267,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 <nav id="nav"><div class="inner">
   <a href="#cover" data-sec="cover">Overview</a>
   <a href="#glance" data-sec="glance">At a Glance</a>
+  <a href="#weather" data-sec="weather">Weather</a>
   <a href="#home" data-sec="home">Home Base</a>
   <a href="#travel" data-sec="travel">Travel</a>
   <a href="#thu" data-sec="thu">Thu</a>
@@ -321,6 +349,24 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     <div class="k">Follow the Scores Live</div>
     <div class="v">Hole-by-hole updates via <a href="https://18birdies.onelink.me/IdkR/p1amwn8a" target="_blank" rel="noopener" style="border-bottom:1px solid var(--gold)">18Birdies</a>.</div>
   </div>
+</section>
+
+<!-- ============ WEATHER DETAIL ============ -->
+<section id="weather" class="section wrap">
+  <div class="eyebrow">Planning Ahead</div>
+  <h2 class="section-title">Weather, In Depth</h2>
+  <hr class="hr">
+  <p class="serif" style="font-size:18px;line-height:1.55;color:var(--green2);max-width:640px;margin-top:0" id="wx-headline"></p>
+
+  <div class="wx-legend">
+    <div class="wx-legend-row"><span class="wx-legend-dot" style="background:var(--green3)"></span><div><b>Rain chance %</b> is the odds that measurable rain falls somewhere in the area during that window &mdash; not that it rains the whole time or right on top of you. A 55% chance often means on-and-off showers, not a soaked afternoon.</div></div>
+    <div class="wx-legend-row"><span class="wx-legend-dot" style="background:var(--gold)"></span><div><b>Rain amount</b> is the bigger tell for how bad it'll actually feel: under ~0.10" total is light/passing, 0.10&ndash;0.25" is a steady soak-your-shirt rain, above that starts to get genuinely miserable.</div></div>
+    <div class="wx-legend-row"><span class="wx-legend-dot" style="background:#E9E1CD;border:1px solid var(--border)"></span><div><b>Thunderstorm %</b> is the one that actually threatens play &mdash; courses pause for lightning, not for plain rain. A high storm chance matters more than a high rain chance.</div></div>
+  </div>
+
+  <div id="wx-days"></div>
+
+  <div style="font-size:11px;color:var(--muted);margin-top:18px;line-height:1.5" id="wx-detail-asof"></div>
 </section>
 
 <!-- ============ HOME BASE ============ -->
@@ -789,6 +835,88 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 77&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sun</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
     '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows. Rechecked regularly as the trip approaches.</div>';
+  window.WEATHER_ICONS = {ICONS: ICONS, weatherIcon: weatherIcon};
+})();
+
+/* ---------- weather: in-depth morning/afternoon/night breakdown ---------- */
+(function(){
+  var DETAIL_GENERATED_AT = '2026-09-21T11:30:00Z';
+  var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
+  var DAY_DATE = {thu:'Oct 1', fri:'Oct 2', sat:'Oct 3', sun:'Oct 4'};
+  var VERDICT_LABEL = {great:'Great', good:'Good', fair:'Fair — Pack Rain Gear', rough:'Rough — High Rain Risk'};
+
+  var WXDETAIL = {
+    thu: {
+      verdict: 'fair',
+      bottomLine: 'Showers on and off most of the day, but this reads as scattered/intermittent rather than a washout — a light rain layer should cover it, not full raingear-required panic. No. 10 (1:36p) and dinner at Pinehurst Brewing are both realistic to keep as planned.',
+      morning:   {t:'60–63°', precip:58, rain:'~0.10"', tag:'Showers',   desc:'Periodic light rain likely, on and off.'},
+      afternoon: {t:'70–72°', precip:55, rain:'~0.10"', tag:'Showers',   desc:'More of the same — scattered showers, mostly overcast.'},
+      night:     {t:'63–65°', precip:38, rain:'< 0.05"', tag:'Cloudy',   desc:'Rain tapering off; steadier rain returns later tonight (after 9p).'}
+    },
+    fri: {
+      verdict: 'good',
+      bottomLine: 'The driest-looking day of the trip on paper — brief morning rain, then a mostly-dry afternoon for the Cradle/No. 8, with just a chance of a passing shower again by the time we’re at Ashten’s for dinner.',
+      morning:   {t:'59–62°', precip:55, rain:'~0.05"', tag:'Light Rain', desc:'A little rain possible early, generally light.'},
+      afternoon: {t:'72–75°', precip:35, rain:'< 0.05"', tag:'Spot Storm', desc:'Mostly drying out; a stray thunderstorm possible.'},
+      night:     {t:'57–60°', precip:52, rain:'~0.05"', tag:'Showers',   desc:'Shower chances return in spots through the evening.'}
+    },
+    sat: {
+      verdict: 'good',
+      bottomLine: 'This is the one to watch, but in a good way — the wettest part of the day looks to be after dark, well past the No. 2 tee time (1:10p). Dinner at Wiregrass (8:30p) sits right in the window where rain becomes more likely — bring a jacket or umbrella just in case.',
+      morning:   {t:'63–66°', precip:52, rain:'~0.05"', tag:'Showers',   desc:'A few showers possible, generally light and brief.'},
+      afternoon: {t:'74–77°', precip:27, rain:'< 0.05"', tag:'Mostly Dry', desc:'Clearing out — humid but mostly dry for the No. 2 tee time.'},
+      night:     {t:'66–68°', precip:68, rain:'~0.15–0.20"', tag:'Rain Likely', desc:'A thundershower possible early evening, then steadier rain moving in late.'}
+    },
+    sun: {
+      verdict: 'good',
+      bottomLine: 'Light drizzle is possible right at the Tobacco Road tee time — nothing that should threaten the round, just maybe a damp start. Clears out through the day as we head home.',
+      morning:   {t:'64–67°', precip:50, rain:'~0.02"', tag:'Drizzle',   desc:'Areas of light drizzle possible right around the 9a tee time.'},
+      afternoon: {t:'77–80°', precip:42, rain:'~0.04"', tag:'Passing Showers', desc:'A little rain possible, generally light.'},
+      night:     {t:'66–68°', precip:22, rain:'0.00"', tag:'Clearing',  desc:'Drying out as we head to RDU.'}
+    }
+  };
+
+  function periodHtml(label, p){
+    var icon = window.WEATHER_ICONS ? window.WEATHER_ICONS.weatherIcon(p.tag) : '';
+    return '<div class="wx-period">'+
+      '<div class="wx-ptitle">'+label+'</div>'+
+      '<div class="wx-picon">'+icon+'</div>'+
+      '<div class="wx-ptemp">'+p.t+'</div>'+
+      '<div class="wx-pprecip">'+p.precip+'% chance of rain &middot; '+p.rain+'</div>'+
+      '<div class="wx-ptag">'+p.tag+'</div>'+
+      '<div class="wx-pdesc">'+p.desc+'</div>'+
+      '</div>';
+  }
+
+  function dayCardHtml(key){
+    var d = WXDETAIL[key];
+    return '<div class="wx-daycard">'+
+      '<div class="wx-dayhead"><div class="wx-dayname">'+DAY_LABEL[key]+'<span>'+DAY_DATE[key]+'</span></div>'+
+      '<div class="wx-verdict '+d.verdict+'">'+VERDICT_LABEL[d.verdict]+'</div></div>'+
+      '<div class="wx-periods">'+
+        periodHtml('Morning &middot; 8–11a', d.morning)+
+        periodHtml('Afternoon &middot; 12–4p', d.afternoon)+
+        periodHtml('Night &middot; 5–9p', d.night)+
+      '</div>'+
+      '<div class="wx-bottomline"><b>Bottom line:</b> '+d.bottomLine+'</div>'+
+      '</div>';
+  }
+
+  var daysEl = document.getElementById('wx-days');
+  if(daysEl){
+    daysEl.innerHTML = ['thu','fri','sat','sun'].map(dayCardHtml).join('');
+  }
+
+  var headlineEl = document.getElementById('wx-headline');
+  if(headlineEl){
+    headlineEl.textContent = 'Nothing in the current forecast points to a multi-day washout — every day is showing scattered or brief rain rather than sustained heavy rain. Thursday is the least certain day; Friday through Sunday all look playable, with the higher rain chances mostly landing in the evenings rather than over tee times.';
+  }
+
+  var asofEl = document.getElementById('wx-detail-asof');
+  if(asofEl){
+    var stamp = new Date(DETAIL_GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+    asofEl.textContent = 'Planning estimates as of ' + stamp + ' ET, built from AccuWeather’s daily forecast (real hourly precision opens up closer to the trip and will tighten these up). Rechecked regularly.';
+  }
 })();
 
 /* ---------- flights: computed live status from booked schedule (all times fixed UTC instants) ---------- */
