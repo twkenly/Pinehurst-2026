@@ -1287,6 +1287,25 @@ document.querySelectorAll('.addcal').forEach(function(a){
     return s;
   }
 
+  var FLAVOR = {
+    dinner: ["I’ve already got a shirt pressed for the occasion, just in case.", "Reservations are a serious business. I take them very seriously.", "I do love a good itinerary with a reservation attached."],
+    golf: ["I’ve never held a club myself, but I do enjoy watching from a respectful distance.", "I polished the trophies for this one. Metaphorically — there are no trophies.", "I marked it in three different calendars, just to be safe."],
+    weather: ["I checked the sky myself this morning, just to be thorough.", "I do hope it clears up. I hate seeing anyone unhappy.", "I’ve got an umbrella on standby, always."],
+    flight: ["I’d have arranged a private jet if anyone had asked.", "I’ve triple-checked those times. One can never be too careful.", "I do love a well-timed arrival."],
+    pack: ["I laid out three backup outfits at home, just thinking about this.", "Presentation matters. Always.", "I ironed my own shirt twice this week out of nervous energy."],
+    cost: ["I keep meticulous records. It’s a small comfort.", "I balanced these figures myself, twice, by hand."],
+    home: ["I’d have turned down the beds myself if I could.", "A tidy home base is the foundation of a good trip."],
+    transpo: ["I called ahead. Several times.", "I do enjoy a well-coordinated shuttle schedule."],
+    score: ["I’ll be refreshing that page more than anyone should."],
+    generic: ["Consider it done.", "Nothing pleases me more than a well-organized itinerary.", "I do so enjoy being useful.", "I’ve cross-referenced everything twice, just to be safe.", "If this doesn’t pan out, I’ll just go rehearse my one-man musical revue again.", "I was going to reorganize my Malibu Stacy collection tonight, but this is far more exciting.", "Happy to help. It’s sort of my whole thing."]
+  };
+  function flavor(qTopics){
+    var pool = null;
+    for(var i=0;i<qTopics.length;i++){ if(FLAVOR[qTopics[i]]){ pool = FLAVOR[qTopics[i]]; break; } }
+    if(!pool) pool = FLAVOR.generic;
+    return pool[Math.floor(Math.random()*pool.length)];
+  }
+
   function answer(q){
     var qNorm = norm(q);
     var qTokens = tokens(q);
@@ -1296,13 +1315,14 @@ document.querySelectorAll('.addcal').forEach(function(a){
                    .filter(function(x){ return x.s > 0; })
                    .sort(function(a,b){ return b.s - a.s; });
     if(!scored.length){
-      return "I’m afraid that’s not in my files — probably better suited to some... other, less organized source. Ask me about a specific day’s dinner, tee time, flights, weather, or packing, and I’ll snap right to it.";
+      var misses = ["I’m afraid that’s not in my files — I’ve checked twice. Probably something better suited to... certain less organized people.", "That one’s outside my files, I’m sorry to say. I’ve alphabetized everything twice and it still isn’t there.", "Not in my records, I’m afraid — and my records are extremely thorough."];
+      return misses[Math.floor(Math.random()*misses.length)]+" Ask me about a specific day’s dinner, tee time, flights, weather, or packing, and I’ll snap right to it.";
     }
     var top = scored[0].s;
     var picked = scored.filter(function(x){ return x.s >= top - 1; }).slice(0,3);
     var seen = {}, out = [];
     picked.forEach(function(x){ if(!seen[x.e.answer]){ seen[x.e.answer]=1; out.push(x.e.answer); } });
-    return out.join('<br><br>');
+    return out.join('<br><br>')+'<div style="margin-top:8px;font-style:italic;color:var(--muted);font-size:12.5px">'+flavor(qTopics)+'</div>';
   }
 
   // ---- UI ----
@@ -1326,7 +1346,7 @@ document.querySelectorAll('.addcal').forEach(function(a){
   function openPanel(){
     panel.classList.add('open');
     if(!greeted){
-      addMsg('Oh! You’re here! I’ve been simply *dying* for someone to ask me something. Anything about the trip — dinners, tee times, flights, weather, packing — just say the word and I’ll drop everything. I only know what’s on this page, so I might miss something outside it — my deepest apologies in advance.', 'bot');
+      addMsg('At your service! I’ve cleared my schedule, alphabetized the itinerary, and I’m ready for anything — dinners, tee times, flights, weather, packing, whatever you need. Between us, it’s far more exciting than another evening with my Malibu Stacy collection. I only know what’s on this page, so do forgive me if something falls outside my files.', 'bot');
       greeted = true;
     }
     input.focus();
