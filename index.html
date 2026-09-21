@@ -687,15 +687,15 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   </div>
 </div>
 
-<div id="ask-nudge" class="ask-nudge">Ask Alfred about the trip &rarr;</div>
-<div id="ask-btn" role="button" tabindex="0" aria-label="Ask Alfred, your butler for the trip">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.3 9.5 12 2 15.7z"/><path d="M22 8.3 14.5 12 22 15.7z"/><rect x="9.3" y="10" width="5.4" height="4" rx="1.1"/></svg>
+<div id="ask-nudge" class="ask-nudge">Ask Smithers about the trip &rarr;</div>
+<div id="ask-btn" role="button" tabindex="0" aria-label="Ask Smithers, devoted to your itinerary">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="4"/><circle cx="17" cy="12" r="4"/><path d="M11 12h2M3 11l-1.6-.6M21 11l1.6-.6"/></svg>
 </div>
 <div id="ask-panel">
   <div id="ask-head">
     <div>
-      <div style="font-family:'Libre Caslon Display',serif;font-size:16px;color:#fff">Alfred</div>
-      <div style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(233,225,205,0.65);margin-top:2px">Your butler for the trip</div>
+      <div style="font-family:'Libre Caslon Display',serif;font-size:16px;color:#fff">Smithers</div>
+      <div style="font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(233,225,205,0.65);margin-top:2px">At your service, every waking moment</div>
     </div>
     <div id="ask-close" role="button" aria-label="Close">&times;</div>
   </div>
@@ -1296,7 +1296,7 @@ document.querySelectorAll('.addcal').forEach(function(a){
                    .filter(function(x){ return x.s > 0; })
                    .sort(function(a,b){ return b.s - a.s; });
     if(!scored.length){
-      return "I couldn’t find anything on that in the itinerary — try asking about a specific day’s dinner, tee time, flights, weather, or packing.";
+      return "I’m afraid that’s not in my files — probably better suited to some... other, less organized source. Ask me about a specific day’s dinner, tee time, flights, weather, or packing, and I’ll snap right to it.";
     }
     var top = scored[0].s;
     var picked = scored.filter(function(x){ return x.s >= top - 1; }).slice(0,3);
@@ -1326,7 +1326,7 @@ document.querySelectorAll('.addcal').forEach(function(a){
   function openPanel(){
     panel.classList.add('open');
     if(!greeted){
-      addMsg('Good day. I’m Alfred — think of me as your butler for the trip. Ask me anything about dinners, tee times, flights, weather, packing. I only know what’s on this page, so I might not catch everything, but I’ll do my best.', 'bot');
+      addMsg('Oh! You’re here! I’ve been simply *dying* for someone to ask me something. Anything about the trip — dinners, tee times, flights, weather, packing — just say the word and I’ll drop everything. I only know what’s on this page, so I might miss something outside it — my deepest apologies in advance.', 'bot');
       greeted = true;
     }
     input.focus();
@@ -1340,12 +1340,12 @@ document.querySelectorAll('.addcal').forEach(function(a){
   // ---- notification nudge: draw the eye until someone's actually opened it once ----
   var nudge = document.getElementById('ask-nudge');
   function markSeen(){
-    try{ localStorage.setItem('alfred_seen', '1'); }catch(e){}
+    try{ localStorage.setItem('smithers_seen', '1'); }catch(e){}
     btn.classList.add('seen');
     if(nudge){ nudge.classList.remove('show'); }
   }
   var alreadySeen = false;
-  try{ alreadySeen = localStorage.getItem('alfred_seen') === '1'; }catch(e){}
+  try{ alreadySeen = localStorage.getItem('smithers_seen') === '1'; }catch(e){}
   if(alreadySeen){
     btn.classList.add('seen');
   } else if(nudge){
