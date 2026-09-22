@@ -787,6 +787,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
   var GENERATED_AT = '2026-09-20T11:20:00Z';
+  var LAST_CHECKED = '2026-09-22T11:20:00Z';
   var WX = {
     thu: {cond:'Rain',     t8:60, t12:68, t20:61, note:'Rain likely on and off through the day — pack rain gear for the round at No. 10 and dinner at Pinehurst Brewing.'},
     fri: {cond:'Showers',  t8:59, t12:70, t20:60, note:"Morning showers possible during the Cradle/No. 8, with more rain possible again by evening at Ashten's — bring a rain layer."},
@@ -838,18 +839,24 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   });
   var g = document.getElementById('glance-weather');
   var stamp = new Date(GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+  var checkedStamp = new Date(LAST_CHECKED).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+  var sameDay = new Date(GENERATED_AT).toLocaleDateString('en-US',{timeZone:'America/New_York'}) === new Date(LAST_CHECKED).toLocaleDateString('en-US',{timeZone:'America/New_York'});
+  var footerLine = sameDay
+    ? 'Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows.'
+    : 'Forecast numbers as of '+stamp+' ET (last changed) &middot; checked again as recently as '+checkedStamp+' ET with no meaningful change. Interpolated from AccuWeather’s daily highs/lows.';
   g.innerHTML =
     '<div class="rowline"><span class="d">Thu</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 58&deg; <span style="color:var(--muted);font-size:11px">H</span> 74&deg;</span></div>'+
     '<div class="rowline"><span class="d">Fri</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 54&deg; <span style="color:var(--muted);font-size:11px">H</span> 75&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 77&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sun</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
-    '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows. Rechecked regularly as the trip approaches.</div>';
+    '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">'+footerLine+'</div>';
   window.WEATHER_ICONS = {ICONS: ICONS, weatherIcon: weatherIcon};
 })();
 
 /* ---------- weather: in-depth morning/afternoon/night breakdown ---------- */
 (function(){
   var DETAIL_GENERATED_AT = '2026-09-21T11:30:00Z';
+  var DETAIL_LAST_CHECKED = '2026-09-22T11:20:00Z';
   var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
   var DAY_DATE = {thu:'Oct 1', fri:'Oct 2', sat:'Oct 3', sun:'Oct 4'};
   var VERDICT_LABEL = {great:'Great', good:'Good', fair:'Fair — Pack Rain Gear', rough:'Rough — High Rain Risk'};
@@ -924,7 +931,11 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   var asofEl = document.getElementById('wx-detail-asof');
   if(asofEl){
     var stamp = new Date(DETAIL_GENERATED_AT).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
-    asofEl.textContent = 'Planning estimates as of ' + stamp + ' ET, built from AccuWeather’s daily forecast (real hourly precision opens up closer to the trip and will tighten these up). Rechecked regularly.';
+    var checkedStamp = new Date(DETAIL_LAST_CHECKED).toLocaleString('en-US', {timeZone:'America/New_York', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+    var sameDay = new Date(DETAIL_GENERATED_AT).toLocaleDateString('en-US',{timeZone:'America/New_York'}) === new Date(DETAIL_LAST_CHECKED).toLocaleDateString('en-US',{timeZone:'America/New_York'});
+    asofEl.textContent = sameDay
+      ? 'Planning estimates as of ' + stamp + ' ET, built from AccuWeather’s daily forecast (real hourly precision opens up closer to the trip and will tighten these up).'
+      : 'Planning estimates last changed ' + stamp + ' ET — checked again as recently as ' + checkedStamp + ' ET with no meaningful change. Built from AccuWeather’s daily forecast (real hourly precision opens up closer to the trip and will tighten these up).';
   }
 })();
 
