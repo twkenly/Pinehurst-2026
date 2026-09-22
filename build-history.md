@@ -2,9 +2,25 @@
 
 `build-notes.md` is the "what and why" summary. This is the "how we actually got there" version — the specific prompt-and-response exchanges that changed the site in a real way (new feature, structural addition, tone shift, rebrand), skipping the routine day-to-day polish (spacing tweaks, wording fixes, small bugs) that doesn't change what the site *is*.
 
-One honesty note up front: this covers everything from when the automated routines were set up (Sept 16) through the most recent session (Sept 22) — that's a real, message-by-message record. The very first build — the original PDF-to-website pivot and the initial mobile layout pass on Sept 14–15 — happened in an earlier session this log doesn't have transcript access to, so that section below is reconstructed from commit messages only, not from the actual prompts.
+One honesty note up front, in two parts. The PDF phase below happened earlier still, in a separate Claude Design conversation — that section is Design's own reconstruction of its conversation, relayed back by Tyler, with Design's own caveat that parts of that older conversation had already fallen out of its context by the time it wrote the summary. The website itself, from when the automated routines were set up (Sept 16) through the most recent session (Sept 22), is a real, message-by-message record on this end. The one real gap is the very first website build and initial mobile layout pass on Sept 14–15, which happened in an earlier session this log doesn't have transcript access to — that section is reconstructed from commit messages only.
 
-Across the period this log *does* have full detail for, Tyler sent on the order of 15–18 distinct prompts (not counting the scheduled routines waking themselves up to check weather/flights/photos). Most of the site's current shape came out of about eight of those.
+Across the period this log *does* have full detail for, Tyler sent on the order of 15–18 distinct prompts (not counting the scheduled routines waking themselves up to check weather/flights/photos). Most of the site's current shape came out of about eight of those. Design counted roughly another 20 substantive asks across the PDF conversation on top of that.
+
+---
+
+## Before Sept 14 — The PDF, built in Claude Design
+
+The PDF (and later a slide-deck/PPTX version) is where the trip content, the design system, and the page structure all came from, before any of it was a website. Only the parts that actually carried forward are below — the PDF conversation also went through a slide-deck/PPTX detour that never shipped (a PowerPoint version, image-format export problems, a portrait re-layout) and isn't part of this site's lineage, so it's left out.
+
+**The brief, and the design system.** Tyler's opening ask was for a "premium looking Golf Trip itinerary" to send to family — full-width course photography, smaller shots of restaurants and activities, the most iconic view for each course (the tee box on No. 1 at Tobacco Road, the 18th at No. 2, the Hall of Fame), the Kenly Golf and Putter Boy logos up top, and the standard to hit: "look like a premium travel agent prepared it." That first pass set the palette and type pairing the website still uses today — Libre Caslon Display over Jost, Pinehurst green / cream / brass — plus the page shape (cover, At a Glance, Home Base, travel, one page per day, Know Before You Go, Costs) that the website's section structure directly descends from.
+
+**Weather per day — the idea that became a routine.** Tyler asked for "an expected weather forecast for each day... at 8a, 12p and 8p" on each day page. At the time this was seasonal averages, not a real forecast — but it's the exact shape (per-day, per-time-slot) the website's weather system was later built to match: first live data, then the automated refresh routine, then the Weather In Depth page.
+
+**The roster and logistics settle.** One large revision reset who was actually going and how: Kevin and James dropped out; Tyler flies Wednesday and works out of Chapel Hill; Kyle's on new flights and shares a room with Tyler at the Westin; Tyler and Kyle collect the rental car and pick up Granger; Colin Ubers in from RDU with the shuttle mention removed; the condo goes from six people to four. This is the traveler list and travel logistics the website still runs on. The same message also asked to inline every venue link at its point of mention in the day-by-day rather than listing them separately at the back — the pattern the website's calendar/timeline entries still follow.
+
+**Real numbers, and Colin listed first.** A follow-up (with a screenshot) asked for the actual cost breakdown — the $480/person swing from losing the double-occupancy rate when the group shrank, Colin's B&B package versus the custom package for the three playing Thursday, broken out by course premium. A later cleanup pass asked to put "Colin's first because his is the least amount and what people will see first" — the website's cost table still opens with Colin's column.
+
+**The pivot.** Per `build-notes.md`: a PDF can't stay current once a tee time shifts or a forecast changes. That's what actually ended the PDF phase and started the website.
 
 ---
 
