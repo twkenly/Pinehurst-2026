@@ -245,10 +245,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 #ask-btn.seen::after{display:none}
 @media (prefers-reduced-motion: reduce){#ask-btn::after{animation:none;display:none}}
 @keyframes askPulse{0%{transform:scale(0.85);opacity:0.85}70%{transform:scale(1.4);opacity:0}100%{transform:scale(1.4);opacity:0}}
-.ask-nudge{position:fixed;right:78px;bottom:30px;background:var(--green);color:var(--cream);padding:8px 14px;border-radius:20px;font-size:12.5px;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,0.25);z-index:79;opacity:0;transform:translateY(4px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
-.ask-nudge.show{opacity:1;transform:translateY(0)}
-.ask-nudge::after{content:'';position:absolute;right:-5px;bottom:16px;width:10px;height:10px;background:var(--green);transform:rotate(45deg)}
-@media(max-width:480px){.ask-nudge{right:auto;left:12px;bottom:76px}.ask-nudge::after{left:16px;right:auto}}
+.ask-nudge{position:fixed;right:78px;bottom:30px;max-width:min(230px,calc(100vw - 100px));background:var(--green);color:var(--cream);padding:9px 14px;border-radius:18px;font-size:12.5px;line-height:1.4;white-space:normal;box-shadow:0 4px 16px rgba(0,0,0,0.4),0 0 22px 2px rgba(201,174,114,0.55);border:1px solid rgba(201,174,114,0.55);z-index:79;opacity:0;transform:translateY(4px);transition:opacity .3s ease,transform .3s ease;pointer-events:none}
+.ask-nudge.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.ask-nudge::after{content:'';position:absolute;right:-6px;bottom:14px;width:10px;height:10px;background:var(--green);border-right:1px solid rgba(201,174,114,0.55);border-bottom:1px solid rgba(201,174,114,0.55);transform:rotate(45deg)}
+@media(max-width:480px){.ask-nudge{right:70px;bottom:76px}}
 #ask-panel{position:fixed;right:18px;bottom:82px;width:340px;max-width:calc(100vw - 36px);height:min(480px,calc(100vh - 120px));background:var(--cream);border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,0.28);display:none;flex-direction:column;overflow:hidden;z-index:81}
 #ask-panel.open{display:flex}
 #ask-head{background:var(--green);padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;flex:0 0 auto}
