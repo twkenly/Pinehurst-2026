@@ -130,7 +130,7 @@ table.flighttable tr:nth-child(even) td{background:var(--cardAlt)}
 /* day pages */
 .day{background:var(--cream)}
 .day .hero{position:relative;background:var(--green);overflow:hidden}
-.day .hero > img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.day .hero > img,.day .hero > video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .day .hero .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,28,18,0.66) 0%,rgba(10,28,18,0.08) 42%,rgba(10,28,18,0.8) 100%)}
 .day .hero .inner{position:relative;padding:30px 24px;display:flex;flex-direction:column;justify-content:space-between;min-height:100%}
 @media(max-width:480px){.day .hero .inner{padding:30px 28px}}
@@ -425,7 +425,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 <!-- ============ THURSDAY ============ -->
 <section id="thu" class="day">
   <div class="hero" style="height:300px">
-    <img src="assets/e3c01142-cd49-4cff-a62b-8ccdecc1819c.jpg" alt="Carolina Hotel entrance" style="object-position:center 78%">
+    <video muted loop playsinline preload="none" poster="assets/hero-thu-resort-poster.jpg" aria-hidden="true"><source src="assets/hero-thu-resort.mp4" type="video/mp4"></video>
     <div class="scrim"></div>
     <div class="inner wrap">
       <div class="daybadge">
@@ -468,7 +468,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 <!-- ============ FRIDAY ============ -->
 <section id="fri" class="day">
   <div class="hero" style="height:290px">
-    <img src="assets/0409b2f4-9476-483f-bf6b-2d66dfe741c6.webp" alt="The Cradle short course">
+    <video muted loop playsinline preload="none" poster="assets/hero-fri-no8-poster.jpg" aria-hidden="true"><source src="assets/hero-fri-no8.mp4" type="video/mp4"></video>
     <div class="scrim"></div>
     <div class="inner wrap">
       <div class="daybadge">
@@ -513,7 +513,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 <!-- ============ SATURDAY ============ -->
 <section id="sat" class="day">
   <div class="hero" style="height:320px">
-    <img src="assets/9098b0e9-0d5d-4782-b98c-c948c97b9767.jpg" alt="Pinehurst No. 2" style="object-position:center 78%">
+    <video muted loop playsinline preload="none" poster="assets/hero-sat-no2-poster.jpg" aria-hidden="true"><source src="assets/hero-sat-no2.mp4" type="video/mp4"></video>
     <div class="scrim"></div>
     <div class="inner wrap">
       <div class="daybadge">
@@ -556,7 +556,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 <!-- ============ SUNDAY ============ -->
 <section id="sun" class="day">
   <div class="hero" style="height:340px;background:#3B3226">
-    <img src="assets/2ef33d2b-2464-4b04-a9c1-eeed16fafa0d.webp" alt="Tobacco Road">
+    <video muted loop playsinline preload="none" poster="assets/hero-sun-tobaccoroad-poster.jpg" aria-hidden="true"><source src="assets/hero-sun-tobaccoroad.mp4" type="video/mp4"></video>
     <div class="scrim" style="background:linear-gradient(180deg,rgba(24,18,10,0.66) 0%,rgba(24,18,10,0.08) 42%,rgba(24,18,10,0.82) 100%)"></div>
     <div class="inner wrap">
       <div class="daybadge">
@@ -782,6 +782,30 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
       tag.appendChild(pill);
     }
   });
+})();
+
+/* ---------- day hero video: loads and plays only while scrolled into view ---------- */
+(function(){
+  var videos = document.querySelectorAll('.day .hero > video');
+  if(!videos.length) return;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return; // poster frame stays put, nothing to wire up
+  if(!('IntersectionObserver' in window)){
+    videos.forEach(function(v){ v.preload = 'metadata'; v.play().catch(function(){}); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var v = entry.target;
+      if(entry.isIntersecting){
+        if(v.preload !== 'auto') v.preload = 'auto';
+        v.play().catch(function(){});
+      } else {
+        v.pause();
+      }
+    });
+  }, {rootMargin: '200px 0px'});
+  videos.forEach(function(v){ io.observe(v); });
 })();
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
