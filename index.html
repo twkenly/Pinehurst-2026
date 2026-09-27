@@ -606,7 +606,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   <h2 class="section-title">Know Before You Go</h2>
   <hr class="hr">
   <div class="grid3">
-    <div class="cell"><div class="k">Weather</div><div class="v">Low 60s &rarr; upper 80s</div><div class="d">Thursday and Friday are warm and dry from start to finish. Saturday's evening thunderstorm chance has strengthened, and Sunday's forecast has shifted to real rain for a good part of the day &mdash; pack real rain gear for the back half of the trip.</div></div>
+    <div class="cell"><div class="k">Weather</div><div class="v">Low 60s &rarr; upper 80s</div><div class="d">Thursday and Friday are warm and dry, with Friday looking a bit sunnier than earlier forecasts. Saturday night's rain chance has eased, and Sunday's rain has trended lighter too &mdash; still some on-and-off rain likely, just less than previously expected. Pack a light rain layer for the back half of the trip.</div></div>
     <div class="cell"><div class="k">Walking</div><div class="v">Three of four on foot</div><div class="d">No. 10 and the Cradle walking, No. 2 with caddies. Only No. 8 has carts.</div></div>
     <div class="cell"><div class="k">Dress Code</div><div class="v">Collared, no denim</div><div class="d">Layers. For Fri/Sat dinner: no gym shorts, no ballcaps.</div></div>
   </div>
@@ -810,13 +810,13 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-09-26T11:20:00Z';
-  var LAST_CHECKED = '2026-09-26T11:20:00Z';
+  var GENERATED_AT = '2026-09-27T11:20:00Z';
+  var LAST_CHECKED = '2026-09-27T11:20:00Z';
   var WX = {
-    thu: {cond:'Mostly Sunny', t8:63, t12:80, t20:67, note:''},
-    fri: {cond:'Mostly Cloudy', t8:67, t12:81, t20:69, note:''},
-    sat: {cond:'Storms',   t8:69, t12:79, t20:71, note:'Saturday night’s forecast has trended wetter — rain and a thunderstorm now look more likely by evening, with a real chance it’s steadier than just a passing shower. Golf (No. 2, 1:10p) should stay dry, but dinner at Wiregrass (8:30p) could see real rain — plan on a jacket or umbrella.'},
-    sun: {cond:'Rain',     t8:71, t12:73, t20:66, note:'Sunday’s forecast has shifted wetter overnight — rain now looks likely for a good part of the day, quite possibly including some of the Tobacco Road round. The plan is still to play through it, so pack real rain gear, not just a light layer, and build in some extra time for the drive to RDU.'}
+    thu: {cond:'Mostly Sunny', t8:63, t12:80, t20:63, note:''},
+    fri: {cond:'Partly Sunny', t8:63, t12:81, t20:69, note:''},
+    sat: {cond:'Showers', t8:69, t12:77, t20:71, note:'Saturday night still carries a rain chance, but it’s trended lighter than before — periods of rain late rather than a heavy thunderstorm. Golf (No. 2, 1:10p) should stay dry; a light jacket should cover dinner at Wiregrass (8:30p).'},
+    sun: {cond:'Rain',     t8:71, t12:74, t20:69, note:'Sunday’s forecast has eased up from earlier reads — periods of rain are still likely for part of the day, including possibly the Tobacco Road round, but lighter than previously expected. Pack a rain layer; this now looks more like on-and-off rain than a heavy, steady soak.'}
   };
   var ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
@@ -869,18 +869,18 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     ? 'Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows.'
     : 'Forecast numbers as of '+stamp+' ET (last changed) &middot; checked again as recently as '+checkedStamp+' ET with no meaningful change. Interpolated from AccuWeather’s daily highs/lows.';
   g.innerHTML =
-    '<div class="rowline"><span class="d">Thu</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 64&deg; <span style="color:var(--muted);font-size:11px">H</span> 86&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Fri</span><span>Mostly Cloudy &middot; <span style="color:var(--muted);font-size:11px">L</span> 66&deg; <span style="color:var(--muted);font-size:11px">H</span> 87&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sat</span><span>Storms &middot; <span style="color:var(--muted);font-size:11px">L</span> 68&deg; <span style="color:var(--muted);font-size:11px">H</span> 85&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sun</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 63&deg; <span style="color:var(--muted);font-size:11px">H</span> 79&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Thu</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 60&deg; <span style="color:var(--muted);font-size:11px">H</span> 86&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Fri</span><span>Partly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 66&deg; <span style="color:var(--muted);font-size:11px">H</span> 87&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sat</span><span>Showers &middot; <span style="color:var(--muted);font-size:11px">L</span> 68&deg; <span style="color:var(--muted);font-size:11px">H</span> 83&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sun</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 66&deg; <span style="color:var(--muted);font-size:11px">H</span> 80&deg;</span></div>'+
     '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">'+footerLine+'</div>';
   window.WEATHER_ICONS = {ICONS: ICONS, weatherIcon: weatherIcon};
 })();
 
 /* ---------- weather: in-depth morning/afternoon/night breakdown ---------- */
 (function(){
-  var DETAIL_GENERATED_AT = '2026-09-26T11:20:00Z';
-  var DETAIL_LAST_CHECKED = '2026-09-26T11:20:00Z';
+  var DETAIL_GENERATED_AT = '2026-09-27T11:20:00Z';
+  var DETAIL_LAST_CHECKED = '2026-09-27T11:20:00Z';
   var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
   var DAY_DATE = {thu:'Oct 1', fri:'Oct 2', sat:'Oct 3', sun:'Oct 4'};
   var VERDICT_LABEL = {great:'Great', good:'Good', fair:'Fair — Pack Rain Gear', rough:'Rough — High Rain Risk'};
@@ -889,30 +889,30 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     thu: {
       verdict: 'great',
       bottomLine: 'Warm and sunny for most of the day — No. 10 (1:36p) and dinner at Pinehurst Brewing should both be comfortable.',
-      morning:   {t:'63–67°', precip:10, rain:'0.00"', tag:'Sunny',   desc:'Clear and comfortable to start the day.'},
-      afternoon: {t:'77–80°', precip:10, rain:'0.00"', tag:'Sunny',    desc:'Warm and sunny for No. 10 (1:36p).'},
-      night:     {t:'65–68°', precip:15, rain:'0.00"', tag:'Partly Cloudy',    desc:'Warm and humid for dinner at Pinehurst Brewing.'}
+      morning:   {t:'63–66°', precip:8, rain:'0.00"', tag:'Sunny',   desc:'Clear and comfortable to start the day.'},
+      afternoon: {t:'77–80°', precip:6, rain:'0.00"', tag:'Sunny',    desc:'Warm and sunny for No. 10 (1:36p).'},
+      night:     {t:'61–64°', precip:10, rain:'0.00"', tag:'Mostly Clear',    desc:'Comfortable for dinner at Pinehurst Brewing.'}
     },
     fri: {
-      verdict: 'good',
-      bottomLine: 'Clouds move through during the day, but it stays dry throughout — the Cradle and No. 8 play as planned, comfortable temps right through dinner at Ashten’s.',
-      morning:   {t:'67–70°', precip:2, rain:'0.00"', tag:'Mostly Cloudy', desc:'Clouds moving through, dry for the Cradle.'},
-      afternoon: {t:'78–81°', precip:2, rain:'0.00"', tag:'Mostly Cloudy', desc:'Warm with clouds around for No. 8, no rain expected.'},
-      night:     {t:'66–69°', precip:2, rain:'0.00"', tag:'Partly Cloudy', desc:'Warm and humid for dinner at Ashten’s.'}
+      verdict: 'great',
+      bottomLine: 'More sun than earlier forecasts suggested — the Cradle and No. 8 play under a mix of sun and clouds, dry all day and comfortable right through dinner at Ashten’s.',
+      morning:   {t:'63–66°', precip:10, rain:'0.00"', tag:'Partly Sunny', desc:'Some sun breaking through, dry for the Cradle.'},
+      afternoon: {t:'78–81°', precip:15, rain:'0.00"', tag:'Partly Sunny', desc:'Warm with sun and some clouds for No. 8, no rain expected.'},
+      night:     {t:'66–69°', precip:25, rain:'0.00"', tag:'Partly Cloudy', desc:'Warm and humid for dinner at Ashten’s.'}
     },
     sat: {
       verdict: 'fair',
-      bottomLine: 'Golf should stay dry — No. 2 (1:10p) plays under a mix of clouds and afternoon sun. Saturday night has trended wetter, though: rain and a thunderstorm now look more likely by evening, with a real chance it’s steadier than a token shower — worth planning for actual rain gear at dinner, not just an umbrella.',
+      bottomLine: 'Golf should stay dry — No. 2 (1:10p) plays under a mix of clouds and sun. Saturday night still carries a rain chance, but it’s trended lighter than before — periods of rain late rather than a heavy thunderstorm, so a jacket or light rain layer should cover dinner at Wiregrass (8:30p).',
       morning:   {t:'69–72°', precip:15, rain:'0.00"', tag:'Partly Cloudy',    desc:'Some clouds around to start, dry for the Hall of Fame visit.'},
-      afternoon: {t:'76–79°', precip:10, rain:'0.00"', tag:'Partly Sunny',    desc:'Sun breaking through at times — good conditions for No. 2 (1:10p).'},
-      night:     {t:'68–71°', precip:65, rain:'~0.30"', tag:'Storms',  desc:'Rain and a thunderstorm look more likely tonight, and it could be steadier than a passing shower — right in the window for dinner at Wiregrass (8:30p).'}
+      afternoon: {t:'74–77°', precip:15, rain:'0.00"', tag:'Intermittent Clouds',    desc:'A mix of sun and clouds for No. 2 (1:10p), no rain expected during the round.'},
+      night:     {t:'68–71°', precip:65, rain:'~0.10"', tag:'Showers',  desc:'Periods of rain look likely late — lighter than earlier forecasts suggested, but still worth planning around for dinner at Wiregrass (8:30p).'}
     },
     sun: {
-      verdict: 'rough',
-      bottomLine: 'Sunday’s forecast has turned wetter — rain now looks likely for a good part of the day, quite possibly including the Tobacco Road round itself. The plan is still to play through it, but pack real rain gear, not just a light layer, and build in some extra time for the drive to RDU.',
-      morning:   {t:'71–74°', precip:60, rain:'~0.5"', tag:'Rain', desc:'Rain looks likely for the 9a tee time at Tobacco Road, not just a passing shower.'},
-      afternoon: {t:'72–75°', precip:75, rain:'~0.7"', tag:'Rain', desc:'Steady rain continuing into the afternoon, likely covering the back nine and the drive to RDU.'},
-      night:     {t:'64–67°', precip:60, rain:'~0.3"', tag:'Rain',     desc:'Rain continuing into the evening as the last flights depart.'}
+      verdict: 'fair',
+      bottomLine: 'Sunday’s forecast has eased up from earlier reads — periods of rain are still likely for part of the day, including possibly the Tobacco Road round, but nowhere near the heavier read from earlier in the week. The plan is still to play through it; pack a rain layer, but this now looks more like on-and-off rain than a steady soak.',
+      morning:   {t:'71–74°', precip:45, rain:'~0.10"', tag:'Rain', desc:'Periods of rain possible for the 9a tee time at Tobacco Road, lighter than earlier forecasts suggested.'},
+      afternoon: {t:'72–75°', precip:55, rain:'~0.10"', tag:'Rain', desc:'Rain continues on and off into the afternoon, covering the back nine and the drive to RDU.'},
+      night:     {t:'66–69°', precip:60, rain:'~0.05"', tag:'Showers',     desc:'Rain tapering off as the last flights depart.'}
     }
   };
 
@@ -949,7 +949,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
   var headlineEl = document.getElementById('wx-headline');
   if(headlineEl){
-    headlineEl.textContent = 'Four days of golf in the Sandhills — Thursday and Friday are shaping up warm and dry from start to finish. The back end of the trip has trended wetter: Saturday’s evening thunderstorm chance has strengthened, and Sunday’s forecast has shifted to real rain for a good part of the day, likely including some of the Tobacco Road round. The plan is still to play through it, just pack real rain gear for the back half of the week.';
+    headlineEl.textContent = 'Four days of golf in the Sandhills — Thursday and Friday are looking warm and dry, with a bit more sun in the Friday forecast than before. The back end of the trip has eased up some too: Saturday night’s rain chance has trended lighter, and Sunday’s forecast has backed off from a heavier read to more of an on-and-off rain day. Nothing that changes the plan — just keep the rain gear handy for the back half of the week.';
   }
 
   var asofEl = document.getElementById('wx-detail-asof');
