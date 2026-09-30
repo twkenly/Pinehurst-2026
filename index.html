@@ -1041,7 +1041,9 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
       else if(r.status === 'incident') out = {badge:'alert', text:'Incident reported &mdash; check FlightAware'};
       else if(r.status === 'scheduled'){
         out = computedPhase(leg, now);
-        out.text = (r.depDelayMin ? 'Delayed +'+r.depDelayMin+'m' : 'On time') + ' &middot; ' + out.text;
+        if(out.badge === 'upcoming' || out.badge === 'soon'){
+          out.badgeLabel = r.depDelayMin ? 'Delayed +'+r.depDelayMin+'m' : 'On time';
+        }
       }
       else { out = computedPhase(leg, now); if(depDelay) out.text += depDelay; }
       out.live = true;
@@ -1079,7 +1081,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
           '<div class="route">'+leg.legLabel+' &middot; '+leg.route+'</div>'+
           '<div class="flightno">'+leg.flightno+timeLine+'</div>'+
           '<a class="track" href="https://www.flightaware.com/live/flight/'+leg.ident+'" target="_blank" rel="noopener"><span class="track-text">Track live on FlightAware</span> &nearr;</a>'+
-          '</div><div class="status"><span class="badge '+st.badge+'">'+badgeLabel(st.badge)+'</span><div style="margin-top:6px">'+st.text+'</div>'+
+          '</div><div class="status"><span class="badge '+st.badge+'">'+(st.badgeLabel || badgeLabel(st.badge))+'</span><div style="margin-top:6px">'+st.text+'</div>'+
           (st.live ? '<div style="margin-top:5px;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold)">Live &middot; AviationStack, checked '+fmtChecked(st.checkedAt)+'</div>' : '')+
           '</div></div>';
       });
