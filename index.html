@@ -1039,6 +1039,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
       else if(r.status === 'cancelled') out = {badge:'alert', text:'Cancelled'};
       else if(r.status === 'diverted') out = {badge:'alert', text:'Diverted'};
       else if(r.status === 'incident') out = {badge:'alert', text:'Incident reported &mdash; check FlightAware'};
+      else if(r.status === 'scheduled'){
+        out = computedPhase(leg, now);
+        out.text = (r.depDelayMin ? 'Delayed +'+r.depDelayMin+'m' : 'On time') + ' &middot; ' + out.text;
+      }
       else { out = computedPhase(leg, now); if(depDelay) out.text += depDelay; }
       out.live = true;
       out.checkedAt = r.checkedAt;
