@@ -810,11 +810,11 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-09-30T11:15:29Z';
-  var LAST_CHECKED = '2026-09-30T11:15:29Z';
+  var GENERATED_AT = '2026-10-01T11:18:00Z';
+  var LAST_CHECKED = '2026-10-01T11:18:00Z';
   var WX = {
-    thu: {cond:'Mostly Sunny', t8:60, t12:82, t20:64, note:''},
-    fri: {cond:'Mostly Sunny', t8:64, t12:84, t20:71, note:''},
+    thu: {cond:'Mostly Sunny', t8:59, t12:82, t20:74, t8icon:'sun', t12icon:'sun', t20icon:'sun', note:''},
+    fri: {cond:'Mostly Sunny', t8:65, t12:84, t20:71, note:''},
     sat: {cond:'Stray Storm',  t8:71, t12:79, t20:67, note:'Saturday’s outlook has eased — expect a mix of sun and clouds for most of the day, with just a stray afternoon thunderstorm chance that could touch part of the No. 2 round (1:10p). Rain becomes more likely after dark, so plan on real rain gear for dinner at Wiregrass (8:30p).'},
     sun: {cond:'Rain',     t8:67, t12:66, t20:66, note:'Sunday has firmed up as a steadier, cooler rain day — periods of rain look likely through a good part of the day, including the Tobacco Road tee time itself. The plan is still to play through it; pack a full rain layer for the round and the drive to RDU.'}
   };
@@ -869,7 +869,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     ? 'Live forecast as of '+stamp+' ET, interpolated from AccuWeather’s daily highs/lows.'
     : 'Forecast numbers as of '+stamp+' ET (last changed) &middot; checked again as recently as '+checkedStamp+' ET with no meaningful change. Interpolated from AccuWeather’s daily highs/lows.';
   g.innerHTML =
-    '<div class="rowline"><span class="d">Thu</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 88&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Thu</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 88&deg;</span></div>'+
     '<div class="rowline"><span class="d">Fri</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 68&deg; <span style="color:var(--muted);font-size:11px">H</span> 90&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sat</span><span>Stray Storm &middot; <span style="color:var(--muted);font-size:11px">L</span> 64&deg; <span style="color:var(--muted);font-size:11px">H</span> 85&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sun</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 63&deg; <span style="color:var(--muted);font-size:11px">H</span> 72&deg;</span></div>'+
@@ -879,8 +879,8 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: in-depth morning/afternoon/night breakdown ---------- */
 (function(){
-  var DETAIL_GENERATED_AT = '2026-09-30T11:15:29Z';
-  var DETAIL_LAST_CHECKED = '2026-09-30T11:15:29Z';
+  var DETAIL_GENERATED_AT = '2026-10-01T11:18:00Z';
+  var DETAIL_LAST_CHECKED = '2026-10-01T11:18:00Z';
   var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
   var DAY_DATE = {thu:'Oct 1', fri:'Oct 2', sat:'Oct 3', sun:'Oct 4'};
   var VERDICT_LABEL = {great:'Great', good:'Good', fair:'Fair — Pack Rain Gear', rough:'Rough — High Rain Risk'};
@@ -888,10 +888,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   var WXDETAIL = {
     thu: {
       verdict: 'great',
-      bottomLine: 'Warm and sunny for most of the day — No. 10 (1:36p) and dinner at Pinehurst Brewing should both be comfortable.',
-      morning:   {t:'60–63°', precip:8, rain:'0.00"', tag:'Sunny',   desc:'Clear and comfortable to start the day.'},
-      afternoon: {t:'77–80°', precip:10, rain:'0.00"', tag:'Sunny',    desc:'Warm and sunny for No. 10 (1:36p).'},
-      night:     {t:'64–67°', precip:13, rain:'0.00"', tag:'Mostly Clear',    desc:'Comfortable for dinner at Pinehurst Brewing.'}
+      bottomLine: 'Confirmed by real hourly data — warm and sunny all day, peaking near 88° during No. 10 (1:36p) and settling into the mid-70s for dinner at Pinehurst Brewing.',
+      morning:   {t:'59–79°', precip:0, rain:'0.00"', tag:'Mostly Sunny',   desc:'Clear and quickly warming through the morning — already near 80° by 11a.'},
+      afternoon: {t:'82–88°', precip:0, rain:'0.00"', tag:'Mostly Sunny',    desc:'Hot and sunny for No. 10 (1:36p), peaking near 88° mid-afternoon.'},
+      night:     {t:'71–85°', precip:0, rain:'0.00"', tag:'Clear',    desc:'Clear skies cooling into the mid-70s for dinner at Pinehurst Brewing.'}
     },
     fri: {
       verdict: 'great',
