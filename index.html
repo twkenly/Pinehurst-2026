@@ -826,13 +826,13 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-10-02T11:20:00Z';
-  var LAST_CHECKED = '2026-10-02T11:20:00Z';
+  var GENERATED_AT = '2026-10-03T11:20:00Z';
+  var LAST_CHECKED = '2026-10-03T11:20:00Z';
   var WX = {
     thu: {cond:'Mostly Sunny', t8:59, t12:82, t20:74, t8icon:'sun', t12icon:'sun', t20icon:'sun', note:''},
     fri: {cond:'Mostly Sunny', t8:66, t12:82, t20:76, t8icon:'sun', t12icon:'sun', t20icon:'partly', note:''},
-    sat: {cond:'Rain & Storms',  t8:70, t12:76, t20:68, note:'Saturday has turned into a wetter day — showers and a heavier thunderstorm look likely during the No. 2 round (1:10p), with periods of rain continuing into the evening. Pack full rain gear for the round and dinner at Wiregrass (8:30p).'},
-    sun: {cond:'Rain',     t8:68, t12:63, t20:66, note:'Sunday stays a steadier, cooler rain day — periods of rain look likely through a good part of the day, including the Tobacco Road tee time itself. The plan is still to play through it; pack a full rain layer for the round and the drive to RDU.'}
+    sat: {cond:'Rain & Storms',  t8:71, t12:80, t20:70, t8icon:'cloud', t12icon:'rain', t20icon:'storm', note:'Confirmed by real hourly data — periods of showers are likely through the No. 2 round (1:10p), with a thunderstorm chance building toward dinner at Wiregrass (8:30p).'},
+    sun: {cond:'Rain',     t8:65, t12:64, t20:65, note:'Sunday stays a steadier, cooler rain day — periods of rain look likely through a good part of the day, including the Tobacco Road tee time itself. The plan is still to play through it; pack a full rain layer for the round and the drive to RDU.'}
   };
   var ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
@@ -887,16 +887,16 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   g.innerHTML =
     '<div class="rowline"><span class="d">Thu</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 88&deg;</span></div>'+
     '<div class="rowline"><span class="d">Fri</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 67&deg; <span style="color:var(--muted);font-size:11px">H</span> 90&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sat</span><span>Rain &amp; Storms &middot; <span style="color:var(--muted);font-size:11px">L</span> 65&deg; <span style="color:var(--muted);font-size:11px">H</span> 82&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sun</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 63&deg; <span style="color:var(--muted);font-size:11px">H</span> 69&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sat</span><span>Rain &amp; Storms &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 82&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sun</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 70&deg;</span></div>'+
     '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">'+footerLine+'</div>';
   window.WEATHER_ICONS = {ICONS: ICONS, weatherIcon: weatherIcon};
 })();
 
 /* ---------- weather: in-depth morning/afternoon/night breakdown ---------- */
 (function(){
-  var DETAIL_GENERATED_AT = '2026-10-02T11:20:00Z';
-  var DETAIL_LAST_CHECKED = '2026-10-02T11:20:00Z';
+  var DETAIL_GENERATED_AT = '2026-10-03T11:20:00Z';
+  var DETAIL_LAST_CHECKED = '2026-10-03T11:20:00Z';
   var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
   var DAY_DATE = {thu:'Oct 1', fri:'Oct 2', sat:'Oct 3', sun:'Oct 4'};
   var VERDICT_LABEL = {great:'Great', good:'Good', fair:'Fair — Pack Rain Gear', rough:'Rough — High Rain Risk'};
@@ -918,10 +918,10 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     },
     sat: {
       verdict: 'fair',
-      bottomLine: 'Saturday has turned into a wetter day — showers and a heavier thunderstorm look likely during the No. 2 round (1:10p), with periods of rain continuing into the evening. Pack full rain gear for the round and dinner at Wiregrass (8:30p).',
-      morning:   {t:'70–76°', precip:60, rain:'~0.08"', tag:'Showers',    desc:'A morning shower is possible ahead of the Hall of Fame visit.'},
-      afternoon: {t:'76–82°', precip:78, rain:'~0.20"', tag:'Spot Storm',    desc:'Showers and a heavier thunderstorm look likely during the No. 2 tee time (1:10p).'},
-      night:     {t:'68–76°', precip:98, rain:'~0.60"', tag:'Rain',  desc:'Periods of rain and a thunderstorm continue into dinner at Wiregrass (8:30p).'}
+      bottomLine: 'Confirmed by real hourly data — scattered showers build through the morning and could touch the No. 2 round (1:10p), with a thunderstorm passing through early evening and rain continuing into dinner at Wiregrass (8:30p).',
+      morning:   {t:'71–79°', precip:35, rain:'~0.01"', tag:'Cloudy',    desc:'Mostly cloudy and warming through the morning ahead of the Hall of Fame visit.'},
+      afternoon: {t:'77–82°', precip:51, rain:'~0.01"', tag:'Showers',    desc:'Scattered showers possible around the No. 2 tee time (1:10p), peaking near 82°.'},
+      night:     {t:'68–75°', precip:98, rain:'~0.64"', tag:'Storm',  desc:'A thunderstorm moves through around 6p, with rain continuing into dinner at Wiregrass (8:30p).'}
     },
     sun: {
       verdict: 'rough',
@@ -965,7 +965,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
   var headlineEl = document.getElementById('wx-headline');
   if(headlineEl){
-    headlineEl.textContent = 'Four days of golf in the Sandhills — Thursday delivered warm and sunny as promised, and Friday is matching it hour for hour. Saturday has turned into a wetter day, with showers and a heavier thunderstorm likely during the No. 2 round and periods of rain continuing into the evening. Sunday stays a steadier, cooler rain day, with periods of rain likely for a good part of it, including possibly the Tobacco Road finale. The plan is still to play through it — pack real rain gear for the back half of the trip.';
+    headlineEl.textContent = 'Four days of golf in the Sandhills — Thursday and Friday delivered warm and sunny as promised. Saturday is now confirmed by real hourly data: scattered showers build through the morning and could touch the No. 2 round, with a thunderstorm passing through early evening and rain continuing into dinner at Wiregrass. Sunday stays a steadier, cooler rain day, with periods of rain likely for a good part of it, including possibly the Tobacco Road finale. The plan is still to play through it — pack real rain gear for the back half of the trip.';
   }
 
   var asofEl = document.getElementById('wx-detail-asof');
