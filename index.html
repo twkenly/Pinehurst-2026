@@ -615,7 +615,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
   <h2 class="section-title">Know Before You Go</h2>
   <hr class="hr">
   <div class="grid3">
-    <div class="cell"><div class="k">Weather</div><div class="v">Low 60s &rarr; low 90s</div><div class="d">Thursday and Friday are warm, sunny, and dry. Saturday brings periods of rain and a thunderstorm, heaviest during the No. 2 round and into the evening. Sunday stays a steadier, cooler rain day, with periods of rain likely for a good part of it, including possibly the Tobacco Road round. Pack rain gear for the back half of the trip.</div></div>
+    <div class="cell"><div class="k">Weather</div><div class="v">Low 60s &rarr; low 90s</div><div class="d">Thursday and Friday were warm, sunny, and dry. Saturday brought periods of rain and a thunderstorm, heaviest during the No. 2 round and into the evening. Sunday eases up some — a stray early storm gives way to a calmer, cloudy morning for the Tobacco Road tee time, with thunderstorm chances returning by evening. Pack rain gear for the finale.</div></div>
     <div class="cell"><div class="k">Walking</div><div class="v">Three of four on foot</div><div class="d">No. 10 and the Cradle walking, No. 2 with caddies. Only No. 8 has carts.</div></div>
     <div class="cell"><div class="k">Dress Code</div><div class="v">Collared, no denim</div><div class="d">Layers. For Fri/Sat dinner: no gym shorts, no ballcaps.</div></div>
   </div>
@@ -826,13 +826,13 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
 /* ---------- weather: baked planning estimates (live forecast opens ~16 days out) ---------- */
 (function(){
-  var GENERATED_AT = '2026-10-03T11:20:00Z';
-  var LAST_CHECKED = '2026-10-03T11:20:00Z';
+  var GENERATED_AT = '2026-10-04T11:14:00Z';
+  var LAST_CHECKED = '2026-10-04T11:14:00Z';
   var WX = {
     thu: {cond:'Mostly Sunny', t8:59, t12:82, t20:74, t8icon:'sun', t12icon:'sun', t20icon:'sun', note:''},
     fri: {cond:'Mostly Sunny', t8:66, t12:82, t20:76, t8icon:'sun', t12icon:'sun', t20icon:'partly', note:''},
     sat: {cond:'Rain & Storms',  t8:71, t12:80, t20:70, t8icon:'cloud', t12icon:'rain', t20icon:'storm', note:'Confirmed by real hourly data — periods of showers are likely through the No. 2 round (1:10p), with a thunderstorm chance building toward dinner at Wiregrass (8:30p).'},
-    sun: {cond:'Rain',     t8:65, t12:64, t20:65, note:'Sunday stays a steadier, cooler rain day — periods of rain look likely through a good part of the day, including the Tobacco Road tee time itself. The plan is still to play through it; pack a full rain layer for the round and the drive to RDU.'}
+    sun: {cond:'Rain & Storms', t8:61, t12:65, t20:65, t8icon:'storm', t12icon:'cloud', t20icon:'storm', note:'Confirmed by real hourly data — a stray early storm eases into a calmer, cloudy stretch right around the 9a tee time at Tobacco Road, with thunderstorm chances building back in through the evening. Keep rain gear handy for the back nine and the drive to RDU.'}
   };
   var ICONS = {
     sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 12H2M22 12h-2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/></svg>',
@@ -888,15 +888,15 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
     '<div class="rowline"><span class="d">Thu</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 88&deg;</span></div>'+
     '<div class="rowline"><span class="d">Fri</span><span>Mostly Sunny &middot; <span style="color:var(--muted);font-size:11px">L</span> 67&deg; <span style="color:var(--muted);font-size:11px">H</span> 90&deg;</span></div>'+
     '<div class="rowline"><span class="d">Sat</span><span>Rain &amp; Storms &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 82&deg;</span></div>'+
-    '<div class="rowline"><span class="d">Sun</span><span>Rain &middot; <span style="color:var(--muted);font-size:11px">L</span> 62&deg; <span style="color:var(--muted);font-size:11px">H</span> 70&deg;</span></div>'+
+    '<div class="rowline"><span class="d">Sun</span><span>Rain &amp; Storms &middot; <span style="color:var(--muted);font-size:11px">L</span> 61&deg; <span style="color:var(--muted);font-size:11px">H</span> 68&deg;</span></div>'+
     '<div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5">'+footerLine+'</div>';
   window.WEATHER_ICONS = {ICONS: ICONS, weatherIcon: weatherIcon};
 })();
 
 /* ---------- weather: in-depth morning/afternoon/night breakdown ---------- */
 (function(){
-  var DETAIL_GENERATED_AT = '2026-10-03T11:20:00Z';
-  var DETAIL_LAST_CHECKED = '2026-10-03T11:20:00Z';
+  var DETAIL_GENERATED_AT = '2026-10-04T11:14:00Z';
+  var DETAIL_LAST_CHECKED = '2026-10-04T11:14:00Z';
   var DAY_LABEL = {thu:'Thursday', fri:'Friday', sat:'Saturday', sun:'Sunday'};
   var DAY_DATE = {thu:'Oct 1', fri:'Oct 2', sat:'Oct 3', sun:'Oct 4'};
   var VERDICT_LABEL = {great:'Great', good:'Good', fair:'Fair — Pack Rain Gear', rough:'Rough — High Rain Risk'};
@@ -924,11 +924,11 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
       night:     {t:'68–75°', precip:98, rain:'~0.64"', tag:'Storm',  desc:'A thunderstorm moves through around 6p, with rain continuing into dinner at Wiregrass (8:30p).'}
     },
     sun: {
-      verdict: 'rough',
-      bottomLine: 'Sunday stays a steadier, cooler rain day — periods of rain look likely through a good part of the day, including the Tobacco Road tee time itself. The plan is still to play through it; pack a full rain layer for the round and the drive to RDU.',
-      morning:   {t:'63–68°', precip:92, rain:'~0.35"', tag:'Rain', desc:'Steady periods of rain likely for the 9a tee time at Tobacco Road.'},
-      afternoon: {t:'63–66°', precip:88, rain:'~0.30"', tag:'Rain', desc:'Rain continues through the afternoon, covering the back nine and the drive to RDU.'},
-      night:     {t:'63–66°', precip:93, rain:'~0.55"', tag:'Showers',     desc:'Showers continuing as the last flights depart.'}
+      verdict: 'fair',
+      bottomLine: 'Confirmed by real hourly data — the rain risk has eased some. A stray early storm gives way to a calmer, cloudy stretch right around the 9a tee time at Tobacco Road, with thunderstorm chances building back in through the evening. Keep rain gear handy for the back nine and the drive to RDU.',
+      morning:   {t:'61–64°', precip:49, rain:'~0.05"', tag:'Early Storm', desc:'A stray thunderstorm near sunrise eases into a calmer, cloudy stretch by the 9a tee time at Tobacco Road.'},
+      afternoon: {t:'65–68°', precip:43, rain:'~0.05"', tag:'Cloudy', desc:'Mostly cloudy with a brief shower/storm chance near 1p; temps climb into the upper 60s.'},
+      night:     {t:'64–68°', precip:58, rain:'~0.15"', tag:'Storms',     desc:'Thunderstorms build back in around sunset (6:58p), continuing into the evening and the drive to RDU.'}
     }
   };
 
@@ -965,7 +965,7 @@ table.costtable tr.total td:first-child{font-family:'Jost',sans-serif;font-size:
 
   var headlineEl = document.getElementById('wx-headline');
   if(headlineEl){
-    headlineEl.textContent = 'Four days of golf in the Sandhills — Thursday and Friday delivered warm and sunny as promised. Saturday is now confirmed by real hourly data: scattered showers build through the morning and could touch the No. 2 round, with a thunderstorm passing through early evening and rain continuing into dinner at Wiregrass. Sunday stays a steadier, cooler rain day, with periods of rain likely for a good part of it, including possibly the Tobacco Road finale. The plan is still to play through it — pack real rain gear for the back half of the trip.';
+    headlineEl.textContent = 'Four days of golf in the Sandhills — Thursday and Friday delivered warm and sunny as promised, and Saturday’s showers and evening storm came through as expected. Sunday is now confirmed by real hourly data too: a stray early storm eases into a calmer, cloudy stretch right around the 9a tee time at Tobacco Road, with thunderstorm chances building back in by evening for the drive to RDU. Pack rain gear for the finale, but the heaviest risk has eased from earlier estimates.';
   }
 
   var asofEl = document.getElementById('wx-detail-asof');
