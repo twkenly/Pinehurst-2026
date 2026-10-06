@@ -102,13 +102,19 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 
 /* ---- shared pool table ---- */
 .pool-table{width:100%; border-collapse:collapse; font-size:14px; margin-top:4px}
-.pool-table td{padding:8px 0; border-bottom:1px solid var(--cardline)}
+.pool-table td{padding:8px 0; border-bottom:1px solid var(--cardline); vertical-align:top}
 .pool-table td:first-child{color:var(--ink)}
+.pool-table .split-note{font-size:11.5px; color:var(--muted); margin-top:2px}
 .pool-table td.amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap}
 .pool-table td.by{text-align:right; color:var(--muted); font-size:12.5px; white-space:nowrap; padding-left:10px}
 .pool-table tr.total-row td{border-bottom:none; border-top:1px solid var(--ink); padding-top:12px; font-weight:600; color:var(--ink)}
 .pool-table tr.total-row td.amt{font-family:'Libre Caslon Display',serif; font-size:17px}
-.pool-split{font-size:13px; color:var(--muted); margin-top:12px}
+.pool-table tr.day-row td{
+  border-bottom:none; padding:18px 0 4px; font-size:11px; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--gold); font-weight:600;
+}
+.pool-table tr.day-row:first-child td{padding-top:0}
+.pool-split{font-size:13px; color:var(--muted); margin-top:12px; line-height:1.5}
 
 /* ---- notes ---- */
 .notes-list{margin:4px 0 0; padding-left:20px; font-size:14.5px; line-height:1.65; color:var(--slate)}
@@ -139,7 +145,7 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 
   <div class="section-head">
     <div class="eyebrow">Shared Pool</div>
-    <p>Rental car plus every meal and drink the group split evenly, four ways.</p>
+    <p>Rental car plus every meal and drink the group split, in order from Thursday arrival to Saturday night. Most items split four ways &mdash; a couple split narrower, noted below each.</p>
   </div>
   <table class="pool-table" id="poolTable"></table>
   <div class="pool-split" id="poolSplit"></div>
@@ -152,7 +158,7 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
     <li><b>Golf No. 10</b> ($125) is a confirmed add-on for Tyler, Kyle, and Granger (not Colin, who arrived after that tee time).</li>
     <li><b>No. 2 surcharge</b> is $250, bundled into the $335 &ldquo;Golf No 1-5&rdquo; charge above along with the caddie fee.</li>
     <li><b>No. 8 and Cradle Crossing</b> rounds had no additional charges &mdash; covered by the package as expected.</li>
-    <li>Granger's $34.24 &ldquo;Golf No 8&rdquo; charge is a glove, his alone.</li>
+    <li><b>Caddie fee ($85)</b> for the No. 2 round was already included in the $335 golf charge &mdash; the $150 cash everyone gave the caddies that day covered gratuity on top of that, not the fee itself. Credited back below.</li>
   </ul>
 
   <a class="back" href="index.html">&larr; Back to the trip site</a>
@@ -163,66 +169,98 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 
 <script>
 var VENMO_BASE = "https://account.venmo.com/u/tylerkenly";
+var ALL4 = ['tyler','colin','kyle','granger'];
+var NAMES = {tyler:'Tyler', colin:'Colin', kyle:'Kyle', granger:'Granger'};
 
+function round2(n){ return Math.round((n + (n >= 0 ? 1e-9 : -1e-9)) * 100) / 100; }
 function fmt(n){
-  var neg = n < 0;
-  var s = '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  var r = round2(n);
+  var neg = r < 0;
+  var s = '$' + Math.abs(r).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
   return neg ? '−' + s : s;
 }
 
-var PEOPLE = [
-  {
-    key: 'colin', name: 'Colin', total: 3955.94,
-    note: "Pinehurst 2026 — package, golf fees, and shared pool share",
-    items: [
-      {label: 'Package charge', amount: 2330.00},
-      {label: 'Package tax', amount: 221.73},
-      {label: 'Package resort fee', amount: 233.00},
-      {label: 'Package sales tax', amount: 16.31},
-      {label: 'No. 8 cart fee', amount: 65.00},
-      {label: 'No. 2 premium + caddie', amount: 335.00},
-      {label: 'Pool share', amount: 754.90}
-    ]
-  },
-  {
-    key: 'granger', name: 'Granger', total: 222.70,
-    note: "Pinehurst 2026 — deposit transfer, Golf No. 10, net of pool credit",
-    items: [
-      {label: 'Pool credit (fronted $957.20 vs. $754.90 share)', amount: -202.30, credit: true},
-      {label: 'Deposit transferred to his folio', amount: 300.00},
-      {label: "Golf No. 10 mischarged to Tyler's folio", amount: 125.00}
-    ]
-  },
-  {
-    key: 'kyle', name: 'Kyle', total: 332.90,
-    note: "Pinehurst 2026 — shared pool share and Wednesday room service",
-    items: [
-      {label: 'Pool share', amount: 754.90},
-      {label: "Credit for fronting Ashten's", amount: -500.00, credit: true},
-      {label: 'Wednesday room service (arrival night)', amount: 78.00}
-    ]
-  }
+// ---- the shared pool, in chronological order ----
+var ITEMS = [
+  {day:'Thursday, Oct 1', label:'Rental car', amount:599.99, participants:ALL4, funders:[{by:'tyler',amt:599.99}]},
+  {day:'Thursday, Oct 1', label:'Station 21 (Thursday Lunch, no Colin)', amount:156.00, participants:['tyler','kyle','granger'], funders:[{by:'tyler',amt:156.00}]},
+  {day:'Thursday, Oct 1', label:'Pinehurst Brewery (Thursday Dinner)', amount:250.50, participants:ALL4, funders:[{by:'tyler',amt:250.50}]},
+  {day:'Friday, Oct 2', label:'Coffee Shop (two charges)', amount:23.45, participants:['tyler','colin'], funders:[{by:'tyler',amt:23.45}]},
+  {day:'Friday, Oct 2', label:'Cradle Drinks (Pre-round and at the 9th hole)', amount:169.84, participants:ALL4, funders:[{by:'granger',amt:169.84}]},
+  {day:'Friday, Oct 2', label:'Restaurant at No. 8 (two charges - lunch pre round + post round drinks/fries)', amount:210.17, participants:ALL4, funders:[{by:'tyler',amt:210.17}]},
+  {day:'Friday, Oct 2', label:'Halfway House No. 8', amount:130.18, participants:ALL4, funders:[{by:'tyler',amt:63.45},{by:'granger',amt:66.73}]},
+  {day:'Friday, Oct 2', label:"Ashten's (Friday Dinner)", amount:500.00, participants:ALL4, funders:[{by:'kyle',amt:500.00}]},
+  {day:'Friday, Oct 2', label:'1901 Lounge (Friday Post-Dinner Nightcap)', amount:64.00, participants:ALL4, funders:[{by:'tyler',amt:64.00}]},
+  {day:'Saturday, Oct 3', label:'The Deuce (Pre- No. 2 lunch)', amount:84.51, participants:ALL4, funders:[{by:'tyler',amt:84.51}]},
+  {day:'Saturday, Oct 3', label:'Halfway House No. 2 (Pre-round and at the turn)', amount:169.84, participants:ALL4, funders:[{by:'tyler',amt:169.84}]},
+  {day:'Saturday, Oct 3', label:'Wiregrass (Saturday Dinner)', amount:720.63, participants:ALL4, funders:[{by:'granger',amt:720.63}]}
 ];
+var POOL_TOTAL = ITEMS.reduce(function(s, it){ return s + it.amount; }, 0);
 
-var POOL = [
-  {label: 'Rental car', amount: 599.99, by: 'Tyler'},
-  {label: 'Pinehurst Brewery', amount: 191.00, by: 'Tyler'},
-  {label: 'Restaurant at No. 8 (two charges)', amount: 210.17, by: 'Tyler'},
-  {label: 'HWH No. 8', amount: 63.45, by: 'Tyler'},
-  {label: 'Halfway House #2', amount: 50.19, by: 'Tyler'},
-  {label: 'Beverage Cart', amount: 119.65, by: 'Tyler'},
-  {label: 'The Deuce', amount: 84.51, by: 'Tyler'},
-  {label: 'Coffee Shop (two charges)', amount: 23.45, by: 'Tyler'},
-  {label: 'Station 21', amount: 156.00, by: 'Tyler'},
-  {label: '1901 Lounge', amount: 64.00, by: 'Tyler'},
-  {label: '91st Hole', amount: 84.01, by: 'Granger'},
-  {label: 'Cradle Crossing', amount: 85.83, by: 'Granger'},
-  {label: 'HWH No. 8 (second charge)', amount: 66.73, by: 'Granger'},
-  {label: 'Wiregrass', amount: 720.63, by: 'Granger'},
-  {label: "Ashten's", amount: 500.00, by: 'Kyle'}
-];
-var POOL_TOTAL = POOL.reduce(function(s, r){ return s + r.amount; }, 0);
-var POOL_SHARE = POOL_TOTAL / 4;
+// ---- derive each person's pool share owed and pool amount fronted ----
+var poolShare = {tyler:0, colin:0, kyle:0, granger:0};
+var poolFronted = {tyler:0, colin:0, kyle:0, granger:0};
+ITEMS.forEach(function(it){
+  var per = it.amount / it.participants.length;
+  it.participants.forEach(function(p){ poolShare[p] += per; });
+  it.funders.forEach(function(f){ poolFronted[f.by] += f.amt; });
+});
+var poolNet = {}; // positive = credited back, negative = owes into the pool
+ALL4.forEach(function(p){ poolNet[p] = poolFronted[p] - poolShare[p]; });
+
+// ---- each person's non-pool, independently documented side debts to Tyler ----
+var SIDE_DEBTS = {
+  colin: [
+    {label: 'Package charge', amount: 2330.00},
+    {label: 'Package tax', amount: 221.73},
+    {label: 'Package resort fee', amount: 233.00},
+    {label: 'Package sales tax', amount: 16.31},
+    {label: 'No. 8 cart fee', amount: 65.00},
+    {label: 'No. 2 premium (caddie fee already covered in cash)', amount: 250.00}
+  ],
+  granger: [
+    {label: 'Deposit transferred to his folio', amount: 300.00},
+    {label: "Golf No. 10 mischarged to Tyler's folio", amount: 125.00},
+    {label: 'Caddie fee credit (already covered in cash to the caddies)', amount: -85.00, credit: true}
+  ],
+  kyle: [
+    {label: 'Wednesday room service (arrival night)', amount: 78.00},
+    {label: 'Caddie fee credit (already covered in cash to the caddies)', amount: -85.00, credit: true}
+  ]
+};
+
+var PEOPLE = ['colin', 'granger', 'kyle'].map(function(key){
+  var sideTotal = SIDE_DEBTS[key].reduce(function(s, d){ return s + d.amount; }, 0);
+  var rawTotal = sideTotal - poolNet[key];
+  var total = round2(rawTotal);
+  var poolLineAmount = round2(total - sideTotal); // forces the breakdown to add up exactly to `total`
+
+  // Kyle fronted Ashten's, so his pool line is a gross share plus a separate credit
+  // for what he fronted, rather than one pre-netted "pool credit" line like Granger's.
+  var items;
+  if (key === 'granger'){
+    var shareDisplay = round2(poolFronted[key] - poolNet[key]);
+    items = [{
+      label: 'Pool credit (fronted ' + fmt(poolFronted[key]) + ' vs. ' + fmt(shareDisplay) + ' share)',
+      amount: poolLineAmount, credit: true
+    }].concat(SIDE_DEBTS[key]);
+  } else if (key === 'kyle'){
+    var ashtensCredit = -500.00;
+    var grossShare = round2(poolLineAmount - ashtensCredit);
+    items = [
+      {label: 'Pool share', amount: grossShare},
+      {label: "Credit for fronting Ashten's", amount: ashtensCredit, credit: true}
+    ].concat(SIDE_DEBTS[key]);
+  } else {
+    items = SIDE_DEBTS[key].concat([{label: 'Pool share', amount: poolLineAmount}]);
+  }
+
+  return {
+    key: key, name: NAMES[key], total: total,
+    note: 'Pinehurst 2026 — ' + (key === 'colin' ? 'package, golf fees, and shared pool share' : key === 'granger' ? 'deposit transfer, Golf No. 10, net of pool credit' : 'shared pool share and Wednesday room service'),
+    items: items
+  };
+});
 
 // ---- render people accordion ----
 var peopleEl = document.getElementById('people');
@@ -273,14 +311,24 @@ PEOPLE.forEach(function(p){
   peopleEl.appendChild(card);
 });
 
-// ---- render shared pool ----
+// ---- render shared pool, grouped by day ----
 var poolTable = document.getElementById('poolTable');
-var poolHtml = POOL.map(function(r){
-  return '<tr><td>' + r.label + '</td><td class="amt">' + fmt(r.amount) + '</td><td class="by">' + r.by + '</td></tr>';
-}).join('');
+var poolHtml = '';
+var lastDay = null;
+ITEMS.forEach(function(it){
+  if (it.day !== lastDay){
+    poolHtml += '<tr class="day-row"><td colspan="3">' + it.day + '</td></tr>';
+    lastDay = it.day;
+  }
+  var byNames = it.funders.map(function(f){ return NAMES[f.by]; }).join(' + ');
+  var splitNote = it.participants.length < 4
+    ? '<div class="split-note">Split: ' + it.participants.map(function(p){ return NAMES[p]; }).join(', ') + '</div>'
+    : '';
+  poolHtml += '<tr><td>' + it.label + splitNote + '</td><td class="amt">' + fmt(it.amount) + '</td><td class="by">' + byNames + '</td></tr>';
+});
 poolHtml += '<tr class="total-row"><td>Total</td><td class="amt">' + fmt(POOL_TOTAL) + '</td><td class="by"></td></tr>';
 poolTable.innerHTML = poolHtml;
-document.getElementById('poolSplit').textContent = 'Split four ways: ' + fmt(POOL_SHARE) + ' each.';
+document.getElementById('poolSplit').textContent = 'Most items split four ways between Tyler, Colin, Kyle, and Granger — Station 21 and the Coffee Shop charges split narrower (see each line above).';
 </script>
 
 </body>
