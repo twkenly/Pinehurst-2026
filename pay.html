@@ -44,49 +44,80 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 .masthead{margin-bottom:44px}
 .masthead .eyebrow{margin-bottom:14px}
 .masthead h1{font-size:40px; line-height:1.12; margin:0 0 16px}
-.masthead .dek{font-size:16.5px; line-height:1.6; color:var(--slate); max-width:480px}
+.masthead .dek{font-size:16.5px; line-height:1.6; color:var(--slate); max-width:500px}
 .masthead .rule{height:1px; background:var(--cardline); margin-top:32px}
 
-/* ---- picker ---- */
-.picker-label{font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:40px 0 14px}
-.picker{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
-.picker button{
-  font-family:'Jost',sans-serif; font-size:15px; font-weight:500; color:var(--ink);
-  background:var(--card); border:1px solid var(--cardline); border-radius:3px;
-  padding:16px 10px; cursor:pointer; box-shadow:var(--shadow); transition:border-color .15s;
-}
-.picker button:hover{border-color:var(--gold)}
-.picker button.active{border-color:var(--gold); background:var(--gold); color:var(--paper)}
-@media (max-width:420px){ .picker{grid-template-columns:1fr 1fr 1fr; gap:8px} .picker button{padding:14px 6px; font-size:13.5px} }
+/* ---- section heads ---- */
+.section-head{margin:48px 0 16px}
+.section-head .eyebrow{margin-bottom:8px}
+.section-head p{font-size:14px; line-height:1.6; color:var(--muted); margin:0; max-width:480px}
 
-/* ---- result card ---- */
-.result{
-  margin-top:28px; background:var(--card); border:1px solid var(--cardline); border-radius:4px;
-  padding:30px 28px; box-shadow:var(--shadow); display:none;
+/* ---- people accordion ---- */
+.people{display:flex; flex-direction:column; gap:10px}
+.person-card{
+  background:var(--card); border:1px solid var(--cardline); border-radius:4px;
+  box-shadow:var(--shadow); overflow:hidden;
 }
-.result.show{display:block}
-.result .to{font-size:13px; color:var(--muted); margin-bottom:6px}
-.result .amount{font-family:'Libre Caslon Display',serif; font-size:48px; color:var(--ink); line-height:1; margin-bottom:4px}
-.result .for{font-size:13.5px; color:var(--muted); margin-bottom:24px}
-.result .pay-btn{
+.person-head{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:none; border:none; cursor:pointer; padding:18px 20px; text-align:left;
+  font-family:'Jost',sans-serif;
+}
+.person-head .name{font-size:16px; font-weight:500; color:var(--ink)}
+.person-head .right{display:flex; align-items:center; gap:14px}
+.person-head .total{font-family:'Libre Caslon Display',serif; font-size:20px; color:var(--ink)}
+.person-head .chevron{
+  width:9px; height:9px; border-right:1.5px solid var(--gold); border-bottom:1.5px solid var(--gold);
+  transform:rotate(45deg); transition:transform .2s; flex-shrink:0;
+}
+.person-card.open .person-head .chevron{transform:rotate(-135deg)}
+
+.person-body{max-height:0; overflow:hidden; transition:max-height .25s ease}
+.person-body-inner{padding:0 20px 22px; border-top:1px solid var(--cardline); margin-top:0}
+
+.breakdown-table{width:100%; border-collapse:collapse; margin-top:16px; font-size:14px}
+.breakdown-table td{padding:7px 0; color:var(--slate)}
+.breakdown-table td:last-child{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink)}
+.breakdown-table tr.credit td:last-child{color:var(--muted)}
+.breakdown-table tr.total-row td{
+  border-top:1px solid var(--cardline); padding-top:12px; margin-top:4px;
+  font-weight:600; color:var(--ink);
+}
+.breakdown-table tr.total-row td:last-child{font-family:'Libre Caslon Display',serif; font-size:17px}
+
+.pay-btn{
   display:flex; align-items:center; justify-content:center; gap:10px;
   width:100%; font-family:'Jost',sans-serif; font-weight:600; font-size:15px;
   letter-spacing:0.02em; color:#fff; background:var(--venmo);
-  border:none; border-radius:4px; padding:16px 20px; text-decoration:none;
+  border:none; border-radius:4px; padding:15px 20px; text-decoration:none;
+  margin-top:20px;
 }
-.result .pay-btn:hover{opacity:0.92}
-.result .pay-btn .vmark{
-  display:flex; align-items:center; justify-content:center; width:22px; height:22px;
+.pay-btn:hover{opacity:0.92}
+.pay-btn .vmark{
+  display:flex; align-items:center; justify-content:center; width:21px; height:21px;
   border-radius:50%; background:rgba(255,255,255,0.22); font-family:'Libre Caslon Display',serif;
-  font-size:14px; line-height:1; flex-shrink:0;
+  font-size:13px; line-height:1; flex-shrink:0;
 }
-.result .fineprint{font-size:12px; color:var(--muted); line-height:1.6; margin-top:16px; text-align:center}
+.fineprint{font-size:11.5px; color:var(--muted); line-height:1.6; margin-top:12px; text-align:center}
 
-.breakdown-link{display:block; text-align:center; font-size:12.5px; color:var(--muted); margin-top:14px; text-decoration:none; border-bottom:1px solid transparent}
-.breakdown-link:hover{color:var(--ink); border-bottom-color:var(--gold)}
+/* ---- shared pool table ---- */
+.pool-table{width:100%; border-collapse:collapse; font-size:14px; margin-top:4px}
+.pool-table td{padding:8px 0; border-bottom:1px solid var(--cardline)}
+.pool-table td:first-child{color:var(--ink)}
+.pool-table td.amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap}
+.pool-table td.by{text-align:right; color:var(--muted); font-size:12.5px; white-space:nowrap; padding-left:10px}
+.pool-table tr.total-row td{border-bottom:none; border-top:1px solid var(--ink); padding-top:12px; font-weight:600; color:var(--ink)}
+.pool-table tr.total-row td.amt{font-family:'Libre Caslon Display',serif; font-size:17px}
+.pool-split{font-size:13px; color:var(--muted); margin-top:12px}
+
+/* ---- notes ---- */
+.notes-list{margin:4px 0 0; padding-left:20px; font-size:14.5px; line-height:1.65; color:var(--slate)}
+.notes-list li{margin-bottom:10px}
+.notes-list li:last-child{margin-bottom:0}
+.notes-list b{color:var(--ink); font-weight:600}
 
 .sign{margin-top:56px; font-size:13px; color:var(--muted); text-align:center; letter-spacing:0.04em}
-.back{display:block; text-align:center; margin-top:28px; font-size:12.5px; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--cardline); padding-bottom:1px; width:fit-content; margin-inline:auto}
+.back{display:block; text-align:center; margin-top:44px; font-size:12.5px; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--cardline); padding-bottom:1px; width:fit-content; margin-inline:auto}
 .back:hover{color:var(--ink); border-bottom-color:var(--gold)}
 </style>
 </head>
@@ -97,27 +128,32 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
   <div class="masthead">
     <div class="eyebrow">Pinehurst 2026</div>
     <h1>Settle Up</h1>
-    <div class="dek">Tyler fronted the rental car, most of the shared meals, and Colin's package on his own folio. Pick your name below for the final amount and a one-tap link to pay him back on Venmo.</div>
+    <div class="dek">Tyler fronted the rental car, most of the shared meals, and Colin's package on his own folio. Tap your name for the full breakdown and a one-tap link to pay him back on Venmo.</div>
     <div class="rule"></div>
   </div>
 
-  <div class="picker-label">Who are you?</div>
-  <div class="picker" id="picker">
-    <button data-person="colin">Colin</button>
-    <button data-person="granger">Granger</button>
-    <button data-person="kyle">Kyle</button>
+  <div class="picker-label section-head" style="margin-top:0">
+    <div class="eyebrow">Who are you?</div>
   </div>
+  <div class="people" id="people"></div>
 
-  <div class="result" id="result">
-    <div class="to">You owe</div>
-    <div class="amount" id="amount">$0.00</div>
-    <div class="for" id="forline"></div>
-    <a class="pay-btn" id="payBtn" target="_blank" rel="noopener">
-      <span class="vmark">V</span>
-      Pay Tyler on Venmo
-    </a>
-    <div class="fineprint" id="fineprint"></div>
+  <div class="section-head">
+    <div class="eyebrow">Shared Pool</div>
+    <p>Rental car plus every meal and drink the group split evenly, four ways.</p>
   </div>
+  <table class="pool-table" id="poolTable"></table>
+  <div class="pool-split" id="poolSplit"></div>
+
+  <div class="section-head">
+    <div class="eyebrow">Notes</div>
+  </div>
+  <ul class="notes-list">
+    <li><b>&ldquo;Golf No 1-5&rdquo; / &ldquo;Main Golf Shop&rdquo; charges</b> are not pro-shop merchandise &mdash; they're green-fee add-ons, just labeled differently across folios: $65 = No. 8 cart fee, $335 = No. 2 premium + caddie fee.</li>
+    <li><b>Golf No. 10</b> ($125) is a confirmed add-on for Tyler, Kyle, and Granger (not Colin, who arrived after that tee time).</li>
+    <li><b>No. 2 surcharge</b> is $250, bundled into the $335 &ldquo;Golf No 1-5&rdquo; charge above along with the caddie fee.</li>
+    <li><b>No. 8 and Cradle Crossing</b> rounds had no additional charges &mdash; covered by the package as expected.</li>
+    <li>Granger's $34.24 &ldquo;Golf No 8&rdquo; charge is a glove, his alone.</li>
+  </ul>
 
   <a class="back" href="index.html">&larr; Back to the trip site</a>
 
@@ -126,44 +162,125 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 </div>
 
 <script>
-var AMOUNTS = {
-  colin:   {amount: 3955.94, note: "Pinehurst 2026 — package, golf fees, and shared pool share"},
-  granger: {amount: 222.70,  note: "Pinehurst 2026 — deposit transfer, Golf No. 10, net of pool credit"},
-  kyle:    {amount: 332.90,  note: "Pinehurst 2026 — shared pool share and Wednesday room service"}
-};
 var VENMO_BASE = "https://account.venmo.com/u/tylerkenly";
 
-var buttons = document.querySelectorAll('#picker button');
-var result = document.getElementById('result');
-var amountEl = document.getElementById('amount');
-var forline = document.getElementById('forline');
-var payBtn = document.getElementById('payBtn');
-var fineprint = document.getElementById('fineprint');
+function fmt(n){
+  var neg = n < 0;
+  var s = '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  return neg ? '−' + s : s;
+}
 
-buttons.forEach(function(btn){
-  btn.addEventListener('click', function(){
-    buttons.forEach(function(b){ b.classList.remove('active'); });
-    btn.classList.add('active');
+var PEOPLE = [
+  {
+    key: 'colin', name: 'Colin', total: 3955.94,
+    note: "Pinehurst 2026 — package, golf fees, and shared pool share",
+    items: [
+      {label: 'Package charge', amount: 2330.00},
+      {label: 'Package tax', amount: 221.73},
+      {label: 'Package resort fee', amount: 233.00},
+      {label: 'Package sales tax', amount: 16.31},
+      {label: 'No. 8 cart fee', amount: 65.00},
+      {label: 'No. 2 premium + caddie', amount: 335.00},
+      {label: 'Pool share', amount: 754.90}
+    ]
+  },
+  {
+    key: 'granger', name: 'Granger', total: 222.70,
+    note: "Pinehurst 2026 — deposit transfer, Golf No. 10, net of pool credit",
+    items: [
+      {label: 'Pool credit (fronted $957.20 vs. $754.90 share)', amount: -202.30, credit: true},
+      {label: 'Deposit transferred to his folio', amount: 300.00},
+      {label: "Golf No. 10 mischarged to Tyler's folio", amount: 125.00}
+    ]
+  },
+  {
+    key: 'kyle', name: 'Kyle', total: 332.90,
+    note: "Pinehurst 2026 — shared pool share and Wednesday room service",
+    items: [
+      {label: 'Pool share', amount: 754.90},
+      {label: "Credit for fronting Ashten's", amount: -500.00, credit: true},
+      {label: 'Wednesday room service (arrival night)', amount: 78.00}
+    ]
+  }
+];
 
-    var key = btn.getAttribute('data-person');
-    var data = AMOUNTS[key];
-    var name = btn.textContent;
+var POOL = [
+  {label: 'Rental car', amount: 599.99, by: 'Tyler'},
+  {label: 'Pinehurst Brewery', amount: 191.00, by: 'Tyler'},
+  {label: 'Restaurant at No. 8 (two charges)', amount: 210.17, by: 'Tyler'},
+  {label: 'HWH No. 8', amount: 63.45, by: 'Tyler'},
+  {label: 'Halfway House #2', amount: 50.19, by: 'Tyler'},
+  {label: 'Beverage Cart', amount: 119.65, by: 'Tyler'},
+  {label: 'The Deuce', amount: 84.51, by: 'Tyler'},
+  {label: 'Coffee Shop (two charges)', amount: 23.45, by: 'Tyler'},
+  {label: 'Station 21', amount: 156.00, by: 'Tyler'},
+  {label: '1901 Lounge', amount: 64.00, by: 'Tyler'},
+  {label: '91st Hole', amount: 84.01, by: 'Granger'},
+  {label: 'Cradle Crossing', amount: 85.83, by: 'Granger'},
+  {label: 'HWH No. 8 (second charge)', amount: 66.73, by: 'Granger'},
+  {label: 'Wiregrass', amount: 720.63, by: 'Granger'},
+  {label: "Ashten's", amount: 500.00, by: 'Kyle'}
+];
+var POOL_TOTAL = POOL.reduce(function(s, r){ return s + r.amount; }, 0);
+var POOL_SHARE = POOL_TOTAL / 4;
 
-    amountEl.textContent = '$' + data.amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
-    forline.textContent = 'to Tyler Kenly — Pinehurst trip';
+// ---- render people accordion ----
+var peopleEl = document.getElementById('people');
+PEOPLE.forEach(function(p){
+  var card = document.createElement('div');
+  card.className = 'person-card';
+  card.setAttribute('data-person', p.key);
 
-    var params = new URLSearchParams({
-      txn: 'pay',
-      amount: data.amount.toFixed(2),
-      note: data.note
-    });
-    payBtn.href = VENMO_BASE + '?' + params.toString();
+  var rowsHtml = p.items.map(function(it){
+    return '<tr' + (it.credit ? ' class="credit"' : '') + '><td>' + it.label + '</td><td>' + fmt(it.amount) + '</td></tr>';
+  }).join('');
 
-    fineprint.textContent = 'Opens Venmo with the amount and a note pre-filled — double-check it matches before you send.';
+  var params = new URLSearchParams({ txn: 'pay', amount: p.total.toFixed(2), note: p.note });
+  var venmoHref = VENMO_BASE + '?' + params.toString();
 
-    result.classList.add('show');
+  card.innerHTML =
+    '<button class="person-head" aria-expanded="false">' +
+      '<span class="name">' + p.name + '</span>' +
+      '<span class="right"><span class="total">' + fmt(p.total) + '</span><span class="chevron"></span></span>' +
+    '</button>' +
+    '<div class="person-body">' +
+      '<div class="person-body-inner">' +
+        '<table class="breakdown-table">' + rowsHtml +
+          '<tr class="total-row"><td>Owed to Tyler</td><td>' + fmt(p.total) + '</td></tr>' +
+        '</table>' +
+        '<a class="pay-btn" href="' + venmoHref + '" target="_blank" rel="noopener">' +
+          '<span class="vmark">V</span> Pay Tyler on Venmo' +
+        '</a>' +
+        '<div class="fineprint">Opens Venmo with the amount and a note pre-filled &mdash; double-check it matches before you send.</div>' +
+      '</div>' +
+    '</div>';
+
+  var head = card.querySelector('.person-head');
+  var body = card.querySelector('.person-body');
+  head.addEventListener('click', function(){
+    var isOpen = card.classList.contains('open');
+    if (isOpen){
+      card.classList.remove('open');
+      body.style.maxHeight = null;
+      head.setAttribute('aria-expanded', 'false');
+    } else {
+      card.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+      head.setAttribute('aria-expanded', 'true');
+    }
   });
+
+  peopleEl.appendChild(card);
 });
+
+// ---- render shared pool ----
+var poolTable = document.getElementById('poolTable');
+var poolHtml = POOL.map(function(r){
+  return '<tr><td>' + r.label + '</td><td class="amt">' + fmt(r.amount) + '</td><td class="by">' + r.by + '</td></tr>';
+}).join('');
+poolHtml += '<tr class="total-row"><td>Total</td><td class="amt">' + fmt(POOL_TOTAL) + '</td><td class="by"></td></tr>';
+poolTable.innerHTML = poolHtml;
+document.getElementById('poolSplit').textContent = 'Split four ways: ' + fmt(POOL_SHARE) + ' each.';
 </script>
 
 </body>
