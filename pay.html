@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settle Up &mdash; Pinehurst 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Jost:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#0F2B1D; --paper:#F6F2E9; --card:#FFFDF7; --cardline:#DCD5C4;
+  --gold:#B99551; --gold2:#C9AE72; --slate:#5A6459; --muted:#8A8574;
+  --shadow: 0 1px 2px rgba(15,43,29,0.06);
+  --venmo:#3D95CE;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#EFE7D2; --paper:#0E2116; --card:#152A1E; --cardline:#2C4535;
+    --gold:#D9BB7C; --gold2:#C9AE72; --slate:#C7CBBF; --muted:#93A092;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#EFE7D2; --paper:#0E2116; --card:#152A1E; --cardline:#2C4535;
+  --gold:#D9BB7C; --gold2:#C9AE72; --slate:#C7CBBF; --muted:#93A092;
+  --shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--slate);
+  font-family:'Jost',sans-serif; -webkit-font-smoothing:antialiased;
+  padding-block:64px 80px;
+}
+h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wrap:balance}
+
+.wrap{max-width:640px; margin:0 auto; padding:0 24px}
+
+.eyebrow{
+  font-size:12px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--gold); font-weight:600;
+}
+
+/* ---- masthead ---- */
+.masthead{margin-bottom:44px}
+.masthead .eyebrow{margin-bottom:14px}
+.masthead h1{font-size:40px; line-height:1.12; margin:0 0 16px}
+.masthead .dek{font-size:16.5px; line-height:1.6; color:var(--slate); max-width:480px}
+.masthead .rule{height:1px; background:var(--cardline); margin-top:32px}
+
+/* ---- picker ---- */
+.picker-label{font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); margin:40px 0 14px}
+.picker{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.picker button{
+  font-family:'Jost',sans-serif; font-size:15px; font-weight:500; color:var(--ink);
+  background:var(--card); border:1px solid var(--cardline); border-radius:3px;
+  padding:16px 10px; cursor:pointer; box-shadow:var(--shadow); transition:border-color .15s;
+}
+.picker button:hover{border-color:var(--gold)}
+.picker button.active{border-color:var(--gold); background:var(--gold); color:var(--paper)}
+@media (max-width:420px){ .picker{grid-template-columns:1fr 1fr 1fr; gap:8px} .picker button{padding:14px 6px; font-size:13.5px} }
+
+/* ---- result card ---- */
+.result{
+  margin-top:28px; background:var(--card); border:1px solid var(--cardline); border-radius:4px;
+  padding:30px 28px; box-shadow:var(--shadow); display:none;
+}
+.result.show{display:block}
+.result .to{font-size:13px; color:var(--muted); margin-bottom:6px}
+.result .amount{font-family:'Libre Caslon Display',serif; font-size:48px; color:var(--ink); line-height:1; margin-bottom:4px}
+.result .for{font-size:13.5px; color:var(--muted); margin-bottom:24px}
+.result .pay-btn{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:100%; font-family:'Jost',sans-serif; font-weight:600; font-size:15px;
+  letter-spacing:0.02em; color:#fff; background:var(--venmo);
+  border:none; border-radius:4px; padding:16px 20px; text-decoration:none;
+}
+.result .pay-btn:hover{opacity:0.92}
+.result .pay-btn .vmark{
+  display:flex; align-items:center; justify-content:center; width:22px; height:22px;
+  border-radius:50%; background:rgba(255,255,255,0.22); font-family:'Libre Caslon Display',serif;
+  font-size:14px; line-height:1; flex-shrink:0;
+}
+.result .fineprint{font-size:12px; color:var(--muted); line-height:1.6; margin-top:16px; text-align:center}
+
+.breakdown-link{display:block; text-align:center; font-size:12.5px; color:var(--muted); margin-top:14px; text-decoration:none; border-bottom:1px solid transparent}
+.breakdown-link:hover{color:var(--ink); border-bottom-color:var(--gold)}
+
+.sign{margin-top:56px; font-size:13px; color:var(--muted); text-align:center; letter-spacing:0.04em}
+.back{display:block; text-align:center; margin-top:28px; font-size:12.5px; color:var(--muted); text-decoration:none; border-bottom:1px solid var(--cardline); padding-bottom:1px; width:fit-content; margin-inline:auto}
+.back:hover{color:var(--ink); border-bottom-color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">Pinehurst 2026</div>
+    <h1>Settle Up</h1>
+    <div class="dek">Tyler fronted the rental car, most of the shared meals, and Colin's package on his own folio. Pick your name below for the final amount and a one-tap link to pay him back on Venmo.</div>
+    <div class="rule"></div>
+  </div>
+
+  <div class="picker-label">Who are you?</div>
+  <div class="picker" id="picker">
+    <button data-person="colin">Colin</button>
+    <button data-person="granger">Granger</button>
+    <button data-person="kyle">Kyle</button>
+  </div>
+
+  <div class="result" id="result">
+    <div class="to">You owe</div>
+    <div class="amount" id="amount">$0.00</div>
+    <div class="for" id="forline"></div>
+    <a class="pay-btn" id="payBtn" target="_blank" rel="noopener">
+      <span class="vmark">V</span>
+      Pay Tyler on Venmo
+    </a>
+    <div class="fineprint" id="fineprint"></div>
+  </div>
+
+  <a class="back" href="index.html">&larr; Back to the trip site</a>
+
+  <div class="sign">Kenly Golf Club &middot; Oct 1&ndash;4, 2026</div>
+
+</div>
+
+<script>
+var AMOUNTS = {
+  colin:   {amount: 3955.94, note: "Pinehurst 2026 — package, golf fees, and shared pool share"},
+  granger: {amount: 222.70,  note: "Pinehurst 2026 — deposit transfer, Golf No. 10, net of pool credit"},
+  kyle:    {amount: 332.90,  note: "Pinehurst 2026 — shared pool share and Wednesday room service"}
+};
+var VENMO_BASE = "https://account.venmo.com/u/tylerkenly";
+
+var buttons = document.querySelectorAll('#picker button');
+var result = document.getElementById('result');
+var amountEl = document.getElementById('amount');
+var forline = document.getElementById('forline');
+var payBtn = document.getElementById('payBtn');
+var fineprint = document.getElementById('fineprint');
+
+buttons.forEach(function(btn){
+  btn.addEventListener('click', function(){
+    buttons.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+
+    var key = btn.getAttribute('data-person');
+    var data = AMOUNTS[key];
+    var name = btn.textContent;
+
+    amountEl.textContent = '$' + data.amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+    forline.textContent = 'to Tyler Kenly — Pinehurst trip';
+
+    var params = new URLSearchParams({
+      txn: 'pay',
+      amount: data.amount.toFixed(2),
+      note: data.note
+    });
+    payBtn.href = VENMO_BASE + '?' + params.toString();
+
+    fineprint.textContent = 'Opens Venmo with the amount and a note pre-filled — double-check it matches before you send.';
+
+    result.classList.add('show');
+  });
+});
+</script>
+
+</body>
+</html>
