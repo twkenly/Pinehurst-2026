@@ -123,10 +123,6 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 /* ---- credit state (Tyler owes them, instead of the reverse) ---- */
 .person-head .direction{font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); margin-right:2px}
 .breakdown-table tr.total-row.owed-back td{color:var(--ink)}
-.owed-back-note{
-  text-align:center; font-size:13.5px; color:var(--ink); background:var(--paper);
-  border:1px solid var(--cardline); border-radius:4px; padding:14px 16px; margin-top:20px; line-height:1.5;
-}
 
 /* ---- notes ---- */
 .notes-list{margin:4px 0 0; padding-left:20px; font-size:14.5px; line-height:1.65; color:var(--slate)}
@@ -174,6 +170,7 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
     <li><b>Pinehurst's system had Colin and Granger mixed up</b> on who played No. 10 &mdash; that's why both the $125 premium and a second $65 Cradle charge landed on Tyler's folio instead of Granger's. The $125 is attributed to Granger below; Pinehurst is refunding the erroneous $65 directly, so it's simply dropped from Colin's total.</li>
     <li><b>Granger's $300 deposit transfer</b> (moved from Tyler's original group deposit to Granger's folio) nets to zero &mdash; Granger had already Venmo'd Tyler that $300 back when the trip was first booked, so it's not an additional debt.</li>
     <li><b>Kyle Venmo'd Tyler $1,000</b> before the trip to get ahead of expenses &mdash; that credit is netted into his total below.</li>
+    <li><b>Kyle doesn't drink on the course</b> &mdash; he ordered soft drinks/Powerade instead of alcohol at the three on-course stops (Cradle Drinks, Halfway House No. 8, Halfway House No. 2; $469.86 combined). His share across those three is capped at a flat $10 total, with the rest split between Tyler, Colin, and Granger.</li>
   </ul>
 
   <a class="back" href="index.html">&larr; Back to the trip site</a>
@@ -199,26 +196,49 @@ function fmt(n){
 var ITEMS = [
   {day:'Thursday, Oct 1', label:'Rental car', amount:599.99, participants:ALL4, funders:[{by:'tyler',amt:599.99}]},
   {day:'Thursday, Oct 1', label:'Station 21 (Thursday Lunch, no Colin)', amount:156.00, participants:['tyler','kyle','granger'], funders:[{by:'tyler',amt:156.00}]},
+  {day:'Thursday, Oct 1', label:'Pre-Dinner Drinks & Snacks (Thursday)', amount:111.64, participants:ALL4, funders:[{by:'tyler',amt:111.64}]},
   {day:'Thursday, Oct 1', label:'Pinehurst Brewery (Thursday Dinner)', amount:250.50, participants:ALL4, funders:[{by:'tyler',amt:250.50}]},
   {day:'Friday, Oct 2', label:'Coffee Shop (two charges)', amount:23.45, participants:['tyler','colin'], funders:[{by:'tyler',amt:23.45}]},
-  {day:'Friday, Oct 2', label:'Cradle Drinks (Pre-round and at the 9th hole)', amount:169.84, participants:ALL4, funders:[{by:'granger',amt:169.84}]},
+  {day:'Friday, Oct 2', label:'Cradle Drinks (Pre-round and at the 9th hole)', amount:169.84, participants:ALL4, group:'oncourse', funders:[{by:'granger',amt:169.84}]},
   {day:'Friday, Oct 2', label:'Restaurant at No. 8 (two charges - lunch pre round + post round drinks/fries)', amount:210.17, participants:ALL4, funders:[{by:'tyler',amt:210.17}]},
-  {day:'Friday, Oct 2', label:'Halfway House No. 8', amount:130.18, participants:ALL4, funders:[{by:'tyler',amt:63.45},{by:'granger',amt:66.73}]},
+  {day:'Friday, Oct 2', label:'Halfway House No. 8', amount:130.18, participants:ALL4, group:'oncourse', funders:[{by:'tyler',amt:63.45},{by:'granger',amt:66.73}]},
   {day:'Friday, Oct 2', label:"Ashten's (Friday Dinner)", amount:500.00, participants:ALL4, funders:[{by:'kyle',amt:500.00}]},
   {day:'Friday, Oct 2', label:'1901 Lounge (Friday Post-Dinner Nightcap)', amount:64.00, participants:ALL4, funders:[{by:'tyler',amt:64.00}]},
   {day:'Saturday, Oct 3', label:'The Deuce (Pre- No. 2 lunch)', amount:84.51, participants:ALL4, funders:[{by:'tyler',amt:84.51}]},
-  {day:'Saturday, Oct 3', label:'Halfway House No. 2 (Pre-round and at the turn)', amount:169.84, participants:ALL4, funders:[{by:'tyler',amt:169.84}]},
+  {day:'Saturday, Oct 3', label:'Halfway House No. 2 (Pre-round and at the turn)', amount:169.84, participants:ALL4, group:'oncourse', funders:[{by:'tyler',amt:169.84}]},
   {day:'Saturday, Oct 3', label:'Wiregrass (Saturday Dinner)', amount:720.63, participants:ALL4, funders:[{by:'granger',amt:720.63}]}
 ];
 var POOL_TOTAL = ITEMS.reduce(function(s, it){ return s + it.amount; }, 0);
 
+// Groups let a cluster of items share unevenly (e.g. one person gets a flat amount
+// instead of an equal fraction, with the rest split among everyone else), rather
+// than each item splitting evenly among its own participants.
+var GROUP_OVERRIDES = {
+  oncourse: {flatShares: {kyle: 10.00}, remainderSplit: ['tyler', 'colin', 'granger']}
+};
+
 // ---- derive each person's pool share owed and pool amount fronted ----
 var poolShare = {tyler:0, colin:0, kyle:0, granger:0};
 var poolFronted = {tyler:0, colin:0, kyle:0, granger:0};
+var groupTotals = {};
 ITEMS.forEach(function(it){
-  var per = it.amount / it.participants.length;
-  it.participants.forEach(function(p){ poolShare[p] += per; });
+  if (it.group){
+    groupTotals[it.group] = (groupTotals[it.group] || 0) + it.amount;
+  } else {
+    var per = it.amount / it.participants.length;
+    it.participants.forEach(function(p){ poolShare[p] += per; });
+  }
   it.funders.forEach(function(f){ poolFronted[f.by] += f.amt; });
+});
+Object.keys(groupTotals).forEach(function(g){
+  var override = GROUP_OVERRIDES[g];
+  var flatSum = 0;
+  Object.keys(override.flatShares).forEach(function(p){
+    poolShare[p] += override.flatShares[p];
+    flatSum += override.flatShares[p];
+  });
+  var remainderPer = (groupTotals[g] - flatSum) / override.remainderSplit.length;
+  override.remainderSplit.forEach(function(p){ poolShare[p] += remainderPer; });
 });
 var poolNet = {}; // positive = credited back, negative = owes into the pool
 ALL4.forEach(function(p){ poolNet[p] = poolFronted[p] - poolShare[p]; });
@@ -289,16 +309,17 @@ PEOPLE.forEach(function(p){
 
   var owesBack = p.total < 0; // negative total: Tyler owes them, not the other way around
   var payAmount = Math.abs(p.total);
-  var params = new URLSearchParams({ txn: 'pay', amount: payAmount.toFixed(2), note: p.note });
+  var params = new URLSearchParams({ txn: owesBack ? 'charge' : 'pay', amount: payAmount.toFixed(2), note: p.note });
   var venmoHref = VENMO_BASE + '?' + params.toString();
 
   var totalRowLabel = owesBack ? ('Tyler owes ' + p.name) : 'Owed to Tyler';
-  var actionHtml = owesBack
-    ? '<div class="owed-back-note">Tyler owes you ' + fmt(payAmount) + ' — no action needed on your end, he’ll send it directly.</div>'
-    : '<a class="pay-btn" href="' + venmoHref + '" target="_blank" rel="noopener">' +
-        '<span class="vmark">V</span> Pay Tyler on Venmo' +
-      '</a>' +
-      '<div class="fineprint">Opens Venmo with the amount and a note pre-filled &mdash; double-check it matches before you send.</div>';
+  var actionHtml =
+    '<a class="pay-btn" href="' + venmoHref + '" target="_blank" rel="noopener">' +
+      '<span class="vmark">V</span> ' + (owesBack ? 'Request from Tyler on Venmo' : 'Pay Tyler on Venmo') +
+    '</a>' +
+    '<div class="fineprint">' + (owesBack
+      ? 'Opens Venmo as a request to Tyler for this amount &mdash; double-check it matches before you send it.'
+      : 'Opens Venmo with the amount and a note pre-filled &mdash; double-check it matches before you send.') + '</div>';
 
   card.innerHTML =
     '<button class="person-head" aria-expanded="false">' +
@@ -349,7 +370,7 @@ ITEMS.forEach(function(it){
 });
 poolHtml += '<tr class="total-row"><td>Total</td><td class="amt">' + fmt(POOL_TOTAL) + '</td><td class="by"></td></tr>';
 poolTable.innerHTML = poolHtml;
-document.getElementById('poolSplit').textContent = 'Most items split four ways between Tyler, Colin, Kyle, and Granger — Station 21 and the Coffee Shop charges split narrower (see each line above).';
+document.getElementById('poolSplit').textContent = 'Most items split four ways between Tyler, Colin, Kyle, and Granger — Station 21 and the Coffee Shop charges split narrower, and Kyle’s share of the three on-course drink stops is capped lower (see Notes below).';
 </script>
 
 </body>
