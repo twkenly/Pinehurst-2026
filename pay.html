@@ -75,15 +75,38 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 .person-body{max-height:0; overflow:hidden; transition:max-height .25s ease}
 .person-body-inner{padding:0 20px 22px; border-top:1px solid var(--cardline); margin-top:0}
 
-.breakdown-table{width:100%; border-collapse:collapse; margin-top:16px; font-size:14px}
+.breakdown-table{width:100%; border-collapse:collapse; margin-top:4px; font-size:14px}
 .breakdown-table td{padding:7px 0; color:var(--slate)}
 .breakdown-table td:last-child{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink)}
 .breakdown-table tr.credit td:last-child{color:var(--muted)}
+.breakdown-table tr.group-head td{
+  padding:16px 0 2px; font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--gold); font-weight:600; border-bottom:1px solid var(--cardline);
+}
+.breakdown-table tr.group-head:first-child td{padding-top:4px}
+.breakdown-table tr.empty td{color:var(--muted); font-style:italic}
+.breakdown-table tr.subtotal-row td{
+  border-top:1px solid var(--cardline); font-weight:600; color:var(--ink); padding-top:8px;
+}
 .breakdown-table tr.total-row td{
-  border-top:1px solid var(--cardline); padding-top:12px; margin-top:4px;
+  border-top:1px solid var(--ink); padding-top:12px; margin-top:4px;
   font-weight:600; color:var(--ink);
 }
 .breakdown-table tr.total-row td:last-child{font-family:'Libre Caslon Display',serif; font-size:17px}
+
+/* ---- at-a-glance summary table ---- */
+.glance-scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:4px}
+.glance-table{width:100%; border-collapse:collapse; font-size:12.5px}
+.glance-table th{
+  text-align:right; font-size:9.5px; letter-spacing:0.05em; text-transform:uppercase;
+  color:var(--muted); font-weight:600; padding:0 0 8px 8px; border-bottom:1px solid var(--ink); white-space:nowrap;
+}
+.glance-table th:first-child, .glance-table td:first-child{text-align:left; padding-left:0}
+.glance-table td{padding:10px 0 10px 8px; border-bottom:1px solid var(--cardline); text-align:right; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap}
+.glance-table td:first-child{color:var(--ink); font-weight:500}
+.glance-table td.net{font-weight:600}
+.glance-table td.net.back{color:var(--gold)}
+.glance-caption{font-size:13px; color:var(--muted); margin-top:12px; line-height:1.5}
 
 .pay-btn{
   display:flex; align-items:center; justify-content:center; gap:10px;
@@ -146,7 +169,14 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
     <div class="rule"></div>
   </div>
 
-  <div class="picker-label section-head" style="margin-top:0">
+  <div class="section-head" style="margin-top:0">
+    <div class="eyebrow">At a Glance</div>
+    <p>What each person owes (their fair share), what they've already paid toward it, and the credits Tyler's applying for his own mix-ups &mdash; netted out to who actually owes whom.</p>
+  </div>
+  <div class="glance-scroll"><table class="glance-table" id="glanceTable"></table></div>
+  <div class="glance-caption" id="glanceCaption"></div>
+
+  <div class="picker-label section-head">
     <div class="eyebrow">Who are you?</div>
   </div>
   <div class="people" id="people"></div>
@@ -239,60 +269,84 @@ Object.keys(groupTotals).forEach(function(g){
 var poolNet = {}; // positive = credited back, negative = owes into the pool
 ALL4.forEach(function(p){ poolNet[p] = poolFronted[p] - poolShare[p]; });
 
-// ---- each person's non-pool, independently documented side debts to Tyler ----
-var SIDE_DEBTS = {
-  colin: [
-    {label: 'Package charge', amount: 2330.00},
-    {label: 'Package tax', amount: 221.73},
-    {label: 'Package resort fee', amount: 233.00},
-    {label: 'Package sales tax', amount: 16.31},
-    {label: 'No. 2 premium ($85 caddie fee credited back — Tyler’s mix-up)', amount: 250.00},
-    {label: 'Original deposit share (never reimbursed)', amount: 300.00}
-  ],
-  granger: [
-    {label: "Golf No. 10 mischarged to Tyler's folio", amount: 125.00},
-    {label: 'Caddie fee make-good (Tyler’s mix-up on the $335 charge)', amount: -85.00, credit: true}
-  ],
-  kyle: [
-    {label: 'Wednesday room service (arrival night)', amount: 78.00},
-    {label: 'Caddie fee make-good (Tyler’s mix-up on the $335 charge)', amount: -85.00, credit: true},
-    {label: 'Pre-trip Venmo toward expenses', amount: -1000.00, credit: true},
-    {label: 'Original deposit share (never reimbursed)', amount: 300.00}
-  ]
+// ---- each person's non-pool charges, split into three honest categories:
+// OWED = their fair share of real costs; PAID = real cash they already put in;
+// CREDITS = goodwill adjustments Tyler is applying for his own mix-ups.
+// Net = Owed - Paid - Credits (positive = owes Tyler, negative = Tyler owes them).
+var LEDGER = {
+  colin: {
+    owed: [
+      {label: 'Package charge', amount: 2330.00},
+      {label: 'Package tax', amount: 221.73},
+      {label: 'Package resort fee', amount: 233.00},
+      {label: 'Package sales tax', amount: 16.31},
+      {label: 'No. 2 premium + caddie fee (full charge)', amount: 335.00},
+      {label: 'Original deposit share', amount: 300.00}
+    ],
+    paid: [],
+    credits: [
+      {label: "Caddie fee make-good (Tyler's mix-up)", amount: 85.00}
+    ]
+  },
+  granger: {
+    owed: [
+      {label: "Golf No. 10 premium (mischarged to Tyler's folio)", amount: 125.00},
+      {label: 'Original deposit share', amount: 300.00}
+    ],
+    paid: [
+      {label: 'Deposit reimbursed before the trip', amount: 300.00}
+    ],
+    credits: [
+      {label: "Caddie fee make-good (Tyler's mix-up)", amount: 85.00}
+    ]
+  },
+  kyle: {
+    owed: [
+      {label: 'Wednesday room service (arrival night)', amount: 78.00},
+      {label: 'Original deposit share', amount: 300.00}
+    ],
+    paid: [
+      {label: 'Pre-trip Venmo toward expenses', amount: 1000.00}
+    ],
+    credits: [
+      {label: "Caddie fee make-good (Tyler's mix-up)", amount: 85.00}
+    ]
+  }
 };
 
 var PEOPLE = ['colin', 'granger', 'kyle'].map(function(key){
-  var sideTotal = SIDE_DEBTS[key].reduce(function(s, d){ return s + d.amount; }, 0);
-  var rawTotal = sideTotal - poolNet[key];
-  var total = round2(rawTotal);
-  var poolLineAmount = round2(total - sideTotal); // forces the breakdown to add up exactly to `total`
+  var L = LEDGER[key];
+  var shareDisplay = round2(poolShare[key]);
+  var frontedDisplay = round2(poolFronted[key]);
 
-  // Kyle fronted Ashten's, so his pool line is a gross share plus a separate credit
-  // for what he fronted, rather than one pre-netted "pool credit" line like Granger's.
-  var items;
-  if (key === 'granger'){
-    var shareDisplay = round2(poolFronted[key] - poolNet[key]);
-    items = [{
-      label: 'Pool credit (fronted ' + fmt(poolFronted[key]) + ' vs. ' + fmt(shareDisplay) + ' share)',
-      amount: poolLineAmount, credit: true
-    }].concat(SIDE_DEBTS[key]);
-  } else if (key === 'kyle'){
-    var ashtensCredit = -500.00;
-    var grossShare = round2(poolLineAmount - ashtensCredit);
-    items = [
-      {label: 'Pool share', amount: grossShare},
-      {label: "Credit for fronting Ashten's", amount: ashtensCredit, credit: true}
-    ].concat(SIDE_DEBTS[key]);
-  } else {
-    items = SIDE_DEBTS[key].concat([{label: 'Pool share', amount: poolLineAmount}]);
-  }
+  var owedItems = L.owed.concat([{label: 'Share of the shared pool', amount: shareDisplay}]);
+  var paidItems = L.paid.concat(frontedDisplay > 0 ? [{label: 'Fronted for the shared pool', amount: frontedDisplay}] : []);
+  var creditItems = L.credits;
+
+  var owedTotal = owedItems.reduce(function(s, d){ return s + d.amount; }, 0);
+  var paidTotal = paidItems.reduce(function(s, d){ return s + d.amount; }, 0);
+  var creditsTotal = creditItems.reduce(function(s, d){ return s + d.amount; }, 0);
+  var total = round2(owedTotal - paidTotal - creditsTotal);
 
   return {
     key: key, name: NAMES[key], total: total,
-    note: 'Pinehurst 2026 — ' + (key === 'colin' ? 'package, golf fees, and shared pool share' : key === 'granger' ? 'Golf No. 10, net of pool credit' : 'shared pool share, Wednesday room service, net of pre-trip Venmo'),
-    items: items
+    owedItems: owedItems, paidItems: paidItems, creditItems: creditItems,
+    owedTotal: owedTotal, paidTotal: paidTotal, creditsTotal: creditsTotal,
+    note: 'Pinehurst 2026 — ' + (key === 'colin' ? 'package, golf fees, and shared pool share' : key === 'granger' ? 'Golf No. 10, net of pool credit' : 'shared pool share, Wednesday room service, net of pre-trip Venmo')
   };
 });
+
+// ---- render the At a Glance summary table ----
+var glanceTable = document.getElementById('glanceTable');
+var glanceHtml = '<tr><th>Person</th><th>Owed</th><th>Paid</th><th>Credits</th><th>Net</th></tr>';
+PEOPLE.forEach(function(p){
+  var back = p.total < 0;
+  glanceHtml += '<tr><td>' + p.name + '</td><td>' + fmt(p.owedTotal) + '</td><td>' + fmt(p.paidTotal) + '</td><td>' + fmt(p.creditsTotal) + '</td>' +
+    '<td class="net' + (back ? ' back' : '') + '">' + fmt(p.total) + '</td></tr>';
+});
+glanceTable.innerHTML = glanceHtml;
+var tylerNet = PEOPLE.reduce(function(s, p){ return s + p.total; }, 0);
+document.getElementById('glanceCaption').textContent = 'Net column: positive = owes Tyler, negative (gold) = Tyler owes them. Across all three, Tyler nets out ' + fmt(round2(tylerNet)) + ' owed to him overall.';
 
 // ---- render people accordion ----
 var peopleEl = document.getElementById('people');
@@ -301,9 +355,12 @@ PEOPLE.forEach(function(p){
   card.className = 'person-card';
   card.setAttribute('data-person', p.key);
 
-  var rowsHtml = p.items.map(function(it){
-    return '<tr' + (it.credit ? ' class="credit"' : '') + '><td>' + it.label + '</td><td>' + fmt(it.amount) + '</td></tr>';
-  }).join('');
+  function rowsFor(items, creditClass){
+    if (items.length === 0) return '<tr class="empty"><td>&mdash; none &mdash;</td><td></td></tr>';
+    return items.map(function(it){
+      return '<tr' + (creditClass ? ' class="credit"' : '') + '><td>' + it.label + '</td><td>' + fmt(it.amount) + '</td></tr>';
+    }).join('');
+  }
 
   var owesBack = p.total < 0; // negative total: Tyler owes them, not the other way around
   var payAmount = Math.abs(p.total);
@@ -311,6 +368,18 @@ PEOPLE.forEach(function(p){
   var venmoHref = VENMO_BASE + '?' + params.toString();
 
   var totalRowLabel = owesBack ? ('Tyler owes ' + p.name) : 'Owed to Tyler';
+  var breakdownHtml =
+    '<tr class="group-head"><td colspan="2">What ' + p.name + ' Owes</td></tr>' +
+    rowsFor(p.owedItems, false) +
+    '<tr class="subtotal-row"><td>Subtotal</td><td>' + fmt(p.owedTotal) + '</td></tr>' +
+    '<tr class="group-head"><td colspan="2">What ' + p.name + "'s Already Paid</td></tr>" +
+    rowsFor(p.paidItems, false) +
+    '<tr class="subtotal-row"><td>Subtotal</td><td>' + fmt(p.paidTotal) + '</td></tr>' +
+    '<tr class="group-head"><td colspan="2">Credits From Tyler</td></tr>' +
+    rowsFor(p.creditItems, true) +
+    '<tr class="subtotal-row"><td>Subtotal</td><td>' + fmt(p.creditsTotal) + '</td></tr>' +
+    '<tr class="total-row' + (owesBack ? ' owed-back' : '') + '"><td>' + totalRowLabel + '</td><td>' + fmt(payAmount) + '</td></tr>';
+
   var actionHtml =
     '<a class="pay-btn" href="' + venmoHref + '" target="_blank" rel="noopener">' +
       '<span class="vmark">V</span> ' + (owesBack ? 'Request from Tyler on Venmo' : 'Pay Tyler on Venmo') +
@@ -326,9 +395,7 @@ PEOPLE.forEach(function(p){
     '</button>' +
     '<div class="person-body">' +
       '<div class="person-body-inner">' +
-        '<table class="breakdown-table">' + rowsHtml +
-          '<tr class="total-row' + (owesBack ? ' owed-back' : '') + '"><td>' + totalRowLabel + '</td><td>' + fmt(payAmount) + '</td></tr>' +
-        '</table>' +
+        '<table class="breakdown-table">' + breakdownHtml + '</table>' +
         actionHtml +
       '</div>' +
     '</div>';
