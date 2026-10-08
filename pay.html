@@ -108,6 +108,21 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
 .glance-table td.net.back{color:var(--gold)}
 .glance-caption{font-size:13px; color:var(--muted); margin-top:12px; line-height:1.5}
 
+/* ---- item-by-item matrix table ---- */
+.matrix-table{width:100%; border-collapse:collapse; font-size:12px}
+.matrix-table th{
+  text-align:right; font-size:9.5px; letter-spacing:0.05em; text-transform:uppercase;
+  color:var(--muted); font-weight:600; padding:0 0 8px 8px; border-bottom:1px solid var(--ink); white-space:nowrap;
+}
+.matrix-table th:first-child, .matrix-table td:first-child{text-align:left; padding-left:0}
+.matrix-table td{padding:8px 0 8px 8px; border-bottom:1px solid var(--cardline); text-align:right; font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap}
+.matrix-table td:first-child{color:var(--slate)}
+.matrix-table tr.subtotal-row td, .matrix-table tr.total-row td{font-weight:600; color:var(--ink); border-top:1px solid var(--ink); border-bottom:none}
+.matrix-table tr.group-head td{
+  padding:14px 0 6px; font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--gold); font-weight:600; border-bottom:1px solid var(--cardline);
+}
+
 .pay-btn{
   display:flex; align-items:center; justify-content:center; gap:10px;
   width:100%; font-family:'Jost',sans-serif; font-weight:600; font-size:15px;
@@ -189,6 +204,12 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
   <div class="pool-split" id="poolSplit"></div>
 
   <div class="section-head">
+    <div class="eyebrow">Item-by-Item Shares</div>
+    <p>The same shared pool above, broken out per person &mdash; each item's fair share on top, who actually fronted it on the bottom.</p>
+  </div>
+  <div class="glance-scroll"><table class="matrix-table" id="matrixTable"></table></div>
+
+  <div class="section-head">
     <div class="eyebrow">Notes</div>
   </div>
   <ul class="notes-list">
@@ -220,19 +241,19 @@ function fmt(n){
 
 // ---- the shared pool, in chronological order ----
 var ITEMS = [
-  {day:'Thursday, Oct 1', label:'Rental car', amount:599.99, participants:ALL4, funders:[{by:'tyler',amt:599.99}]},
-  {day:'Thursday, Oct 1', label:'Station 21 (Thursday Lunch, no Colin)', amount:156.00, participants:['tyler','kyle','granger'], funders:[{by:'tyler',amt:156.00}]},
-  {day:'Thursday, Oct 1', label:'Pre-Dinner Drinks & Snacks (Thursday)', amount:111.64, participants:ALL4, funders:[{by:'tyler',amt:111.64}]},
-  {day:'Thursday, Oct 1', label:'Pinehurst Brewery (Thursday Dinner)', amount:250.50, participants:ALL4, funders:[{by:'tyler',amt:250.50}]},
-  {day:'Friday, Oct 2', label:'Coffee Shop (two charges)', amount:23.45, participants:['tyler','colin'], funders:[{by:'tyler',amt:23.45}]},
-  {day:'Friday, Oct 2', label:'Cradle Drinks (Pre-round and at the 9th hole)', amount:169.84, participants:ALL4, group:'oncourse', funders:[{by:'granger',amt:169.84}]},
-  {day:'Friday, Oct 2', label:'Restaurant at No. 8 (two charges - lunch pre round + post round drinks/fries)', amount:210.17, participants:ALL4, funders:[{by:'tyler',amt:210.17}]},
-  {day:'Friday, Oct 2', label:'Halfway House No. 8', amount:130.18, participants:ALL4, group:'oncourse', funders:[{by:'tyler',amt:63.45},{by:'granger',amt:66.73}]},
-  {day:'Friday, Oct 2', label:"Ashten's (Friday Dinner)", amount:500.00, participants:ALL4, funders:[{by:'kyle',amt:500.00}]},
-  {day:'Friday, Oct 2', label:'1901 Lounge (Friday Post-Dinner Nightcap)', amount:64.00, participants:ALL4, funders:[{by:'tyler',amt:64.00}]},
-  {day:'Saturday, Oct 3', label:'The Deuce (Pre- No. 2 lunch)', amount:84.51, participants:ALL4, funders:[{by:'tyler',amt:84.51}]},
-  {day:'Saturday, Oct 3', label:'Halfway House No. 2 (Pre-round and at the turn)', amount:169.84, participants:ALL4, group:'oncourse', funders:[{by:'tyler',amt:169.84}]},
-  {day:'Saturday, Oct 3', label:'Wiregrass (Saturday Dinner)', amount:720.63, participants:ALL4, funders:[{by:'granger',amt:720.63}]}
+  {day:'Thursday, Oct 1', label:'Rental car', short:'Rental car', amount:599.99, participants:ALL4, funders:[{by:'tyler',amt:599.99}]},
+  {day:'Thursday, Oct 1', label:'Station 21 (Thursday Lunch, no Colin)', short:'Station 21', amount:156.00, participants:['tyler','kyle','granger'], funders:[{by:'tyler',amt:156.00}]},
+  {day:'Thursday, Oct 1', label:'Pre-Dinner Drinks & Snacks (Thursday)', short:'Pre-Dinner Drinks', amount:111.64, participants:ALL4, funders:[{by:'tyler',amt:111.64}]},
+  {day:'Thursday, Oct 1', label:'Pinehurst Brewery (Thursday Dinner)', short:'Pinehurst Brewery', amount:250.50, participants:ALL4, funders:[{by:'tyler',amt:250.50}]},
+  {day:'Friday, Oct 2', label:'Coffee Shop (two charges)', short:'Coffee Shop', amount:23.45, participants:['tyler','colin'], funders:[{by:'tyler',amt:23.45}]},
+  {day:'Friday, Oct 2', label:'Cradle Drinks (Pre-round and at the 9th hole)', short:'Cradle Drinks', amount:169.84, participants:ALL4, group:'oncourse', kyleItemShare:20.00, funders:[{by:'granger',amt:169.84}]},
+  {day:'Friday, Oct 2', label:'Restaurant at No. 8 (two charges - lunch pre round + post round drinks/fries)', short:'Restaurant No. 8', amount:210.17, participants:ALL4, funders:[{by:'tyler',amt:210.17}]},
+  {day:'Friday, Oct 2', label:'Halfway House No. 8', short:'Halfway No. 8', amount:130.18, participants:ALL4, group:'oncourse', kyleItemShare:10.00, funders:[{by:'tyler',amt:63.45},{by:'granger',amt:66.73}]},
+  {day:'Friday, Oct 2', label:"Ashten's (Friday Dinner)", short:"Ashten's", amount:500.00, participants:ALL4, funders:[{by:'kyle',amt:500.00}]},
+  {day:'Friday, Oct 2', label:'1901 Lounge (Friday Post-Dinner Nightcap)', short:'1901 Lounge', amount:64.00, participants:ALL4, funders:[{by:'tyler',amt:64.00}]},
+  {day:'Saturday, Oct 3', label:'The Deuce (Pre- No. 2 lunch)', short:'The Deuce', amount:84.51, participants:ALL4, funders:[{by:'tyler',amt:84.51}]},
+  {day:'Saturday, Oct 3', label:'Halfway House No. 2 (Pre-round and at the turn)', short:'Halfway No. 2', amount:169.84, participants:ALL4, group:'oncourse', kyleItemShare:20.00, funders:[{by:'tyler',amt:169.84}]},
+  {day:'Saturday, Oct 3', label:'Wiregrass (Saturday Dinner)', short:'Wiregrass', amount:720.63, participants:ALL4, funders:[{by:'granger',amt:720.63}]}
 ];
 var POOL_TOTAL = ITEMS.reduce(function(s, it){ return s + it.amount; }, 0);
 
@@ -436,6 +457,43 @@ ITEMS.forEach(function(it){
 poolHtml += '<tr class="total-row"><td>Total</td><td class="amt">' + fmt(POOL_TOTAL) + '</td><td class="by"></td></tr>';
 poolTable.innerHTML = poolHtml;
 document.getElementById('poolSplit').textContent = 'Most items split four ways between Tyler, Colin, Kyle, and Granger — Station 21 and the Coffee Shop charges split narrower, and Kyle’s share of the three on-course drink stops is capped lower (see Notes below).';
+
+// ---- render the item-by-item per-person matrix (shares on top, paid on bottom) ----
+function itemShares(it){
+  var s = {tyler:0, colin:0, kyle:0, granger:0};
+  if (it.group === 'oncourse'){
+    var remainder = (it.amount - it.kyleItemShare) / 3;
+    s.kyle = it.kyleItemShare;
+    s.tyler = remainder; s.colin = remainder; s.granger = remainder;
+  } else {
+    var per = it.amount / it.participants.length;
+    it.participants.forEach(function(p){ s[p] = per; });
+  }
+  return s;
+}
+function matrixRow(label, byPerson, bold){
+  return '<tr' + (bold ? ' class="total-row"' : '') + '><td>' + label + '</td>' +
+    ALL4.map(function(p){ return '<td>' + (byPerson[p] ? fmt(byPerson[p]) : '') + '</td>'; }).join('') + '</tr>';
+}
+var matrixTable = document.getElementById('matrixTable');
+var matrixHtml = '<tr><th>Item</th>' + ALL4.map(function(p){ return '<th>' + NAMES[p] + '</th>'; }).join('') + '</tr>';
+var shareTotals = {tyler:0, colin:0, kyle:0, granger:0};
+ITEMS.forEach(function(it){
+  var s = itemShares(it);
+  ALL4.forEach(function(p){ shareTotals[p] += s[p]; });
+  matrixHtml += matrixRow(it.short, s, false);
+});
+matrixHtml += matrixRow('Total Owed', shareTotals, true);
+matrixHtml += '<tr class="group-head"><td colspan="5">Paid</td></tr>';
+var paidTotals = {tyler:0, colin:0, kyle:0, granger:0};
+ITEMS.forEach(function(it){
+  var row = {tyler:0, colin:0, kyle:0, granger:0};
+  it.funders.forEach(function(f){ row[f.by] += f.amt; });
+  ALL4.forEach(function(p){ paidTotals[p] += row[p]; });
+  matrixHtml += matrixRow(it.short, row, false);
+});
+matrixHtml += matrixRow('Total Paid', paidTotals, true);
+matrixTable.innerHTML = matrixHtml;
 </script>
 
 </body>
