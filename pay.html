@@ -164,7 +164,7 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
   <ul class="notes-list">
     <li><b>Golf No. 10 + The Cradle</b> &mdash; since Tyler, Kyle, and Granger added No. 10 to the 3-round package, there was an additional $65 charge for them to play the Cradle, listed as &ldquo;Golf No 1-5&rdquo; on each of their folios. Colin doesn't have one, since his Cradle round counted toward his 3-round package. There was also an additional $125 premium for No. 10, just for those three.</li>
     <li><b>No. 2 round</b> carries a $250 premium plus an $85 caddie fee, bundled into one $335 charge. The caddie fee was already covered there &mdash; Tyler didn't realize that and had everyone give the caddies $150 cash on top, more than double the $65 suggested gratuity. Since that mix-up was his, he's crediting the extra $85 back to everyone below as a make-good.</li>
-    <li><b>Granger's $300 deposit transfer</b> (moved from Tyler's original group deposit to Granger's folio) nets to zero &mdash; Granger had already Venmo'd Tyler that $300 back when the trip was first booked, so it's not an additional debt.</li>
+    <li><b>The original $1,800 group deposit</b> was $300 per person across all six original travelers (Tyler, Colin, Kyle, Granger, Kevin, James). Granger's $300 share got moved to his own folio, but he'd already Venmo'd Tyler back for it when the trip was first booked, so his nets to zero. Colin and Kyle never reimbursed their $300 shares, so that's added to each of their totals below.</li>
     <li><b>Kyle Venmo'd Tyler $1,000</b> before the trip to get ahead of expenses &mdash; that credit is netted into his total below.</li>
     <li><b>Kyle's share is lower</b> than the others for the on-course drinking charges because he wasn't boozing.</li>
   </ul>
@@ -246,7 +246,8 @@ var SIDE_DEBTS = {
     {label: 'Package tax', amount: 221.73},
     {label: 'Package resort fee', amount: 233.00},
     {label: 'Package sales tax', amount: 16.31},
-    {label: 'No. 2 premium ($85 caddie fee credited back — Tyler’s mix-up)', amount: 250.00}
+    {label: 'No. 2 premium ($85 caddie fee credited back — Tyler’s mix-up)', amount: 250.00},
+    {label: 'Original deposit share (never reimbursed)', amount: 300.00}
   ],
   granger: [
     {label: "Golf No. 10 mischarged to Tyler's folio", amount: 125.00},
@@ -255,7 +256,8 @@ var SIDE_DEBTS = {
   kyle: [
     {label: 'Wednesday room service (arrival night)', amount: 78.00},
     {label: 'Caddie fee make-good (Tyler’s mix-up on the $335 charge)', amount: -85.00, credit: true},
-    {label: 'Pre-trip Venmo toward expenses', amount: -1000.00, credit: true}
+    {label: 'Pre-trip Venmo toward expenses', amount: -1000.00, credit: true},
+    {label: 'Original deposit share (never reimbursed)', amount: 300.00}
   ]
 };
 
