@@ -162,15 +162,11 @@ h1,h2,.serif{font-family:'Libre Caslon Display',serif; color:var(--ink); text-wr
     <div class="eyebrow">Notes</div>
   </div>
   <ul class="notes-list">
-    <li><b>&ldquo;Golf No 1-5&rdquo; / &ldquo;Main Golf Shop&rdquo; charges</b> are not pro-shop merchandise &mdash; they're green-fee add-ons, just labeled differently across folios: $335 = No. 2 premium + caddie fee (see below); $65 = the Cradle add-on (see below).</li>
-    <li><b>Golf No. 10</b> ($125) is a confirmed add-on for Tyler, Kyle, and Granger (not Colin, who arrived after that tee time).</li>
-    <li><b>No. 2 surcharge</b> is $250, bundled into the $335 &ldquo;Golf No 1-5&rdquo; charge above along with the caddie fee.</li>
-    <li><b>The Cradle and No. 8</b> are normally both included free in everyone's 3-round package. But since Tyler, Kyle, and Granger added No. 10, Pinehurst's system counted No. 10 as one of their three included rounds instead of the Cradle &mdash; so the Cradle became a $65 add-on for those three (confirmed by calling Pinehurst directly), well under the price of a full extra round. Colin, who didn't play No. 10, kept his Cradle round included at no charge.</li>
-    <li><b>Caddie fee ($85)</b> for the No. 2 round was already included in the $335 golf charge. That one's on Tyler &mdash; he didn't realize the fee was already covered, so he thought we still owed it in cash and had everyone give the caddies $150 instead of the $65 suggested gratuity. Since the mix-up was his, he's crediting the extra $85 back to everyone below as a make-good.</li>
-    <li><b>Pinehurst's system had Colin and Granger mixed up</b> on who played No. 10 &mdash; that's why both the $125 premium and a second $65 Cradle charge landed on Tyler's folio instead of Granger's. The $125 is attributed to Granger below; Pinehurst is refunding the erroneous $65 directly, so it's simply dropped from Colin's total.</li>
+    <li><b>Golf No. 10 + The Cradle</b> &mdash; since Tyler, Kyle, and Granger added No. 10 to the 3-round package, there was an additional $65 charge for them to play the Cradle, listed as &ldquo;Golf No 1-5&rdquo; on each of their folios. Colin doesn't have one, since his Cradle round counted toward his 3-round package. There was also an additional $125 premium for No. 10, just for those three.</li>
+    <li><b>No. 2 round</b> carries a $250 premium plus an $85 caddie fee, bundled into one $335 charge. The caddie fee was already covered there &mdash; Tyler didn't realize that and had everyone give the caddies $150 cash on top, more than double the $65 suggested gratuity. Since that mix-up was his, he's crediting the extra $85 back to everyone below as a make-good.</li>
     <li><b>Granger's $300 deposit transfer</b> (moved from Tyler's original group deposit to Granger's folio) nets to zero &mdash; Granger had already Venmo'd Tyler that $300 back when the trip was first booked, so it's not an additional debt.</li>
     <li><b>Kyle Venmo'd Tyler $1,000</b> before the trip to get ahead of expenses &mdash; that credit is netted into his total below.</li>
-    <li><b>Kyle doesn't drink on the course</b> &mdash; he ordered soft drinks/Powerade instead of alcohol at the three on-course stops (Cradle Drinks, Halfway House No. 8, Halfway House No. 2; $469.86 combined). His share across those three is capped at a flat $10 total, with the rest split between Tyler, Colin, and Granger.</li>
+    <li><b>Kyle's share is lower</b> than the others for the on-course drinking charges.</li>
   </ul>
 
   <a class="back" href="index.html">&larr; Back to the trip site</a>
@@ -214,7 +210,7 @@ var POOL_TOTAL = ITEMS.reduce(function(s, it){ return s + it.amount; }, 0);
 // instead of an equal fraction, with the rest split among everyone else), rather
 // than each item splitting evenly among its own participants.
 var GROUP_OVERRIDES = {
-  oncourse: {flatShares: {kyle: 10.00}, remainderSplit: ['tyler', 'colin', 'granger']}
+  oncourse: {flatShares: {kyle: 50.00}, remainderSplit: ['tyler', 'colin', 'granger']} // $10 x 5 stops (Cradle Drinks = 2, Halfway No. 8 = 1, Halfway No. 2 = 2)
 };
 
 // ---- derive each person's pool share owed and pool amount fronted ----
